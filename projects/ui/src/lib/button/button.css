@@ -1,0 +1,34 @@
+@import '../../styles/variables/variables.css';
+
+.style-button {
+    background-color: var(--bg-btn-primary);
+    color: var(--text-color);
+    border: none;
+    padding: var(--padding-md) var(--padding-mdlg);
+    border-radius: var(--border-lg);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    &:hover {
+        background-color: var(--bg-btn-primary-hover);
+        color: var(--text-color);
+    }
+}
+
+.style-button-outline {
+    background-color: transparent;
+    color: var(--bg-btn-primary);
+    border: var(--border-sm) solid var(--bg-btn-primary);
+    padding: var(--padding-md) var(--padding-mdlg);
+    border-radius: var(--border-lg);
+    cursor: pointer;
+}
+
+.style-button-filled {
+    background-color: var(--bg-btn-primary);
+    color: var(--text-color);
+    border: none;
+    padding: var(--padding-md) var(--padding-mdlg);
+    border-radius: var(--border-lg);
+    cursor: pointer;
+}

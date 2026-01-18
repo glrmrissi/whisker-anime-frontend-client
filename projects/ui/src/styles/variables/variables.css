@@ -1,0 +1,27 @@
+/* Do not patch anyone style, only add new variables, pls. */
+
+:root {
+    --bg-color: #ffffff;
+    --bg-color-hover: #f0f0f0;
+    --text-color: #000000;
+    --bg-btn-primary: #007bff;
+    --bg-btn-primary-hover: #0056b3;
+
+
+    --padding-sm: 4px;
+    --padding-md: 8px;
+    --padding-mdlg: 12px;
+    --padding-lg: 16px;
+
+    --border-sm: 2px;
+    --border-md: 4px;
+    --border-lg: 8px;
+}
+
+:root.dark-mode {
+    --bg-color: #1a181b;
+    --bg-color-hover: #121212;
+    --text-color: #ffffff;
+    --bg-btn-primary: #4c00ff;
+    --bg-btn-primary-hover: #14111b;
+}

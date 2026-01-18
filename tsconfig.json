@@ -6,6 +6,14 @@
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
+    "paths": {
+      "minha-ui": [
+        "./dist/minha-ui"
+      ],
+      "ui": [
+        "./dist/ui"
+      ]
+    },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -28,6 +36,18 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/minha-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/minha-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ui/tsconfig.spec.json"
     }
   ]
 }

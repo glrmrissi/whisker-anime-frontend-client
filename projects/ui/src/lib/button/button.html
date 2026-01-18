@@ -1,0 +1,9 @@
+<button 
+type="submit"
+[ngClass]="{
+    'style-button' : appearance === 'default',
+    'style-button-outline' : appearance === 'outline',
+    'style-button-filled' : appearance === 'filled'
+}">
+{{ item }}
+</button>

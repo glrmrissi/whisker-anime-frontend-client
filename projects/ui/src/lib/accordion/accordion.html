@@ -1,0 +1,22 @@
+<cdk-accordion class="lib-accordion-container" 
+[ngClass]="{
+    'style-outline': appearance === 'outline',
+    'style-filled': appearance === 'filled',
+    'style-default': appearance === 'default'
+  }">
+    @for (item of items; track item; let index = $index) {
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="lib-item">
+
+        <button (click)="accordionItem.toggle()" class="accordion-item-header">
+            {{ item.title }}
+        </button>
+
+        @if(accordionItem.expanded) {
+        <div class="accordion-item-body">
+            {{ item.content }}
+        </div>
+        }
+
+    </cdk-accordion-item>
+    }
+</cdk-accordion>

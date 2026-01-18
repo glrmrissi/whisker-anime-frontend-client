@@ -1,0 +1,43 @@
+@import '../../styles/variables/variables.css';
+
+.lib-accordion-container {
+  border: none;
+}
+
+.style-outline .lib-item {
+  border: 1px solid #f32a2a;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.style-filled .lib-item {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--padding-lg);
+  text-align: left;
+  border: var(--border-sm) solid var(--bg-btn-primary);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  &:hover {
+    background-color: var(--bg-color-hover);
+    color: var(--text-color);
+  }
+}
+
+.accordion-item-header:first-child {
+  border-top-left-radius:  var(--border-lg);
+  border-top-right-radius:  var(--border-lg);
+}
+
+.accordion-item-header:last-child {
+  border-bottom-left-radius:  var(--border-lg);
+  border-bottom-right-radius:  var(--border-lg);
+}

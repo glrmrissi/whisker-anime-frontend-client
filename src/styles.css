@@ -1,3 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
+@import '../projects/ui/src/styles/variables/variables.css';
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
