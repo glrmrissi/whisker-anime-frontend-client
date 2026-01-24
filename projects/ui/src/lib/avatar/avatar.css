@@ -1,0 +1,11 @@
+.avatar-item {
+    border-radius: var(--border-lg);
+    width: 1.8rem;
+    height: 1.8rem;
+    object-fit: cover;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;
+    &:hover {
+        box-shadow: 0 0 0 1px var(--bg-btn-primary);
+    }
+}

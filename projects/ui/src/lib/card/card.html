@@ -1,0 +1,27 @@
+<span (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"> 
+    <div class="card-container-img">
+        <img class="card-img" [src]="item.image" alt="">
+    </div>
+    @if(isHovering) {
+        <div [ngClass]="{'card-content-view': isHovering, 'card-content': !isHovering}">
+            <span class="header-title">
+                <h3 class="card-title">{{ item.title }}</h3>
+                <span class="tags-container">
+                    @for(tag of item.tag; track $index) {
+                        @if(isStringUrl(tag)) {
+                            <small>
+                                {{ tag }}
+                            </small>
+                        }
+                    }
+                </span>
+            </span>
+            <div class="card-handling-buttons">
+                    <fa-icon [icon]="faPlay"></fa-icon>
+                    <fa-icon [icon]="faPlus"></fa-icon>
+            </div>
+        </div>
+}
+
+<!-- <p class="card-description">{{ item.description }}</p> -->
+</span>

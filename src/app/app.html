@@ -1,6 +1,9 @@
+
+<app-header></app-header>
 <div style="padding: 19px;">
     <lib-button (click)="switchTheme()" [item]="btn.item"></lib-button>
-<lib-accordion [items]="myData" appearance="filled"></lib-accordion>
-<app-inputs></app-inputs>
+    <lib-accordion [items]="myData" appearance="filled"></lib-accordion>
+    <lib-avatar [item]="avatarItem"></lib-avatar>
+    <lib-card [item]="cardItem"></lib-card>
 </div>
 <router-outlet />

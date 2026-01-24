@@ -1,5 +1,34 @@
 @import "tailwindcss";
-@import '../projects/ui/src/styles/variables/variables.css';
+
+/* Do not patch anyone style, only add new variables, pls. */
+
+:root {
+    --bg-color: #ffffff;
+    --bg-color-hover: #f0f0f0;
+    --text-color: #000000;
+    --text-color-hover: #121212;
+    --bg-btn-primary: #007bff;
+    --bg-btn-primary-hover: #0056b3;
+
+
+    --padding-sm: 4px;
+    --padding-md: 8px;
+    --padding-mdlg: 12px;
+    --padding-lg: 16px;
+
+    --border-sm: 2px;
+    --border-md: 4px;
+    --border-lg: 8px;
+}
+
+:root.dark-mode {
+    --bg-color: #1a181b;
+    --bg-color-hover: #121212;
+    --text-color: #ffffff;
+    --text-color-hover: #f3f3f3;
+    --bg-btn-primary: #4c00ff;
+    --bg-btn-primary-hover: #14111b;
+}
 
 body {
     background-color: var(--bg-color);

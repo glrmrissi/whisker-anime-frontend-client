@@ -1,0 +1,26 @@
+<header class="header-container">
+    <aside class="header-rows">
+        <lib-avatar [item]="logoItem"></lib-avatar>
+        <h1 class="header-title">Animes a rodo</h1>
+        <nav class="header-nav-list">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <aside class="header-rows"> 
+        <img class="theme-icon" src="https://png.pngtree.com/png-vector/20230316/ourmid/pngtree-night-mode-line-icon-vector-png-image_6651460.png" alt="" (click)="switchTheme()">
+        <input type="search" placeholder="Botar placeholder">
+        <lib-avatar [item]="avatarItem" (click)="showDropDown()"></lib-avatar>
+        <div class="dropdown-avatar">
+            <ul class="dropdown-menu" [hidden]="dropDownActive">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+</header>
+<span class="overlay-invisible" [hidden]="dropDownActive" (click)="showDropDown()"></span>
