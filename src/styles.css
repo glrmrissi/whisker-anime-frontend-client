@@ -3,12 +3,14 @@
 /* Do not patch anyone style, only add new variables, pls. */
 
 :root {
-    --bg-color: #ffffff;
-    --bg-color-hover: #f0f0f0;
-    --text-color: #000000;
-    --text-color-hover: #121212;
-    --bg-btn-primary: #007bff;
-    --bg-btn-primary-hover: #0056b3;
+    --bg-color: #f5e0dc;
+    --bg-color-hover: #f2cdcd;
+    --text-color: #313244;
+    --text-color-hover: #45475a;
+    --bg-btn-primary: #f5c2e7;
+    --bg-btn-primary-hover: #f2cdcd;
+    --bg-card-hover: #e0def4;
+    --bg-btn-card: #45475a;
 
 
     --padding-sm: 4px;
@@ -19,18 +21,26 @@
     --border-sm: 2px;
     --border-md: 4px;
     --border-lg: 8px;
+
+    --gap-md: 0.6rem
 }
 
 :root.dark-mode {
-    --bg-color: #1a181b;
-    --bg-color-hover: #121212;
-    --text-color: #ffffff;
-    --text-color-hover: #f3f3f3;
-    --bg-btn-primary: #4c00ff;
-    --bg-btn-primary-hover: #14111b;
+    --bg-color: #2a2836;
+    --bg-color-hover: #3d3547;
+    --bg-card-hover: #141414;
+    --text-color: #cdd6f4;
+    --text-color-hover: #bac2de;
+    --bg-btn-primary: #b794f6;
+    --bg-btn-primary-hover: #a687e8;
+    --bg-btn-card: #ffffff80;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+}
+
+.mat-mdc-dialog-surface {
+  background-color: var(--bg-color) !important; 
 }

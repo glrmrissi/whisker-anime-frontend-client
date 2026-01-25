@@ -1,27 +1,24 @@
-<span (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"> 
+<div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <div class="card-container-img">
-        <img class="card-img" [src]="item.image" alt="">
+        <img class="card-img" [src]="item.coverImage" alt="Cover">
     </div>
+
     @if(isHovering) {
-        <div [ngClass]="{'card-content-view': isHovering, 'card-content': !isHovering}">
-            <span class="header-title">
-                <h3 class="card-title">{{ item.title }}</h3>
-                <span class="tags-container">
-                    @for(tag of item.tag; track $index) {
-                        @if(isStringUrl(tag)) {
-                            <small>
-                                {{ tag }}
-                            </small>
-                        }
+        <div class="card-content-view">
+            <div class="header-title">
+                <h3 class="card-title">{{ item.canonicalTitle }}</h3>
+                <div class="tags-container">
+                    @for(tag of item.subtype; track $index) {
+                        <small>{{ tag }}</small>
                     }
-                </span>
-            </span>
+                </div>
+            </div>
+
             <div class="card-handling-buttons">
-                    <fa-icon [icon]="faPlay"></fa-icon>
-                    <fa-icon [icon]="faPlus"></fa-icon>
+                <button><fa-icon [icon]="faPlay"></fa-icon></button>
+                <button><fa-icon [icon]="faPlus"></fa-icon></button>
+                <button (click)="openDialog()"><fa-icon [icon]="faAngleUp"></fa-icon></button>
             </div>
         </div>
-}
-
-<!-- <p class="card-description">{{ item.description }}</p> -->
-</span>
+    }
+</div>
