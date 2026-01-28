@@ -23,10 +23,7 @@ export class Card {
   
   readonly dialog = inject(MatDialog);
   
-  constructor() {
-    console.log(this.item);
-
-  }
+  constructor() {}
   
   @Input() item: any = { id: '',coverImage: '', canonicalTitle: '', description: '', link: '', subtype: [] };
   

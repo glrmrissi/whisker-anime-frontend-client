@@ -1,13 +1,26 @@
 <div class="thumbnail-container">
-    <img class="thumbnail-img" src="assets/thumbnail.jpg" alt="Thumbnail">
+    <div class="title-thumbnail-wrapper">
+        <img class="thumbnail-img" [src]="srcImg" alt="Thumbnail">
+        <h2 class="details-title"><strong>{{ item.title }}</strong></h2>
+    </div>
     <div class="close-button" (click)="close()">
-        &times;
+        <fa-icon [icon]="faClose"></fa-icon>
     </div>
 </div>
 <div class="details-content">
-    <h2 class="details-title">Dialog Details Card</h2>
     <p class="details-description">
-        This is a detailed view inside a dialog. You can add more information here as needed.
+        {{ item.synopsis }}
     </p>
-    <button class="action-button" (click)="close()">Close</button>
+    <p class="details-rating">Average Rating: {{ item.averageRating }}</p>
+    <p class="details-user-count">User Count: {{ item.userCount }}</p>
+    <p class="details-favorites-count">Favorites Count: {{ item.favoritesCount }}</p>
+    <p class="details-age-rating">Age Rating: {{ item.ageRating }}</p>
+    <p class="details-episode-count">Episode Count: {{ item.episodeCount }}</p>
+    <p class="details-episode-length">Episode Length: {{ item.episodeLength }} minutes</p>
+    <p class="details-nsfw">NSFW: {{ item.nsfw ? 'Yes' : 'No' }}</p>
+    <iframe width="560" height="315" 
+        [src]="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + item.youtubeVideoId)"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>

@@ -12,4 +12,8 @@ export class HomeService {
     async getAnimeTrending() {
         return this.apiService.getV1('kitsu-api/trending-anime', { limit: '5' });
     }
+
+    async getAnimePagination(page: string = '1', limit: string = '10', nsfw: string = 'true') {
+        return this.apiService.getV1(`kitsu-api/anime?page=${page}&limit=${limit}&nsfw=${nsfw}`, {});
+    }
 }

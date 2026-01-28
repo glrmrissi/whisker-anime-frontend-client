@@ -1,12 +1,12 @@
 <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <div class="card-container-img">
-        <img class="card-img" [src]="item.coverImage" alt="Cover">
+        <img class="card-img" [src]="item.coverImage" alt="Cover" (click)="openDialog()">
     </div>
 
     @if(isHovering) {
         <div class="card-content-view">
             <div class="header-title">
-                <h3 class="card-title">{{ item.canonicalTitle }}</h3>
+                <h3 class="card-title" (click)="openDialog()">{{ item.canonicalTitle }}</h3>
                 <div class="tags-container">
                     @for(tag of item.subtype; track $index) {
                         <small>{{ tag }}</small>

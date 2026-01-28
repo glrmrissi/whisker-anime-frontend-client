@@ -16,9 +16,10 @@ export class Home implements OnInit {
   ) {}
 
   animeTrending: any[] = [];
+  animePagination: any[] = [];
 
-  ngOnInit() {
-    this.homeService.getAnimeTrending().then((data) => {
+  async ngOnInit() {
+    await this.homeService.getAnimeTrending().then((data) => {
       this.animeTrending = (data.data || []).map((anime: any) => ({
         id: anime.id,
         coverImage: anime.attributes.posterImage?.large || anime.attributes.coverImage?.large || '',
@@ -27,7 +28,20 @@ export class Home implements OnInit {
         link: anime.attributes.slug || '',
         subtype: [anime.attributes.subtype || '']
       }));
-      console.log(this.animeTrending);
+      this.cdr.markForCheck();
+    });
+
+    await this.homeService.getAnimePagination().then((data) => {
+      this.animePagination = (data.data || []).map((anime: any) => ({
+        id: anime.id,
+        coverImage: anime.attributes.posterImage?.large || anime.attributes.coverImage?.large || '',
+        canonicalTitle: anime.attributes.canonicalTitle || '',
+        description: anime.attributes.description || '',
+        link: anime.attributes.slug || '',
+        subtype: [anime.attributes.subtype || '']
+      }));
+
+      console.log("Anime Pagination:", this.animePagination);
       this.cdr.markForCheck();
     });
   }

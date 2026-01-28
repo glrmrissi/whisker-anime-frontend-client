@@ -1,3 +1,9 @@
 @for (anime of animeTrending; track anime.link) {
     <lib-card [item]="anime"></lib-card>
 }
+
+<div>
+    @for (animePagination of animePagination; track $index) {
+        <lib-card [item]="animePagination"></lib-card>
+    }
+</div>

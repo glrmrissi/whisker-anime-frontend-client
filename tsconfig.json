@@ -7,9 +7,6 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "minha-ui": [
-        "./dist/minha-ui"
-      ],
       "ui": [
         "./dist/ui"
       ]
