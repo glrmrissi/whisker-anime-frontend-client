@@ -1,8 +1,13 @@
-@for (anime of animeTrending; track anime.link) {
+
+<h2>Trending Anime</h2>
+<div class="wrapper-anime-trending wrapper-anime-pagination">
+    @for (anime of animeTrending; track anime.link) {
     <lib-card [item]="anime"></lib-card>
 }
+</div>
 
-<div>
+<h2>Recently Added/Updated Anime</h2>
+<div class="wrapper-anime-pagination">
     @for (animePagination of animePagination; track $index) {
         <lib-card [item]="animePagination"></lib-card>
     }

@@ -1,0 +1,54 @@
+<img (click)="navigateHome()" class="logo-auth" src="logo.svg" alt="Logo" width="100" height="100">
+<div class="background-auth">
+    <div class="container-rain">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <line class="drop drop-1" x1="10" y1="0" x2="10" y2="10" />
+            <line class="drop drop-2" x1="25" y1="0" x2="25" y2="10" />
+            <line class="drop drop-3" x1="40" y1="0" x2="40" y2="10" />
+            <line class="drop drop-4" x1="55" y1="0" x2="55" y2="10" />
+            <line class="drop drop-5" x1="70" y1="0" x2="70" y2="10" />
+            <line class="drop drop-6" x1="85" y1="0" x2="85" y2="10" />
+            <line class="drop drop-7" x1="95" y1="0" x2="95" y2="10" />
+            <line class="drop drop-8" x1="5" y1="0" x2="5" y2="10" />
+        </svg>
+    </div>
+</div>
+
+@switch(true) {
+@case(isLogin()) {
+<div class="wrapper">
+    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
+    <app-auth-inputs icon="lock" type="password" placeholder="Password"></app-auth-inputs>
+    <span class="forget-password">
+        <a (click)="toggleForgotPassword()">Forget Password?</a>
+    </span>
+    <button class="auth-button">Login</button>
+    <div class="auth-footer">
+        <span>Don't have an account? </span>
+        <a (click)="toggleRegister()">Sign Up</a>
+    </div>
+</div>
+}
+@case(isRegister()) {
+<div class="wrapper">
+    <app-auth-inputs icon="tag" type="text" placeholder="Username"></app-auth-inputs>
+    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
+    <app-auth-inputs icon="lock" type="password" placeholder="Password"></app-auth-inputs>
+    <button class="auth-button">Register</button>
+    <div class="auth-footer">
+        <span>Have an account? </span>
+        <a (click)="toggleLogin()">Login</a>
+    </div>
+</div>
+}
+@case(isForgotPassword()) {
+<div class="wrapper">
+    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
+    <button class="auth-button">Reset Password</button>
+    <div class="auth-footer">
+        <span>Remember your password? </span>
+        <a (click)="toggleLogin()">Login</a>
+    </div>
+</div>
+}
+}

@@ -1,0 +1,25 @@
+<div [class.has-error]="!isEmailValid() && emailControl?.value && type === 'email'">
+    <span>
+        <fa-icon class="left-icon" [icon]="currentIcon"></fa-icon>
+        @if(type === 'email') {
+        <input class="auth-input" [class.input-error]="!isEmailValid() && emailControl?.value" [type]="type"
+            [placeholder]="placeholder" [formControl]="emailControl!" (input)="onInput($event)">
+        } @else if(type === 'password' || placeholder === 'Password') {
+        <input class="auth-input" [type]="type" [class.input-error]="!isPasswordValid() && passwordControl?.value" [placeholder]="placeholder" [formControl]="passwordControl!"
+            (input)="onInput($event)">
+        } @else {
+        <input class="auth-input" [type]="type" [placeholder]="placeholder"
+            (input)="onInput($event)">
+        }
+        @if(placeholder === 'Password') {
+        <fa-icon class="toggle-password-icon" [icon]="isPasswordVisible ? iconMap['eyeSlash'] : iconMap['eye']"
+            (click)="togglePasswordVisibility()"></fa-icon>
+        }
+        @if(!isEmailValid() && emailControl?.value && type === 'email') {
+        <span class="error-message">{{ errorMessage() }}</span>
+        }
+        @if(!isPasswordValid() && passwordControl?.value && type === 'password') {
+        <span class="error-message">{{ errorMessage() }}</span>
+        }
+    </span>
+</div>

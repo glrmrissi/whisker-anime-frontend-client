@@ -35,12 +35,6 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./projects/minha-ui/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/minha-ui/tsconfig.spec.json"
-    },
-    {
       "path": "./projects/ui/tsconfig.lib.json"
     },
     {

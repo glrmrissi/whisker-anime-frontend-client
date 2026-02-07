@@ -62,5 +62,8 @@
         display: flex;
         flex-direction: column;
         gap: var(--gap-md);
+        .details-youtube-video {
+            border-radius: var(--border-md);
+        }
     }
 }

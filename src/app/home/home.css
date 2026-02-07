@@ -1,3 +1,8 @@
 :host {
     display: flex;
+    flex-direction: column;
+    .wrapper-anime-pagination{
+        display: flex;
+        justify-content: center;
+    }
 }
