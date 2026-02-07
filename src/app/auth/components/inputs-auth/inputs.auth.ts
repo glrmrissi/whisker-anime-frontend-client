@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, signal, OnInit } from "@angular/core";
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, signal, OnInit, forwardRef } from "@angular/core";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faEye, faEyeSlash, faUser, faLock, faTag } from "@fortawesome/free-solid-svg-icons";
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -10,18 +10,22 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     templateUrl: './inputs.auth.html',
     styleUrls: ['./inputs.auth.css'],
     imports: [FaIconComponent, ReactiveFormsModule],
-    standalone: true
+    standalone: true,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => AuthInputs),
+            multi: true
+        }
+    ]
 })
 
-export class AuthInputs implements OnInit {
+export class AuthInputs implements OnInit, ControlValueAccessor {
     @Input() type: string = 'text';
     @Input() placeholder: string = '';
     @Input() icon: string = '';
     @Output() valueChange = new EventEmitter<string>();
     @Output() inputEvent = new EventEmitter<Event>();
-
-    emailControl: FormControl | null = null;
-    passwordControl: FormControl | null = null;
 
     isEmailValid = signal(false);
     isPasswordValid = signal(false);
@@ -36,36 +40,54 @@ export class AuthInputs implements OnInit {
     };
 
     isPasswordVisible: boolean = false;
+    internalControl = new FormControl<string>('');
+
+    private onChangeFn: (value: string) => void = () => {};
+    private onTouchedFn: () => void = () => {};
 
     constructor() {}
 
+    writeValue(value: string | null): void {
+        this.internalControl.setValue(value ?? '', { emitEvent: false });
+    }
+
+    registerOnChange(fn: (value: string) => void): void {
+        this.onChangeFn = fn;
+    }
+
+    registerOnTouched(fn: () => void): void {
+        this.onTouchedFn = fn;
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+        if (isDisabled) {
+            this.internalControl.disable({ emitEvent: false });
+        } else {
+            this.internalControl.enable({ emitEvent: false });
+        }
+    }
+
     ngOnInit() {
-        if (this.type === 'email') {
-            this.emailControl = new FormControl('');
-            this.emailControl.valueChanges
-                .pipe(
-                    debounceTime(300),
-                    distinctUntilChanged()
-                )
-                .subscribe((value) => {
-                    const validation = this.validateEmail(value || '');
+        this.internalControl.valueChanges
+            .pipe(
+                debounceTime(300),
+                distinctUntilChanged()
+            )
+            .subscribe((value) => {
+                const nextValue = value ?? '';
+                this.onChangeFn(nextValue);
+
+                if (this.type === 'email') {
+                    const validation = this.validateEmail(nextValue);
                     this.isEmailValid.set(validation.isValid);
                     this.errorMessage.set(validation.message);
-                });
-        }
-        if (this.type === 'password') {
-            this.passwordControl = new FormControl('');
-            this.passwordControl.valueChanges
-                .pipe(
-                    debounceTime(300),
-                    distinctUntilChanged()
-                )
-                .subscribe((value) => {
-                    const validation = this.validatePasswordStrength(value || '');
+                }
+                if (this.type === 'password') {
+                    const validation = this.validatePasswordStrength(nextValue);
                     this.isPasswordValid.set(validation.isValid);
                     this.errorMessage.set(validation.message);
-                });
-        }
+                }
+            });
     }
 
     validatePasswordStrength(password: string): { isValid: boolean; message: string } {
@@ -106,11 +128,12 @@ export class AuthInputs implements OnInit {
 
     onInput(event: Event) {
         const inputElement = event.target as HTMLInputElement;
-        if (this.type === 'email' && this.emailControl) {
-            this.emailControl.setValue(inputElement.value);
-        }
         this.valueChange.emit(inputElement.value);
         this.inputEvent.emit(event);
+    }
+
+    onBlur() {
+        this.onTouchedFn();
     }
 
     togglePasswordVisibility() {

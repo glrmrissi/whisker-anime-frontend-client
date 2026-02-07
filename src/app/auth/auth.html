@@ -16,13 +16,13 @@
 
 @switch(true) {
 @case(isLogin()) {
-<div class="wrapper">
-    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
-    <app-auth-inputs icon="lock" type="password" placeholder="Password"></app-auth-inputs>
+<div class="wrapper" [formGroup]="authForm">
+    <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
+    <app-auth-inputs icon="lock" type="password" placeholder="Password" formControlName="password"></app-auth-inputs>
     <span class="forget-password">
         <a (click)="toggleForgotPassword()">Forget Password?</a>
     </span>
-    <button class="auth-button">Login</button>
+    <button class="auth-button" (click)="loginUser(authForm.get('email')?.value, authForm.get('password')?.value)">Login</button>
     <div class="auth-footer">
         <span>Don't have an account? </span>
         <a (click)="toggleRegister()">Sign Up</a>
@@ -30,11 +30,11 @@
 </div>
 }
 @case(isRegister()) {
-<div class="wrapper">
-    <app-auth-inputs icon="tag" type="text" placeholder="Username"></app-auth-inputs>
-    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
-    <app-auth-inputs icon="lock" type="password" placeholder="Password"></app-auth-inputs>
-    <button class="auth-button">Register</button>
+<div class="wrapper" [formGroup]="authForm">
+    <app-auth-inputs icon="tag" type="text" placeholder="Username" formControlName="username"></app-auth-inputs>
+    <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
+    <app-auth-inputs icon="lock" type="password" placeholder="Password" formControlName="password"></app-auth-inputs>
+    <button class="auth-button" (click)="registerUser(authForm.get('username')?.value, authForm.get('email')?.value, authForm.get('password')?.value)">Register</button>
     <div class="auth-footer">
         <span>Have an account? </span>
         <a (click)="toggleLogin()">Login</a>
@@ -42,9 +42,9 @@
 </div>
 }
 @case(isForgotPassword()) {
-<div class="wrapper">
-    <app-auth-inputs icon="user" type="email" placeholder="Email"></app-auth-inputs>
-    <button class="auth-button">Reset Password</button>
+<div class="wrapper" [formGroup]="authForm">
+    <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
+    <button class="auth-button" (click)="resetPasswordUser(authForm.get('email')?.value)">Reset Password</button>
     <div class="auth-footer">
         <span>Remember your password? </span>
         <a (click)="toggleLogin()">Login</a>
