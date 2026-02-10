@@ -37,7 +37,7 @@ export class ApiService {
         if (token) {
             headers['x_access_token'] = `${token}`;
         }
-        return firstValueFrom(this.http.get<T>(url, { params: params, headers }).pipe(map((res: T) => res)));
+        return firstValueFrom(this.http.get<T>(url, { params: params, headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
     postV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
@@ -49,7 +49,7 @@ export class ApiService {
         if (token) {
             headers['x_access_token'] = `${token}`;
         }
-        return firstValueFrom(this.http.post<T>(url, body, { headers }).pipe(map((res: T) => res)));
+        return firstValueFrom(this.http.post<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
     patchV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
@@ -61,7 +61,7 @@ export class ApiService {
         if (token) {
             headers['x_access_token'] = `${token}`;
         }
-        return firstValueFrom(this.http.patch<T>(url, body, { headers }).pipe(map((res: T) => res)));
+        return firstValueFrom(this.http.patch<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
     putV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
@@ -73,7 +73,7 @@ export class ApiService {
         if (token) {
             headers['x_access_token'] = `${token}`;
         }
-        return firstValueFrom(this.http.put<T>(url, body, { headers }).pipe(map((res: T) => res)));
+        return firstValueFrom(this.http.put<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
     deleteV1<T = any>(endpoint: string, extraHeaders?: {}, noAuth = true): Promise<T> {
@@ -85,7 +85,7 @@ export class ApiService {
         if (token) {
             headers['x_access_token'] = `${token}`;
         }
-        return firstValueFrom(this.http.delete<T>(url, { headers }).pipe(map((res: T) => res)));
+        return firstValueFrom(this.http.delete<T>(url, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
     async verifyToken(x_access_token: string | null): Promise<boolean> {

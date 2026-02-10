@@ -4,6 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faUser, faPlay, faPlus, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { DialogData, DialogDetailsCard } from '../dialog-details-card/dialog-details-card';
 import { MatDialog } from '@angular/material/dialog';
+import { ApiService } from '../../../../../src/api/api.service';
+import { DialogError } from '../dialog-error/dialog-error';
 
 export type Tag = string | any;
 
@@ -20,13 +22,15 @@ export class Card {
   protected faPlay = faPlay;
   protected faPlus = faPlus;
   protected faAngleUp = faAngleUp;
-  
+
   readonly dialog = inject(MatDialog);
-  
-  constructor() {}
-  
-  @Input() item: any = { id: '',coverImage: '', canonicalTitle: '', description: '', link: '', subtype: [] };
-  
+
+  constructor(
+    private apiService: ApiService
+  ) { }
+
+  @Input() item: any = { id: '', coverImage: '', canonicalTitle: '', description: '', link: '', subtype: [] };
+
   @HostBinding('class.hovering') isHovering = false;
 
   isStringUrl(tag: Tag): boolean {
@@ -41,6 +45,21 @@ export class Card {
 
   onMouseLeave() {
     this.isHovering = false;
+  }
+
+  favoriteAnime() {
+    this.apiService.postV1(`favorites-animes/${this.item.id}`, {}).then(response => {
+    }).catch(error => {
+      console.error('Error favoriting anime:', error);
+      if ((error as any)?.status === 409) {
+        this.dialog.open(DialogError, {
+          width: '30rem',
+          height: '30dvh',
+          data: { message: `Failed to mark anime as favorite.
+            Maybe it is already marked as favorite.` }
+        });
+      }
+    });
   }
 
   openDialog(): void {

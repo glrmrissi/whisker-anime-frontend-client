@@ -10,7 +10,7 @@ import { RouterLink } from "@angular/router";
 })
 export class Header {
   avatarItem = { src: 'https://a.storyblok.com/f/178900/960x540/14906f2269/monogatari-suruga-kanbaru.jpg', alt: 'User Avatar' };
-  logoItem = { src: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Crunchyroll_logo_2012v.png', alt: 'Logo' }
+  logoItem = { src: '/logo.svg', alt: 'Logo' }
   dropDownActive = true;
 
   showDropDown() {

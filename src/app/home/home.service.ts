@@ -16,4 +16,10 @@ export class HomeService {
     async getAnimePagination(page: string = '1', limit: string = '10', nsfw: string = 'true') {
         return this.apiService.getV1(`kitsu-api/anime?page=${page}&limit=${limit}&nsfw=${nsfw}`, {});
     }
+
+    async getFavoriteAnimes() {
+        const res = this.apiService.getV1('favorites-animes', {});
+        console.log('Favorite animes response:', res);
+        return res;
+    }
 }

@@ -22,8 +22,6 @@ export class AuthService {
         try {
             const response = await this._apiService.postV1('user-auth/login', { username, password });
             if (isPlatformBrowser(this.platformId)) {
-                localStorage.setItem('x_access_token', response.access_token); 
-                console.log('Stored access token in localStorage:', response);
                 this.isAuthenticated = true;
             }
         } catch (error) {

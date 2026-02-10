@@ -1,4 +1,5 @@
 
+<app-header></app-header>
 <h2>Trending Anime</h2>
 <div class="wrapper-anime-trending wrapper-anime-pagination">
     @for (anime of animeTrending; track anime.link) {
@@ -10,5 +11,12 @@
 <div class="wrapper-anime-pagination">
     @for (animePagination of animePagination; track $index) {
         <lib-card [item]="animePagination"></lib-card>
+    }
+</div>
+
+
+<div class="wrapper-anime-pagination">
+    @for (favoriteAnimes of favoriteAnimes; track $index) {
+        <lib-card [item]="favoriteAnimes"></lib-card>
     }
 </div>
