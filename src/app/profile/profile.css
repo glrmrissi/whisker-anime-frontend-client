@@ -1,0 +1,79 @@
+:host {
+    display: flex;
+    min-height: 100dvh;
+    padding: 5rem;
+
+    .left-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 20rem;
+        gap: 20px;
+    }
+
+    .right-section {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            gap: 10px;
+
+            h2 {
+                font-size: 2rem;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            p {
+                margin: 0;
+                padding: 10px;
+                border: 1px solid var(--bg-secondary);
+                background-color: #494949;
+                border-radius: 6px;
+            }
+        }
+    }
+
+    .content-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        fa-icon {
+            font-size: 1.4rem;
+            padding-top: 3px;
+        }
+    }
+
+    .btn-edit-wrapper {
+        display: flex;
+        justify-content: space-between;
+
+
+        .edit-profile-btn {
+            align-self: flex-end;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            border-radius: 6px;
+            background-color: var(--bg-btn-primary);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            &:hover {
+                background-color: var(--bg-btn-primary-hover);
+                color: var(--text-color-hover);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+}

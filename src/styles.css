@@ -28,8 +28,8 @@
 }
 
 :root.dark-mode {
-    --bg-color: #1a1a1a;
-    --bg-secondary: #2d2d2d;
+    --bg-color: #141414;
+    --bg-secondary: #272727;
     --bg-color-hover: #2d2d2d;
     --bg-card-hover: #0f0f0f;
     --text-color: #ffffff;

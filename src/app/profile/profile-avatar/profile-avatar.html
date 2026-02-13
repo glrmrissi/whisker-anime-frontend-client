@@ -1,0 +1,14 @@
+<div class="img-wrapper" (click)="fileInput.click()">
+    <img [src]="imageUrl" alt="Sua foto">
+    
+    <span class="camera-wrapper">
+        <fa-icon [icon]="faCamera"></fa-icon>
+    </span>
+</div>
+<input 
+  #fileInput
+  type="file" 
+  style="display: none;"  
+  accept="image/*" 
+  (change)="onFileSelected($event)"
+  >

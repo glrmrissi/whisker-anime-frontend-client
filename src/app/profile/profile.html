@@ -1,0 +1,24 @@
+<section class="left-section">
+    <app-profile-avatar></app-profile-avatar>
+</section>
+<section class="right-section">
+    <div class="profile-info">
+        <div class="btn-edit-wrapper">
+            <span class="content-wrapper">
+                <fa-icon [icon]="faUserShield"></fa-icon>
+                <h2>{{ profileName }}</h2>
+            </span>
+            <button class="edit-profile-btn">
+                <fa-icon [icon]="faEdit"></fa-icon> Edit Profile
+            </button>
+        </div>
+        <hr>
+        <p>{{ profileBio }}</p>
+        <div class="favorites-animes">
+            <h1>Favorite Animes:</h1>
+            @for(animes of favoriteAnimes ; track animes) {
+            <span class="anime-badge">{{ animes }}</span>
+            }
+        </div>
+    </div>
+</section>
