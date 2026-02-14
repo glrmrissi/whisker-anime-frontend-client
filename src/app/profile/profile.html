@@ -1,24 +1,33 @@
 <section class="left-section">
-    <app-profile-avatar></app-profile-avatar>
+    <app-profile-avatar 
+        [imageUrlInput]="profile()?.avatarUrl ?? undefined" 
+        (avatarUpdated)="refreshData()"
+    ></app-profile-avatar>
 </section>
 <section class="right-section">
     <div class="profile-info">
         <div class="btn-edit-wrapper">
             <span class="content-wrapper">
                 <fa-icon [icon]="faUserShield"></fa-icon>
-                <h2>{{ profileName }}</h2>
+                <input type="text" [disabled]="disabledInput" [placeholder]="profile()?.nickName">
             </span>
-            <button class="edit-profile-btn">
+            <button class="edit-profile-btn" [hidden]="hiddenEditButton" (click)="enableInputs()">
                 <fa-icon [icon]="faEdit"></fa-icon> Edit Profile
             </button>
         </div>
         <hr>
-        <p>{{ profileBio }}</p>
+        <input type="text" [disabled]="disabledInput" [placeholder]="profile()?.bio ">
         <div class="favorites-animes">
             <h1>Favorite Animes:</h1>
-            @for(animes of favoriteAnimes ; track animes) {
+            @for(animes of profile()?.favoriteAnimes ; track animes) {
             <span class="anime-badge">{{ animes }}</span>
             }
+        </div>
+
+         <div class="btn-edit-wrapper" [hidden]="!hiddenEditButton">
+            <button class="edit-profile-btn" (click)="saveEdits()">
+                <fa-icon [icon]="faEdit"></fa-icon> Save
+            </button>
         </div>
     </div>
 </section>

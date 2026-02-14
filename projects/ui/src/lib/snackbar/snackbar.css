@@ -1,0 +1,47 @@
+:host {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 25rem;
+    background-color: #363636;
+    padding: 0.6rem 0.6rem;
+    border-radius: 6px;
+    animation: entry normal 0.3s;
+
+    .snackbar-message {
+        width: 100%;
+    }
+
+    .snackbar-btn {
+        width: auto;
+        padding: 0.4rem 0.8rem;
+        text-align: center;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #000;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #c5c5c5;
+        }
+    }
+}
+
+
+@keyframes entry {
+    0% {
+        scale: 0.8;
+    }
+
+    50% {
+        scale: 1.1
+    }
+
+    100% {
+        scale: 1;
+    }
+}

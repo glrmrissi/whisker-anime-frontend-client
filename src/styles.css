@@ -47,3 +47,15 @@ body {
 .mat-mdc-dialog-surface {
   background-color: var(--bg-color) !important; 
 }
+
+.warning {
+    background-color: #f5ce64 !important;
+    color: #0a0a0a;
+    button {
+        background-color: #d6b24e !important;
+        color: #131313 !important;
+        &:hover {
+            background-color: #ad8b2c !important;
+        }
+    }
+}
