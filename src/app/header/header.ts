@@ -18,7 +18,7 @@ export class Header {
   private router = inject(Router)
 
   avatarItem = { src: 'https://a.storyblok.com/f/178900/960x540/14906f2269/monogatari-suruga-kanbaru.jpg', alt: 'User Avatar' };
-  logoItem = '/logo.svg'
+  logoItem = '/logo.png'
   themeSwitch = false
   dropDownActive = true;
   protected faSun = faSun
