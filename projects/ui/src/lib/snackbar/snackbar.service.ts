@@ -14,13 +14,17 @@ type SnackType = 'success' | 'error' | 'warning';
     providedIn: 'root'
 })
 export class SnackBarService {
-    
+
     private appRef = inject(ApplicationRef)
     private injector = inject(EnvironmentInjector);
     private snackRef?: ComponentRef<SnackBar>
 
 
-    open(message: string, actionText: string = 'OK', duration: number = 3000, classMod?: SnackType, ) {
+    open(message: string, actionText: string = 'OK', duration: number = 3000, classMod?: SnackType,) {
+
+        if (typeof document === 'undefined') {
+            return;
+        }
 
         if (this.snackRef) {
             this.close();
@@ -38,7 +42,7 @@ export class SnackBarService {
         });
 
         this.appRef.attachView(this.snackRef.hostView);
-        
+
         document.body.appendChild(
             this.snackRef.location.nativeElement
         );
