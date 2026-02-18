@@ -10,6 +10,10 @@ export class ProfileService {
     ) { }   
 
     async getUserProfile() {
-        return await this._apiService.getV1('users', {})
+        return await this._apiService.getV1('users/', {})
+    }
+
+    async editUser() {
+        
     }
 }

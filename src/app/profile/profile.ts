@@ -1,12 +1,13 @@
-import { Component, OnInit, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { ProfileAvatar } from "./profile-avatar/profile-avatar";
 import { A11yModule } from "@angular/cdk/a11y";
-import { faEdit, faMailForward, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faMailForward, faUserShield, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ProfileService } from './profile.service';
-import { MatDialog } from '@angular/material/dialog';
-import { SnackBar } from '../../../projects/ui/src/lib/snackbar/snackbar';
 import { SnackBarService } from '../../../projects/ui/src/lib/snackbar/snackbar.service';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { Header } from '../header/header';
 
 type ProfileType = {
   username: string;
@@ -19,16 +20,17 @@ type ProfileType = {
 
 @Component({
   selector: 'app-profile',
-  imports: [ProfileAvatar, A11yModule, FaIconComponent],
+  imports: [CommonModule, ProfileAvatar, A11yModule, FaIconComponent, ɵInternalFormsSharedModule, ReactiveFormsModule, Header],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
-export class Profile implements OnInit {
+export class Profile implements AfterViewInit {
   @ViewChild('profileAvatar') protected profileAvatar!: ProfileAvatar;
 
   protected faEdit = faEdit;
   protected faUserShield = faUserShield;
   protected faMailForward = faMailForward;
+  protected faSave = faSave
 
   protected disabledInput = true;
   protected hiddenEditButton = false;
@@ -36,6 +38,14 @@ export class Profile implements OnInit {
   protected baseUrl = 'http://localhost:3001/';
 
   public profile = signal<ProfileType | null>(null);
+
+  private formBuilder = inject(FormBuilder);
+
+  editUserGroup = this.formBuilder.group({
+    nickName: [''],
+    bio: ['']
+  })
+
 
   constructor(
     private readonly profileService: ProfileService,
@@ -45,7 +55,7 @@ export class Profile implements OnInit {
     this.hiddenEditButton = false;
   }
 
-  async ngOnInit(): Promise<ProfileType | void> {
+  async ngAfterViewInit(): Promise<ProfileType | void> {
     await this.getProfile();
   }
 
@@ -55,10 +65,8 @@ export class Profile implements OnInit {
     if (!res) {
       return;
     }
-
     const timestamp = new Date().getTime();
     res.avatarUrl = `${this.baseUrl}${res.avatarUrl}?t=${timestamp}`;
-
     this.profile.set(res);
     return res;
   }
@@ -85,5 +93,10 @@ export class Profile implements OnInit {
       'OK',
       3000
     )
+  }
+
+  onSubmit() {
+    const res = this.editUserGroup.value
+    console.log(JSON.stringify(res));
   }
 }
