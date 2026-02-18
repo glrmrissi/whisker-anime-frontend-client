@@ -8,10 +8,13 @@
     --bg-color-hover: #f5f5f5;
     --text-color: #1a1a1a;
     --text-color-hover: #333333;
+    --text-color-invert: #f9f9f9;
     --bg-btn-primary: #252525;
     --bg-btn-primary-hover: #0a0a0a;
     --bg-card-hover: #efefef;
     --bg-btn-card: #ffffff;
+
+    --bg-icon-hover: #643bfa;
 
 
     --padding-sm: 4px;
@@ -34,9 +37,12 @@
     --bg-card-hover: #0f0f0f;
     --text-color: #ffffff;
     --text-color-hover: #e0e0e0;
+    --text-color-invert: #1a1a1a;
     --bg-btn-primary: #0f0f0f;
     --bg-btn-primary-hover: #5f5f5f;
     --bg-btn-card: #2d2d2d;
+    
+    --bg-icon-hover: #fcd93d;
 }
 
 body {
