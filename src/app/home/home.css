@@ -1,8 +1,16 @@
 :host {
     display: flex;
     flex-direction: column;
-    .wrapper-anime-pagination{
-        display: flex;
-        justify-content: center;
+    .carousel-wrapper {
+        padding: 0px 24px;
+
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
     }
 }

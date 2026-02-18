@@ -1,22 +1,23 @@
-
 <app-header></app-header>
-<h2>Trending Anime</h2>
-<div class="wrapper-anime-trending wrapper-anime-pagination">
-    @for (anime of animeTrending; track anime.link) {
-    <lib-card [item]="anime"></lib-card>
-}
-</div>
-
-<h2>Recently Added/Updated Anime</h2>
-<div class="wrapper-anime-pagination">
-    @for (animePagination of animePagination; track $index) {
-        <lib-card [item]="animePagination"></lib-card>
-    }
-</div>
-
-
-<div class="wrapper-anime-pagination">
-    @for (favoriteAnimes of favoriteAnimes; track $index) {
-        <lib-card [item]="favoriteAnimes"></lib-card>
-    }
-</div>
+<app-hero-slider [slides]="heroSlides()" [autoPlayInterval]="6000" style="padding-bottom: 10px;"/>
+<section class="carousel-wrapper" style="width: 100%;">
+    <div class="title-wrapper">
+        <fa-icon [icon]="faBolt"></fa-icon>
+        <h2>Latest release</h2>
+    </div>
+    <app-carousel [items]="latestRelease"></app-carousel>
+</section>
+<section class="carousel-wrapper" style="width: 100%;">
+    <div class="title-wrapper">
+        <fa-icon [icon]="faBolt"></fa-icon>
+        <h2>OVAS</h2>
+    </div>
+    <app-carousel [items]="ovasRelease"></app-carousel>
+</section>
+<section class="carousel-wrapper" style="width: 100%;">
+    <div class="title-wrapper">
+        <fa-icon [icon]="faWater"></fa-icon>
+        <h2>Best Rating</h2>
+    </div>
+    <app-carousel [items]="averageRating"></app-carousel>
+</section>

@@ -2,19 +2,19 @@ import { Injectable } from "@angular/core";
 import { ApiService } from "../../api/api.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class HomeService {
     constructor(
         private apiService: ApiService
-    ) {}
+    ) { }
 
     async getAnimeTrending() {
-        return this.apiService.getV1('kitsu-api/trending-anime', { limit: '5' });
+        return this.apiService.getV1('kitsu-api/trending-anime', { limit: '10' });
     }
 
-    async getAnimePagination(page: string = '1', limit: string = '10', nsfw: string = 'true') {
-        return this.apiService.getV1(`kitsu-api/anime?page=${page}&limit=${limit}&nsfw=${nsfw}`, {});
+    async getAnimePagination(page: string, limit: string, sort: string, subtype: string) {
+        return this.apiService.getV1(`kitsu-api/anime?page=${page}&limit=${limit}&sort=${sort}&subtype=${subtype}`, {});
     }
 
     async getFavoriteAnimes() {
