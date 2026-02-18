@@ -2,10 +2,10 @@ import { Component, inject, Input, HostBinding, ChangeDetectionStrategy } from '
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faUser, faPlay, faPlus, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { DialogData, DialogDetailsCard } from '../dialog-details-card/dialog-details-card';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../../../../../src/api/api.service';
 import { DialogError } from '../dialog-error/dialog-error';
+import { Router } from '@angular/router'
 
 export type Tag = string | any;
 
@@ -25,10 +25,11 @@ export class Card {
 
   readonly dialog = inject(MatDialog);
 
+  private router = inject(Router);
+
   constructor(
     private apiService: ApiService
   ) { }
-
   @Input() item: any = { id: '', coverImage: '', canonicalTitle: '', description: '', link: '', subtype: [] };
 
   @HostBinding('class.hovering') isHovering = false;
@@ -62,12 +63,9 @@ export class Card {
     });
   }
 
+
   openDialog(): void {
-    this.dialog.open(DialogDetailsCard, {
-      width: '40rem',
-      height: '70dvh',
-      data: this.item.id,
-    });
+    this.router.navigate(['/anime', this.item.id]);
   }
 
 }

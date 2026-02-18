@@ -36,6 +36,7 @@
   flex: 0 0 calc(14.285% - 13.71px);
   min-width: 0;
   aspect-ratio: 3 / 4;
+  border-radius: 4px;
 }
 
 .carousel-button {
