@@ -6,12 +6,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../../../../../src/api/api.service';
 import { DialogError } from '../dialog-error/dialog-error';
 import { Router } from '@angular/router'
-
+import { TooltipDirective } from '../../../../../src/directives/tooltip.directive'
 export type Tag = string | any;
 
 @Component({
   selector: 'lib-card',
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, TooltipDirective],
   templateUrl: './card.html',
   styleUrls: ['./card.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,23 +49,24 @@ export class Card {
   }
 
   favoriteAnime() {
-    this.apiService.postV1(`favorites-animes/${this.item.id}`, {}).then(response => {
+    this.apiService.postV1(`favorites-animes/${this.item.id}??include=castings,genres,streamingLinks`, {}).then(response => {
     }).catch(error => {
       console.error('Error favoriting anime:', error);
       if ((error as any)?.status === 409) {
         this.dialog.open(DialogError, {
           width: '30rem',
           height: '30dvh',
-          data: { message: `Failed to mark anime as favorite.
+          data: {
+            message: `Failed to mark anime as favorite.
             Maybe it is already marked as favorite.` }
         });
       }
     });
   }
 
-
   openDialog(): void {
-    this.router.navigate(['/anime', this.item.id]);
+    const urlTree = this.router.createUrlTree(['/anime', this.item.id]);
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
   }
-
 }

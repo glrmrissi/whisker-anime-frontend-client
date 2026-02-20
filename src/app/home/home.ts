@@ -17,6 +17,7 @@ export class Home implements AfterViewInit {
   private readonly platformId = inject(PLATFORM_ID);
 
   protected faBolt = faBolt
+  
   protected faWater = faWater
 
   constructor(
@@ -67,7 +68,7 @@ export class Home implements AfterViewInit {
 
   async fetchTrendingAnime() {
     try {
-      const data = await this.homeService.getAnimePagination('1', '20', '-startDate', 'TV,OVA,ONA,MOVIE,SPECIAL');
+      const data = await this.homeService.getAnimePagination('1', '20', '-createdAt', 'TV,OVA,ONA,MOVIE,SPECIAL');
       this.latestRelease = (data?.data || []).map((anime: any) => ({
         id: anime.id,
         coverImage: anime.attributes.posterImage?.large || anime.attributes.coverImage?.large || '',
@@ -82,7 +83,7 @@ export class Home implements AfterViewInit {
     }
 
     try {
-      const data = await this.homeService.getAnimePagination('1', '20', '-startDate', 'OVA');
+      const data = await this.homeService.getAnimePagination('1', '20', '-createdAt', 'OVA');
       this.ovasRelease = (data?.data || []).map((anime: any) => ({
         id: anime.id,
         coverImage: anime.attributes.posterImage?.large || anime.attributes.coverImage?.large || '',

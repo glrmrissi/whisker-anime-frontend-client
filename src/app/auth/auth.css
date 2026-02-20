@@ -29,8 +29,7 @@
         justify-content: center;
         align-items: center;
         gap: 0.4rem;
-        background: #101010;
-        background: linear-gradient(45deg, #101010 0%, #151515 50%, #2b2b2b 100%);
+        background: var(--bg-color);
         border-radius: var(--border-lg);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         display: flex;
@@ -45,7 +44,7 @@
             margin-top: 1.4rem;
             max-width: 20rem;
             padding: 0.66rem;
-            color: var(--text-color);
+            color: var(--text-color-invert);
             border: 1px solid var(--text-color);
             background-color: var(--bg-btn-primary);
             border-radius: var(--border-mdlg);
@@ -90,11 +89,11 @@ svg {
 }
 
 .drop {
-    stroke: rgba(255, 255, 255, 0.8);
+    stroke: var(--rain-drop-color);
     stroke-width: 0.4;
     stroke-linecap: round;
     stroke-dasharray: 2 8;
-    filter: blur(0.3px);
+    filter: blur(0.2px);
     animation: fall 1s linear infinite;
     opacity: 0.9;
 }

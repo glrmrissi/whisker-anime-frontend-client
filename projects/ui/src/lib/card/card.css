@@ -86,7 +86,7 @@
     }
 
     .card-title:hover {
-        color: var(--bg-icon-hover);
+        color: var(--bg-icon-main-hover);
     }
 
     .tags-container {
@@ -97,7 +97,7 @@
 
     .tags-container small {
         display: inline-block;
-        background: var(--bg-icon-hover);
+        background: var(--bg-icon-main);
         color: var(--text-color-invert);
         padding: 4px 8px;
         border-radius: 4px;
@@ -118,7 +118,7 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        background: var(--bg-icon-hover);
+        background: var(--bg-icon-main);
         border: none;
         color: var(--text-color-invert);
         font-size: 14px;
@@ -133,7 +133,7 @@
     .card-handling-buttons button:hover {
         background: transparent;
         backdrop-filter: blur(10px);
-        border: solid 1px var(--bg-icon-hover);
+        border: solid 1px var(--bg-icon-main-hover);
         color: #fff;
     }
 

@@ -1,0 +1,350 @@
+ :host {
+     display: block;
+     background-color: var(--bg-color);
+     color: var(--text-color);
+
+     app-header {
+         display: block;
+         margin-bottom: 2rem;
+     }
+
+     .container-wrapper {
+         display: flex;
+         gap: 3rem;
+         padding: 0 2rem 3rem 2rem;
+         max-width: 1400px;
+         margin: 0 auto;
+     }
+
+     .poster-section {
+         flex: 0 0 320px;
+     }
+
+     .poster-wrapper {
+         position: sticky;
+         top: 2rem;
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-lg);
+     }
+
+     .poster-image-container {
+         position: relative;
+         border-radius: var(--border-md);
+         overflow: hidden;
+         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+     }
+
+     .poster-image {
+         width: 100%;
+         height: auto;
+         display: block;
+         border-radius: var(--border-md);
+     }
+
+     .rating-badge {
+         position: absolute;
+         top: 12px;
+         right: 12px;
+         background: linear-gradient(135deg, var(--bg-icon-main), var(--bg-icon-main-hover));
+         color: var(--text-color-invert);
+         padding: 8px 12px;
+         border-radius: var(--border-md);
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 2px;
+         font-weight: 700;
+         font-size: 14px;
+         box-shadow: 0 4px 12px rgba(100, 59, 250, 0.3);
+     }
+
+     .rating-value {
+         font-size: 18px;
+     }
+
+     .rating-label {
+         font-size: 10px;
+         opacity: 0.9;
+     }
+
+     .anime-title {
+         font-size: 1.5rem;
+         font-weight: 700;
+         line-height: 1.3;
+         margin: 0;
+         color: var(--text-color);
+     }
+
+     .streaming-section {
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-md);
+     }
+
+     .streaming-title {
+         font-size: 0.9rem;
+         font-weight: 600;
+         text-transform: uppercase;
+         color: var(--text-color-hover);
+         margin: 0;
+         letter-spacing: 0.5px;
+     }
+
+     .streamingLinks {
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-sm);
+     }
+
+     .streaming-link {
+         display: flex;
+         align-items: center;
+         gap: var(--padding-md);
+         padding: var(--padding-md) var(--padding-lg);
+         border-radius: var(--border-md);
+         text-decoration: none;
+         color: var(--text-color-invert);
+         font-weight: 600;
+         font-size: 0.95rem;
+         transition: all 0.3s ease;
+         border: 2px solid transparent;
+
+         img {
+             width: 24px;
+         }
+     }
+
+     .streaming-link.crunchyroll {
+         background-color: #d43c0e;
+         color: var(--text-color-white);
+     }
+
+     .streaming-link.crunchyroll:hover {
+         background-color: rgb(211, 67, 23);
+     }
+
+     .streaming-link.netflix {
+         background-color: #6e050a;
+         color: var(--text-color-white);
+     }
+
+     .streaming-link.netflix:hover {
+         background-color: #5c0409;
+     }
+
+     .streaming-link.hulu {
+         background-color: #1c96e7;
+         color: var(--text-color-white);
+     }
+
+     .streaming-link.hulu:hover {
+         background-color: #1d8dd8;
+     }
+
+     .streaming-link.amazon {
+         background-color: #1c41e7;
+         color: var(--text-color-white);
+     }
+
+     .streaming-link.amazon:hover {
+         background-color: #1b3fdf;
+     }
+
+     .streaming-link.tubi {
+         background-color: #e7e41c;
+         color: var(--text-color-dark);
+     }
+
+     .streaming-link.tubi:hover {
+         background-color: #d8d519;
+     }
+
+     .streaming-link:not(.crunchyroll):not(.netflix):not(.hulu):not(.amazon):not(.tubi) {
+         background-color: var(--bg-btn-primary);
+     }
+
+     .streaming-link:not(.crunchyroll):not(.netflix):not(.hulu):not(.amazon):not(.tubi):hover {
+         background-color: var(--bg-btn-primary-hover);
+         transform: translateX(4px);
+     }
+
+     .platform-icon {
+         font-size: 1.1rem;
+     }
+
+     .genres-section {
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-md);
+     }
+
+     .section-title {
+         font-size: 0.9rem;
+         font-weight: 600;
+         text-transform: uppercase;
+         color: var(--text-color-hover);
+         margin: 0;
+         letter-spacing: 0.5px;
+     }
+
+     .genres-list {
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-sm);
+     }
+
+     .genre-tag {
+         display: inline-block;
+         background-color: var(--bg-secondary);
+         color: var(--text-color);
+         padding: var(--padding-md) var(--padding-lg);
+         border-radius: var(--border-md);
+         font-size: 0.85rem;
+         font-weight: 500;
+         border-left: 4px solid var(--bg-icon-main);
+         transition: all 0.3s ease;
+     }
+
+     .genre-tag:hover {
+         background-color: var(--bg-icon-main);
+         color: var(--text-color-invert);
+         border-left-color: var(--bg-icon-main-hover);
+     }
+
+     .information-wrapper {
+         flex: 1;
+         min-width: 0;
+     }
+
+     .info-content {
+         background-color: var(--bg-secondary);
+         padding: 2rem;
+         border-radius: var(--border-md);
+         border: 1px solid #e0e0e0;
+     }
+
+     .info-title {
+         font-size: 1.5rem;
+         font-weight: 700;
+         margin: 0 0 1rem 0;
+         color: var(--text-color);
+     }
+
+     .description-text {
+         line-height: 1.8;
+         color: var(--text-color);
+         margin-bottom: 2rem;
+         font-size: 1rem;
+     }
+
+     .details-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+         gap: 1.5rem;
+         margin-top: 2rem;
+         padding-top: 2rem;
+         border-top: 1px solid #e0e0e0;
+     }
+
+     .detail-item {
+         display: flex;
+         flex-direction: column;
+         gap: var(--padding-sm);
+     }
+
+     .detail-label {
+         font-size: 0.85rem;
+         font-weight: 600;
+         text-transform: uppercase;
+         color: var(--text-color-hover);
+         letter-spacing: 0.5px;
+     }
+
+     .detail-value {
+         font-size: 1rem;
+         font-weight: 500;
+         color: var(--text-color);
+     }
+
+     @media (max-width: 1024px) {
+         .container-wrapper {
+             gap: 2rem;
+             padding: 0 1.5rem 2rem 1.5rem;
+         }
+
+         .poster-section {
+             flex: 0 0 280px;
+         }
+
+         .details-grid {
+             grid-template-columns: repeat(2, 1fr);
+         }
+     }
+
+     @media (max-width: 768px) {
+         .container-wrapper {
+             flex-direction: column;
+             gap: 2rem;
+             padding: 0 1rem 2rem 1rem;
+         }
+
+         .poster-section {
+             flex: 1;
+         }
+
+         .poster-wrapper {
+             position: static;
+         }
+
+         .poster-image-container {
+             max-width: 400px;
+             margin: 0 auto;
+         }
+
+         .info-content {
+             padding: 1.5rem;
+         }
+
+         .details-grid {
+             grid-template-columns: 1fr;
+         }
+
+         .anime-title {
+             text-align: center;
+         }
+
+         .streaming-section,
+         .genres-section {
+             align-items: center;
+         }
+
+         .streamingLinks {
+             width: 100%;
+         }
+     }
+
+     @media (max-width: 480px) {
+         .container-wrapper {
+             padding: 0 0.75rem 1.5rem 0.75rem;
+         }
+
+         .anime-title {
+             font-size: 1.25rem;
+         }
+
+         .info-title {
+             font-size: 1.25rem;
+         }
+
+         .info-content {
+             padding: 1rem;
+         }
+
+         .rating-badge {
+             top: 8px;
+             right: 8px;
+             padding: 6px 10px;
+         }
+     }
+ }

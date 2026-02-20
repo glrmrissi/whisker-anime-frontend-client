@@ -15,9 +15,8 @@
             </div>
 
             <div class="card-handling-buttons">
-                <button><fa-icon [icon]="faPlay"></fa-icon></button>
-                <button (click)="favoriteAnime()"><fa-icon [icon]="faPlus"></fa-icon></button>
-                <button (click)="openDialog()"><fa-icon [icon]="faAngleUp"></fa-icon></button>
+                <button (click)="favoriteAnime()" [appTooltip]="'Add To Favorite'"><fa-icon [icon]="faPlus"></fa-icon></button>
+                <button (click)="openDialog()" [appTooltip]="'See More'"><fa-icon [icon]="faAngleUp"></fa-icon></button>
             </div>
         </div>
     }

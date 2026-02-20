@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faInfoCircle, faFire, faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faFire, faPlayCircle, faStopCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { TooltipDirective } from '../../directives/tooltip.directive';
 
 export interface HeroSlide {
@@ -39,6 +39,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   protected faFire = faFire
   protected faPlayCircle = faPlayCircle
   protected faStopCircle = faStopCircle
+  protected faPlay = faPlay
 
   ngOnInit(): void {
     this.startAutoPlay();
