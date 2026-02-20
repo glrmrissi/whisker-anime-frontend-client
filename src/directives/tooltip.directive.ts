@@ -15,13 +15,11 @@ export class TooltipDirective implements OnDestroy {
   
   @HostListener('mouseenter')
   onMouseEnter() {
-    // Cancela qualquer hide pendente
     if (this.hideTimeout) {
       clearTimeout(this.hideTimeout);
       this.hideTimeout = undefined;
     }
     
-    // Pequeno delay antes de mostrar (evita flicker em movimento rápido)
     this.showTimeout = setTimeout(() => {
       this.show();
     }, 50);
