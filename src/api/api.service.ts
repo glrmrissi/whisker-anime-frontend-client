@@ -18,7 +18,7 @@ export class ApiService {
         return environment.apiUrl;
     }
 
-    getV1<T = any>(endpoint: string, params: any, extraHeaders?: {}, noAuth = true): Promise<T> {
+    getV1<T = any>(endpoint: string, params: any, extraHeaders?: {}): Promise<T> {
         const url = `${this.getBaseUrl()}/${endpoint}`;
         const headers: Record<string, string> = {
             ...extraHeaders
@@ -30,7 +30,7 @@ export class ApiService {
         );
     }
 
-    postV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
+    postV1<T = any>(endpoint: string, body: any, extraHeaders?: {}): Promise<T> {
         const url = `${this.getBaseUrl()}/${endpoint}`;
         const headers: Record<string, string> = {
             ...extraHeaders
@@ -38,7 +38,7 @@ export class ApiService {
         return firstValueFrom(this.http.post<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
-    patchV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
+    patchV1<T = any>(endpoint: string, body: any, extraHeaders?: {}): Promise<T> {
         const url = `${this.getBaseUrl()}/${endpoint}`;
         const headers: Record<string, string> = {
             ...extraHeaders
@@ -46,7 +46,7 @@ export class ApiService {
         return firstValueFrom(this.http.patch<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
-    putV1<T = any>(endpoint: string, body: any, extraHeaders?: {}, noAuth = true): Promise<T> {
+    putV1<T = any>(endpoint: string, body: any, extraHeaders?: {}): Promise<T> {
         const url = `${this.getBaseUrl()}/${endpoint}`;
         const headers: Record<string, string> = {
             ...extraHeaders
@@ -54,7 +54,7 @@ export class ApiService {
         return firstValueFrom(this.http.put<T>(url, body, { headers, withCredentials: true }).pipe(map((res: T) => res)));
     }
 
-    deleteV1<T = any>(endpoint: string, extraHeaders?: {}, noAuth = true): Promise<T> {
+    deleteV1<T = any>(endpoint: string, extraHeaders?: {}): Promise<T> {
         const url = `${this.getBaseUrl()}/${endpoint}`;
         const headers: Record<string, string> = {
             ...extraHeaders
