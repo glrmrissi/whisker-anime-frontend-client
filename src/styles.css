@@ -33,6 +33,8 @@
 
     --gap-md: 0.6rem;
     --rain-drop-color: rgba(3, 3, 3, 0.877);
+
+    --error-color: red
 }
 
 :root.dark-mode {
