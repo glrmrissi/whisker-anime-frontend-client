@@ -1,62 +1,48 @@
-# FrontEnd
+# Whisker Anime - Complete Anime Platform
+A modern and responsive web platform for discovering, tracking, and managing your favorite anime. Developed in Angular with consumption of the RESTful API from Whisker Anime Backend.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
+### Authentication and Account
 
-## Development server
+- **Login** - Secure authentication with JWT
+- **Register** - Create a new account with validation
+- **Password Recovery** - Reset password via email
+- **User Profile** - View and edit personal information
 
-To start a local development server, run:
+### Requirements System
 
-```bash
-ng serve
-```
+- Node.js - v18.0.0 or higher
+- npm - v9.0.0 or higher
+- Angular CLI - v17.0.0 or higher
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Installation
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 1. Clone the Repository
 
 ```bash
-ng generate --help
+git clone https://github.com/glrmrissi/whisker-anime-frontend.git
+cd whisker-anime-frontend
 ```
 
-## Building
-
-To build the project run:
+### 2. Install Dependencies
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 3. Start Development Server
 
 ```bash
-ng test
+ng serve --open
 ```
 
-## Running end-to-end tests
+### Layout Overview
 
-For end-to-end (e2e) testing, run:
+<img width="1911" height="935" alt="image" src="https://github.com/user-attachments/assets/79b60b00-c019-4527-b670-f9ae3acc9fac" />
 
-```bash
-ng e2e
-```
+<img width="1911" height="935" alt="image" src="https://github.com/user-attachments/assets/0dc2e2d9-0000-4c66-847c-5a1ecde28c2e" />
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Light and Dark Mode
 
-## Additional Resources
+<img width="1915" height="937" alt="image" src="https://github.com/user-attachments/assets/7507847e-5bf0-4272-9842-c04b1d339ca9" />
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
-
-to generate a component on lib ng g component accordion --project=ui
+<img width="1915" height="940" alt="image" src="https://github.com/user-attachments/assets/6878252e-041a-4dc1-ab37-669acff9f7de" />
