@@ -1,114 +1,119 @@
 <app-header>
 </app-header>
 @if(anime()) {
-      <section class="container-wrapper">
-        <div class="poster-section">
-          <div class="poster-wrapper">
-            <div class="poster-image-container">
-              <img 
-                [src]="anime().data.attributes.posterImage?.large" 
-                alt="{{ anime().data.attributes.canonicalTitle }}"
-                class="poster-image"
-              >
-              <div class="rating-badge">
-                <span class="rating-value">{{ anime().data.attributes.averageRating }}</span>
-                <span class="rating-label">Rating</span>
-              </div>
-            </div>
-
-            <h1 class="anime-title">{{ anime().data.attributes.canonicalTitle }}</h1>
-
-            <div class="streaming-section">
-              <h3 class="streaming-title">WHERE TO WATCH</h3>
-              <aside class="streamingLinks">
-                @for(item of getStreamingLinks(); track $index) {
-                  @switch (true) {
-                    @case(item.attributes.url.includes('crunchyroll')) {
-                      <a href="{{ item.attributes.url }}" class="streaming-link crunchyroll" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">
-                            <img src="crunchyroll.png" alt="Crunchyroll">
-                        </span>
-                        Crunchyroll
-                      </a>
-                    } 
-                    @case(item.attributes.url.includes('hulu')) {
-                      <a href="{{ item.attributes.url }}" class="streaming-link hulu" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">
-                            <img src="disney.png" alt="Disney +">
-                        </span>
-                        Disney +
-                      </a>
-                    }
-                    @case(item.attributes.url.includes('netflix')) {
-                      <a href="{{ item.attributes.url }}" class="streaming-link netflix" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">
-                            <img src="netflix.png" alt="Netflix">
-                        </span>
-                        Netflix
-                      </a>
-                    }
-                    @case(item.attributes.url.includes('amazon')) {
-                      <a href="{{ item.attributes.url }}" class="streaming-link amazon" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">
-                            <img src="amazon-prime.png" alt="Amazon">
-                        </span>
-                        Amazon
-                      </a>
-                    }
-                    @case(item.attributes.url.includes('tubi')) {
-                      <a href="{{ item.attributes.url }}" class="streaming-link tubi" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">
-                            <img src="tubi.png" alt="Tubi">
-                        </span>
-                        Tubi
-                      </a>
-                    }
-                    @default {
-                      <a href="{{ item.attributes.url }}" class="streaming-link default" target="_blank" rel="noopener noreferrer">
-                        <span class="platform-icon">🔗</span>
-                        See
-                      </a>
-                    }
-                  }
-                }
-              </aside>
-            </div>
-
-            <div class="genres-section">
-              <h3 class="section-title">GENRES</h3>
-              <div class="genres-list">
-                @for(genre of getGenres(); track $index) {
-                  <span class="genre-tag">{{ genre.attributes.name }}</span>
-                }
-              </div>
-            </div>
-          </div>
+<section class="container-wrapper">
+  <div class="poster-section">
+    <div class="poster-wrapper">
+      <div class="poster-image-container">
+        <img [src]="anime().data.attributes.posterImage?.large" alt="{{ anime().data.attributes.canonicalTitle }}"
+          class="poster-image">
+        <div class="rating-badge">
+          <span class="rating-value">{{ anime().data.attributes.averageRating }}</span>
+          <span class="rating-label">Rating</span>
         </div>
+      </div>
 
-        <div class="information-wrapper">
-          <div class="info-content">
-            <h2 class="info-title">Synopsis</h2>
-            <p class="description-text">{{ anime().data.attributes.description }}</p>
+      <h1 class="anime-title">{{ anime().data.attributes.canonicalTitle }}</h1>
 
-            <div class="details-grid">
-              <div class="detail-item">
-                <span class="detail-label">STATUS</span>
-                <span class="detail-value">{{ anime().data.attributes.status }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">EPISODES</span>
-                <span class="detail-value">{{ anime().data.attributes.episodeCount || 'N/A' }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">TYPE</span>
-                <span class="detail-value">{{ anime().data.attributes.subtype }}</span>
-              </div>
-              <div class="detail-item">
-                <span class="detail-label">START</span>
-                <span class="detail-value">{{ anime().data.attributes.startDate }}</span>
-              </div>
-            </div>
-          </div>
+      <div class="streaming-section">
+        <h3 class="streaming-title">WHERE TO WATCH</h3>
+        <aside class="streamingLinks">
+          @for(item of getStreamingLinks(); track $index) {
+          @switch (true) {
+          @case(item.attributes.url.includes('crunchyroll')) {
+          <a href="{{ item.attributes.url }}" class="streaming-link crunchyroll" target="_blank"
+            rel="noopener noreferrer">
+            <span class="platform-icon">
+              <img src="crunchyroll.png" alt="Crunchyroll">
+            </span>
+            Crunchyroll
+          </a>
+          }
+          @case(item.attributes.url.includes('hulu')) {
+          <a href="{{ item.attributes.url }}" class="streaming-link hulu" target="_blank" rel="noopener noreferrer">
+            <span class="platform-icon">
+              <img src="disney.png" alt="Disney +">
+            </span>
+            Disney +
+          </a>
+          }
+          @case(item.attributes.url.includes('netflix')) {
+          <a href="{{ item.attributes.url }}" class="streaming-link netflix" target="_blank" rel="noopener noreferrer">
+            <span class="platform-icon">
+              <img src="netflix.png" alt="Netflix">
+            </span>
+            Netflix
+          </a>
+          }
+          @case(item.attributes.url.includes('amazon')) {
+          <a href="{{ item.attributes.url }}" class="streaming-link amazon" target="_blank" rel="noopener noreferrer">
+            <span class="platform-icon">
+              <img src="amazon-prime.png" alt="Amazon">
+            </span>
+            Amazon
+          </a>
+          }
+          @case(item.attributes.url.includes('tubi')) {
+          <a href="{{ item.attributes.url }}" class="streaming-link tubi" target="_blank" rel="noopener noreferrer">
+            <span class="platform-icon">
+              <img src="tubi.png" alt="Tubi">
+            </span>
+            Tubi
+          </a>
+          }
+          @default {
+          <a href="{{ item.attributes.url }}" class="streaming-link default" target="_blank" rel="noopener noreferrer">
+            <span class="platform-icon">🔗</span>
+            See
+          </a>
+          }
+          }
+          }
+        </aside>
+      </div>
+
+      <div class="genres-section">
+        <h3 class="section-title">GENRES</h3>
+        <div class="genres-list">
+          @for(genre of getGenres(); track $index) {
+          <span class="genre-tag">{{ genre.attributes.name }}</span>
+          }
         </div>
-      </section>
-    }
+      </div>
+    </div>
+  </div>
+
+  <div class="information-wrapper">
+    <div class="info-content">
+      <h2 class="info-title">Synopsis</h2>
+      <p class="description-text">{{ anime().data.attributes.description }}</p>
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-label">STATUS</span>
+          <span class="detail-value">{{ anime().data.attributes.status }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">EPISODES</span>
+          <span class="detail-value">{{ anime().data.attributes.episodeCount || 'N/A' }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">TYPE</span>
+          <span class="detail-value">{{ anime().data.attributes.subtype }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">START</span>
+          <span class="detail-value">{{ anime().data.attributes.startDate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="anime-detail">
+  @if (animeId()) {
+  <app-comments [animeId]="animeId()"></app-comments>
+  } @else {
+  <p>Carregando seção de comentários...</p>
+  }
+</div>
+}

@@ -1,13 +1,13 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { AnimeDetailsService } from './anime.details.service';
 import { Header } from '../header/header';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faAd } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
+import { Comments } from '../comments/comments';
 @Component({
   selector: 'app-anime-details',
-  imports: [Header],
+  imports: [Header, Comments],
   templateUrl: './anime-details.html',
   styleUrl: './anime-details.css'
 })
@@ -18,6 +18,7 @@ export class AnimeDetails implements OnInit {
 
   private titleService = inject(Title);
 
+
   protected faAd = faAd
 
   setPageTitle(title: string) {
@@ -25,19 +26,22 @@ export class AnimeDetails implements OnInit {
   }
 
   anime = signal<any>(null);
+  animeId = signal<number>(0)
 
   async ngOnInit() {
     this.route.paramMap.subscribe(async params => {
       const id = params.get('id');
-      const data = await this.animeService.getAnimeById(id)
-      await this.setPageTitle(data.data.attributes.canonicalTitle)
-      this.anime.set(data);
-      this.getGenres();
-      this.getStreamingLinks();
-      console.log(await this.anime())
+      if (id) {
+        this.animeId.set(Number(id));
+        const data = await this.animeService.getAnimeById(id);
+        this.anime.set(data);
+        this.setPageTitle(data.data.attributes.canonicalTitle);
+        this.getGenres();
+        this.getStreamingLinks();
+      }
     });
   }
-  
+
   getStreamingLinks() {
     if (!this.anime()?.included) return [];
     return this.anime().included.filter((item: any) => item.type === 'streamingLinks');

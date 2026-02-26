@@ -1,0 +1,89 @@
+<div class="comments-container">
+
+    @if (!replyToId) {
+    <div class="comment-form-section">
+        <h2 class="section-title">Comments</h2>
+        <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="comment-form">
+            <textarea formControlName="content" placeholder="Share your thoughts..." class="comment-input"
+                rows="4"></textarea>
+            <div class="form-footer">
+                <span class="char-count">{{ charCount }}/500</span>
+                <button type="submit" class="submit-btn" [disabled]="commentForm.invalid || isSubmitting">
+                    {{ isSubmitting ? 'Posting...' : 'Post Comment' }}
+                </button>
+            </div>
+        </form>
+    </div>
+    }
+
+    <div class="comments-list-section">
+        @if (isLoading) {
+            <div class="loading">Loading comments...</div>
+        } @else {
+            @if (comments.length > 0) {
+                <div class="comments-list">
+                    @for (comment of comments; track comment.id) {
+                        <ng-container *ngTemplateOutlet="commentTree; context: { $implicit: comment, level: 0 }">
+                        </ng-container>
+                    }
+                </div>
+            } @else {
+                <div class="no-comments">
+                    No comments yet. Be the first!
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<ng-template #commentTree let-comment let-level="level">
+    <div class="comment-item" [style.margin-left.px]="level > 0 ? 24 : 0">
+        
+        <div class="comment-header">
+            <div class="user-avatar" [class.small]="level > 0">foto</div>
+            <div class="user-details">
+                <span class="user-id">{{ comment.userId || 'Anonymous' }}</span>
+                <span class="comment-date">{{ comment.createdAt | date: 'short' }}</span>
+            </div>
+        </div>
+
+        <div class="comment-content">
+            <p>{{ comment.content }}</p>
+        </div>
+
+        <div class="comment-footer">
+            <button class="action-btn" (click)="setupReply(comment.id)">
+                {{ replyToId === comment.id ? 'Cancel' : 'Reply' }}
+            </button>
+
+            @if (comment.replies && comment.replies.length > 0) {
+                <button class="action-btn replies-btn" (click)="toggleReplies(comment.id)">
+                    <span>↳ {{ comment.replies.length }} Replies</span>
+                </button>
+            }
+        </div>
+
+        @if (replyToId === comment.id) {
+            <div class="reply-form-box">
+                <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+                    <textarea formControlName="content" placeholder="Write a reply..." class="comment-input"></textarea>
+                    <div class="form-footer">
+                        <span class="char-count">{{ charCount }}/500</span>
+                        <button type="submit" class="submit-btn" [disabled]="commentForm.invalid || isSubmitting">
+                            Post Reply
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+
+        @if (expandedReplies[comment.id] && comment.replies && comment.replies.length > 0) {
+            <div class="replies-section">
+                @for (reply of comment.replies; track reply.id) {
+                    <ng-container *ngTemplateOutlet="commentTree; context: { $implicit: reply, level: level + 1 }">
+                    </ng-container>
+                }
+            </div>
+        }
+    </div>
+</ng-template>
