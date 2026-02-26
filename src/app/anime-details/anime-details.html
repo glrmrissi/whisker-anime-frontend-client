@@ -19,7 +19,7 @@
             <h1 class="anime-title">{{ anime().data.attributes.canonicalTitle }}</h1>
 
             <div class="streaming-section">
-              <h3 class="streaming-title">ONDE ASSISTIR</h3>
+              <h3 class="streaming-title">WHERE TO WATCH</h3>
               <aside class="streamingLinks">
                 @for(item of getStreamingLinks(); track $index) {
                   @switch (true) {
@@ -66,7 +66,7 @@
                     @default {
                       <a href="{{ item.attributes.url }}" class="streaming-link default" target="_blank" rel="noopener noreferrer">
                         <span class="platform-icon">🔗</span>
-                        Ver
+                        See
                       </a>
                     }
                   }
@@ -75,7 +75,7 @@
             </div>
 
             <div class="genres-section">
-              <h3 class="section-title">GÊNEROS</h3>
+              <h3 class="section-title">GENRES</h3>
               <div class="genres-list">
                 @for(genre of getGenres(); track $index) {
                   <span class="genre-tag">{{ genre.attributes.name }}</span>
@@ -87,7 +87,7 @@
 
         <div class="information-wrapper">
           <div class="info-content">
-            <h2 class="info-title">Sinopse</h2>
+            <h2 class="info-title">Synopsis</h2>
             <p class="description-text">{{ anime().data.attributes.description }}</p>
 
             <div class="details-grid">
@@ -96,15 +96,15 @@
                 <span class="detail-value">{{ anime().data.attributes.status }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">EPISÓDIOS</span>
+                <span class="detail-label">EPISODES</span>
                 <span class="detail-value">{{ anime().data.attributes.episodeCount || 'N/A' }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">TIPO</span>
+                <span class="detail-label">TYPE</span>
                 <span class="detail-value">{{ anime().data.attributes.subtype }}</span>
               </div>
               <div class="detail-item">
-                <span class="detail-label">INÍCIO</span>
+                <span class="detail-label">START</span>
                 <span class="detail-value">{{ anime().data.attributes.startDate }}</span>
               </div>
             </div>

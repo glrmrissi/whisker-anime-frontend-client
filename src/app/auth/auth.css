@@ -44,7 +44,7 @@
             margin-top: 1.4rem;
             max-width: 20rem;
             padding: 0.66rem;
-            color: var(--text-color-invert);
+            color: var(--text-color);
             border: 1px solid var(--text-color);
             background-color: var(--bg-btn-primary);
             border-radius: var(--border-mdlg);
