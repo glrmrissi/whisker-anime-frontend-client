@@ -11,6 +11,9 @@ export interface Comment {
   userLiked: boolean;
   replies?: Comment[];
   parentId?: number;
+  replyCount?: number; 
+  avatarUrl?: string;
+  nickName?: string; 
 }
 
 export interface CommentsDto {
@@ -40,6 +43,14 @@ export class CommentsService {
 
   async likeComment(commentId: number): Promise<any> {
     return this.apiService.patchV1('comments/like', { commentId });
+  }
+
+  async getCountReplies(commentId: number) {
+    return this.apiService.getV1('comments/count-replies', { commentId });
+  }
+
+  async getAvatarAndName(userId: string) {
+    return this.apiService.getV1('users/avatar-name', { userId });
   }
 
   async getLikesByCommentId(commentId: number): Promise<{ likesCount: number }> {

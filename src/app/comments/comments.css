@@ -61,7 +61,7 @@
 
 .char-count {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-color);
 }
 
 .submit-btn {
@@ -132,9 +132,9 @@
 
 .comment-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: var(--padding-md);
+  gap: 10px;
 }
 
 .comment-user-info {

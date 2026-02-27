@@ -1,6 +1,5 @@
 import {
     Component,
-    OnInit,
     Input,
     inject,
     PLATFORM_ID,
@@ -10,6 +9,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentsService, Comment } from './comments.service';
+import { SnackBarService } from '../../../projects/ui/src/public-api';
 
 @Component({
     selector: 'app-comments',
@@ -20,6 +20,7 @@ import { CommentsService, Comment } from './comments.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Comments {
+    private _animeId!: number;
     @Input() set animeId(value: number) {
         this._animeId = value;
         if (isPlatformBrowser(this.platformId)) {
@@ -27,7 +28,6 @@ export class Comments {
         }
     }
     get animeId(): number { return this._animeId; }
-    private _animeId!: number;
 
     comments: Comment[] = [];
     commentForm: FormGroup;
@@ -42,6 +42,7 @@ export class Comments {
     private cdr = inject(ChangeDetectorRef);
     private fb = inject(FormBuilder);
     private commentsService = inject(CommentsService);
+    private snackBar = inject(SnackBarService);
 
     constructor() {
         this.commentForm = this.fb.group({
@@ -54,28 +55,53 @@ export class Comments {
         });
     }
 
+    private async populateReplyCounts(comments: Comment[]): Promise<Comment[]> {
+        return await Promise.all(comments.map(async (comment) => {
+            try {
+                const [resCount, userData] = await Promise.all([
+                    this.commentsService.getCountReplies(comment.id),
+                    this.commentsService.getAvatarAndName(comment.userId)
+                ]);
+
+
+                const count = resCount?.[0]?.replies_count ? parseInt(resCount[0].replies_count, 10) : 0;
+
+                const res = {
+                    ...comment,
+                    replyCount: count,
+                    nickName: userData[0].nickName || 'Anonymous',
+                    avatarUrl: userData[0].avatarUrl,
+                    replies: comment.replies || []
+                };
+
+                return res
+            } catch (err) {
+                console.error(`Error enriching comment ${comment.id}:`, err);
+                return { ...comment, replyCount: 0, replies: comment.replies || [] };
+            }
+        }));
+    }
+
     async loadComments() {
         if (!this.animeId || this.isLoading) return;
-
         try {
             this.isLoading = true;
             this.cdr.detectChanges();
 
-            const data: Comment[] = await this.commentsService.getCommentsByAnimeId(this.animeId);
+            const data = await this.commentsService.getCommentsByAnimeId(this.animeId);
+
+            const enrichedComments = await this.populateReplyCounts(data);
 
             const map = new Map<number, Comment>();
+            enrichedComments.forEach(c => map.set(c.id, c));
+
+
             const tree: Comment[] = [];
-
-            data.forEach(comment => {
-                map.set(comment.id, { ...comment, replies: [] });
-            });
-
-            data.forEach(comment => {
-                const node = map.get(comment.id)!;
-                if (comment.parentId) {
-                    const parent = map.get(comment.parentId);
+            map.forEach(node => {
+                if (node.parentId) {
+                    const parent = map.get(node.parentId);
                     if (parent) {
-                        parent.replies!.push(node);
+                        parent.replies = [...(parent.replies || []), node];
                     }
                 } else {
                     tree.push(node);
@@ -83,67 +109,79 @@ export class Comments {
             });
 
             this.comments = tree;
-
         } catch (error) {
-            this.errorMessage = 'Failed to load comments';
+            this.errorMessage = 'Error loading comments';
         } finally {
             this.isLoading = false;
             this.cdr.detectChanges();
         }
     }
 
-private addReplyToTree(list: Comment[], parentId: number, newReply: Comment): boolean {
-    for (const comment of list) {
-        if (comment.id === parentId) {
-            comment.replies = [...(comment.replies || []), newReply];
-            return true;
-        }
-        if (comment.replies && comment.replies.length > 0) {
-            const found = this.addReplyToTree(comment.replies, parentId, newReply);
-            if (found) return true;
+    async submitComment() {
+        if (this.commentForm.invalid || this.isSubmitting) return;
+
+        try {
+            this.isSubmitting = true;
+            this.cdr.detectChanges();
+
+            const content = this.commentForm.get('content')?.value;
+            const commentData = {
+                animeId: Number(this.animeId),
+                content,
+                parentId: this.replyToId || undefined
+            };
+
+            const newComment = await this.commentsService.createComment(commentData);
+
+            const userData = await this.commentsService.getAvatarAndName(newComment.userId);
+
+            const freshComment: Comment = {
+                ...newComment,
+                nickName: userData[0].nickName || 'Anonymous',
+                avatarUrl: userData[0].avatarUrl,
+                createdAt: new Date(),
+                replies: [],
+                replyCount: 0
+            };
+
+            this.snackBar.open(
+                'Comment added successfully',
+                'OK',
+                3000,
+                'success'
+            )
+
+            if (this.replyToId) {
+                this.comments = this.updateRepliesInList(this.comments, this.replyToId, freshComment);
+                this.expandedReplies[this.replyToId] = true;
+                this.replyToId = null;
+            } else {
+                this.comments = [freshComment, ...this.comments];
+            }
+
+            this.commentForm.reset();
+        } catch (error) {
+            this.errorMessage = "Error when posting";
+        } finally {
+            this.isSubmitting = false;
+            this.cdr.detectChanges();
         }
     }
-    return false;
-}
 
-async submitComment() {
-    if (this.commentForm.invalid || this.isSubmitting) return;
-
-    try {
-        this.isSubmitting = true;
-        this.cdr.detectChanges();
-        
-        const content = this.commentForm.get('content')?.value;
-        const commentData = {
-            animeId: Number(this.animeId),
-            content: content,
-            parentId: this.replyToId || undefined
-        };
-
-        const newComment = await this.commentsService.createComment(commentData);
-        const freshComment = { ...newComment, replies: [] };
-
-        if (this.replyToId) {
-            this.addReplyToTree(this.comments, this.replyToId, freshComment);
-            this.expandedReplies[this.replyToId] = true;
-            this.replyToId = null;
-        } else {
-            this.comments = [freshComment, ...this.comments];
-        }
-
-        this.commentForm.reset();
-    } catch (error) {
-        this.errorMessage = "Error posting comment.";
-    } finally {
-        this.isSubmitting = false;
-        this.cdr.detectChanges();
-    }
-}
-
-    setupReply(commentId: number) {
-        this.replyToId = this.replyToId === commentId ? null : commentId;
-        this.commentForm.reset();
-        this.cdr.markForCheck();
+    private updateRepliesInList(list: Comment[], parentId: number, newReply: Comment): Comment[] {
+        return list.map(c => {
+            if (c.id === parentId) {
+                return {
+                    ...c,
+                    replies: [...(c.replies || []), newReply],
+                    replyCount: (c.replyCount || 0) + 1
+                };
+            }
+            if (c.replies && c.replies.length > 0) {
+                return { ...c, replies: this.updateRepliesInList(c.replies, parentId, newReply) };
+            }
+            return c;
+        });
     }
 
     toggleReplies(commentId: number) {
@@ -151,19 +189,37 @@ async submitComment() {
         if (this.expandedReplies[commentId]) {
             this.loadReplies(commentId);
         }
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     async loadReplies(commentId: number) {
         try {
-            const replies = await this.commentsService.getRepliesOfComment(commentId);
-            this.comments = this.comments.map(c =>
-                c.id === commentId ? { ...c, replies: replies } : c
-            );
-            this.cdr.markForCheck();
+            const rawReplies = await this.commentsService.getRepliesOfComment(commentId);
+            const enrichedReplies = await this.populateReplyCounts(rawReplies);
+
+            const updateTree = (list: Comment[]): Comment[] => {
+                return list.map(c => {
+                    if (c.id === commentId) {
+                        return { ...c, replies: enrichedReplies };
+                    }
+                    if (c.replies && c.replies.length > 0) {
+                        return { ...c, replies: updateTree(c.replies) };
+                    }
+                    return c;
+                });
+            };
+
+            this.comments = updateTree(this.comments);
+            this.cdr.detectChanges();
         } catch (error) {
             console.error('Error loading replies:', error);
         }
+    }
+
+    setupReply(commentId: number) {
+        this.replyToId = this.replyToId === commentId ? null : commentId;
+        this.commentForm.reset();
+        this.cdr.detectChanges();
     }
 
     get contentControl() { return this.commentForm.get('content'); }
