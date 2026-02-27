@@ -54,8 +54,9 @@
                 </div>
 
                 <div class="like-btn">
-                    <button>
-                        <fa-icon>faHeart</fa-icon>
+                    <p>{{ comment.likeCount }}</p>
+                    <button (click)="likeTheComment(comment.id)">
+                        <fa-icon [icon]="faHeart" [ngClass]="{ 'liked': comment.likeCount > 0 }"></fa-icon>
                     </button>
                 </div>
             </div>

@@ -219,11 +219,16 @@
   background-color: rgba(100, 59, 250, 0.1);
 }
 
-.like-btn.liked {
-  color: #e74c3c;
+.like-btn {
+  display: flex;
+  gap: 4px;
 }
 
-.like-btn.liked:hover {
+.liked {
+  color: #d84737;
+}
+
+.liked:hover {
   color: #c0392b;
 }
 

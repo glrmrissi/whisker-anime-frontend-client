@@ -11,9 +11,10 @@ export interface Comment {
   userLiked: boolean;
   replies?: Comment[];
   parentId?: number;
-  replyCount?: number; 
+  replyCount?: number;
   avatarUrl?: string;
-  nickName?: string; 
+  nickName?: string;
+  likeCount?: number;
 }
 
 export interface CommentsDto {
@@ -26,7 +27,7 @@ export interface CommentsDto {
   providedIn: 'root'
 })
 export class CommentsService {
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   async createComment(commentsDto: CommentsDto): Promise<Comment> {
     console.log(commentsDto)
@@ -49,11 +50,11 @@ export class CommentsService {
     return this.apiService.getV1('comments/count-replies', { commentId });
   }
 
-  async getAvatarAndName(userId: string) {
-    return this.apiService.getV1('users/avatar-name', { userId });
+  async getCountLikes(commentId: number) {
+    return this.apiService.getV1('comments/count-likes', { commentId });
   }
 
-  async getLikesByCommentId(commentId: number): Promise<{ likesCount: number }> {
-    return this.apiService.getV1<{ likesCount: number }>('comments/count-likes', { commentId });
+  async getAvatarAndName(userId: string) {
+    return this.apiService.getV1('users/avatar-name', { userId });
   }
 }

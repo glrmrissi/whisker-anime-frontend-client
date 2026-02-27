@@ -61,20 +61,24 @@ export class Comments {
     private async populateReplyCounts(comments: Comment[]): Promise<Comment[]> {
         return await Promise.all(comments.map(async (comment) => {
             try {
-                const [resCount, userData] = await Promise.all([
+                const [resCount, userData, likeCount] = await Promise.all([
                     this.commentsService.getCountReplies(comment.id),
-                    this.commentsService.getAvatarAndName(comment.userId)
+                    this.commentsService.getAvatarAndName(comment.userId),
+                    this.commentsService.getCountLikes(comment.id)
                 ]);
 
 
                 const count = resCount?.[0]?.replies_count ? parseInt(resCount[0].replies_count, 10) : 0;
+                const countLike = likeCount?.[0]?.likes_count ? parseInt(likeCount[0].likes_count, 10) : 0;
+                
 
                 const res = {
                     ...comment,
                     replyCount: count,
                     nickName: userData[0].nickName || 'Anonymous',
                     avatarUrl: userData[0].avatarUrl,
-                    replies: comment.replies || []
+                    replies: comment.replies || [],
+                    likeCount: countLike
                 };
 
                 return res
@@ -226,4 +230,9 @@ export class Comments {
     }
 
     get contentControl() { return this.commentForm.get('content'); }
+
+
+    async likeTheComment(commentId: number) {
+        await this.commentsService.likeComment(commentId);
+    }
 }
