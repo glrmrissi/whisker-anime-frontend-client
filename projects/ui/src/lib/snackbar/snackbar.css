@@ -1,11 +1,16 @@
 :host {
-    position: absolute;
+    position: fixed;
+    top: 15px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: fit-content; 
+    min-width: 25rem;
+    
     display: flex;
     align-items: center;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 25rem;
     background-color: #363636;
     padding: 0.6rem 0.6rem;
     border-radius: 4px;
