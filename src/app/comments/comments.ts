@@ -10,17 +10,20 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentsService, Comment } from './comments.service';
 import { SnackBarService } from '../../../projects/ui/src/public-api';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-comments',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, FaIconComponent],
     templateUrl: './comments.html',
     styleUrls: ['./comments.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Comments {
     private _animeId!: number;
+    protected faHeart = faHeart;
     @Input() set animeId(value: number) {
         this._animeId = value;
         if (isPlatformBrowser(this.platformId)) {

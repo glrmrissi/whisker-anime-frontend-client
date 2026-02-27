@@ -52,6 +52,12 @@
                     <span class="user-id">{{ comment.nickName || 'Anonymous' }}</span>
                     <small class="comment-date">{{ comment.createdAt | date: 'short' }}</small>
                 </div>
+
+                <div class="like-btn">
+                    <button>
+                        <fa-icon>faHeart</fa-icon>
+                    </button>
+                </div>
             </div>
 
             <div class="comment-content">
