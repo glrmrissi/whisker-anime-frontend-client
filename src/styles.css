@@ -16,7 +16,8 @@
 
     --bg-icon-main: #643bfa;;
     --bg-icon-main-hover: #6c4be2;;
-
+    
+    --border-color: #1f1f1f;
 
     --padding-sm: 4px;
     --padding-md: 8px;
@@ -27,6 +28,7 @@
     --border-md: 4px;
     --border-mdlg: 6px;
     --border-lg: 8px;
+
 
     --text-color-white: #fafafa;
     --text-color-dark: #1b1b1b;
@@ -53,6 +55,8 @@
     --bg-icon-main-hover: #e0c54b;
     
     --rain-drop-color: rgba(255, 255, 255, 0.8);
+
+    --border-color: #3d3c3c;
 }
 
 body {
@@ -65,13 +69,33 @@ body {
 }
 
 .warning {
-    background-color: #f5ce64 !important;
-    color: #0a0a0a;
+    background-color: #fde293 !important; 
+    color: #5c3d05;
+
     button {
-        background-color: #d6b24e !important;
-        color: #131313 !important;
+        background-color: #facc15 !important; 
+        color: #422006 !important;
+        font-weight: 600;
+
         &:hover {
-            background-color: #ad8b2c !important;
+            background-color: #eab308 !important;
+        }
+    }
+}
+
+.success {
+    background-color: #b7e4c7 !important; 
+    
+    color: #1b4332; 
+
+    button {
+        background-color: #95d5b2 !important;
+        color: #1b4332 !important;
+        border: none;
+        font-weight: 600;
+
+        &:hover {
+            background-color: #74c69d !important;
         }
     }
 }
