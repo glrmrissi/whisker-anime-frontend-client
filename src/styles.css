@@ -99,3 +99,22 @@ body {
         }
     }
 }
+
+.error {
+    background-color: #ffcccb !important; 
+    
+    color: #5e0b0b; 
+
+    button {
+        background-color: #ff8a8a !important;
+        color: #5e0b0b !important;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: #ff5c5c !important;
+        }
+    }
+}
