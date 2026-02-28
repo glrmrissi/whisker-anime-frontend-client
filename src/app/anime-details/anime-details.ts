@@ -1,8 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { AnimeDetailsService } from './anime.details.service';
 import { Header } from '../header/header';
-import { faAd } from '@fortawesome/free-solid-svg-icons';
+import { faAd, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Title } from '@angular/platform-browser';
 import { Comments } from '../comments/comments';
 @Component({
@@ -12,23 +12,22 @@ import { Comments } from '../comments/comments';
   styleUrl: './anime-details.css'
 })
 export class AnimeDetails implements OnInit {
-  private route = inject(ActivatedRoute);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
-  private animeService = inject(AnimeDetailsService);
+  private animeService: AnimeDetailsService = inject(AnimeDetailsService);
 
-  private titleService = inject(Title);
+  private titleService: Title = inject(Title);
 
+  protected faAd: IconDefinition = faAd
 
-  protected faAd = faAd
-
-  setPageTitle(title: string) {
+  setPageTitle(title: string): void {
     this.titleService.setTitle(`${title} - Whiskers`);
   }
 
-  anime = signal<any>(null);
-  animeId = signal<number>(0)
+  anime: WritableSignal<any> = signal<any>(null);
+  animeId: WritableSignal<number> = signal<number>(0)
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe(async params => {
       const id = params.get('id');
       if (id) {
@@ -42,14 +41,14 @@ export class AnimeDetails implements OnInit {
     });
   }
 
-  getStreamingLinks() {
+  getStreamingLinks(): any {
     if (!this.anime()?.included) return [];
-    return this.anime().included.filter((item: any) => item.type === 'streamingLinks');
+    return this.anime().included.filter((item: any): boolean => item.type === 'streamingLinks');
   }
 
-  getGenres() {
+  getGenres(): any {
     if (!this.anime()?.included) return [];
-    return this.anime().included.filter((item: any) => item.type === 'genres');
+    return this.anime().included.filter((item: any): boolean => item.type === 'genres');
   }
 
 

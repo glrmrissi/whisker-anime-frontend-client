@@ -1,7 +1,7 @@
 import { Component, inject, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee, faUser, faPlay, faPlus, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faUser, faPlay, faPlus, faAngleUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../../../../src/api/api.service';
 import { Router } from '@angular/router'
 import { TooltipDirective } from '../../../../../src/directives/tooltip.directive'
@@ -15,11 +15,11 @@ export type Tag = string | any;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Card {
-  protected faCoffee = faCoffee;
-  protected faUser = faUser;
-  protected faPlay = faPlay;
-  protected faPlus = faPlus;
-  protected faAngleUp = faAngleUp;
+  protected faCoffee: IconDefinition = faCoffee;
+  protected faUser: IconDefinition = faUser;
+  protected faPlay: IconDefinition = faPlay;
+  protected faPlus: IconDefinition = faPlus;
+  protected faAngleUp: IconDefinition = faAngleUp;
 
   private router = inject(Router);
 
@@ -28,7 +28,7 @@ export class Card {
   ) { }
   @Input() item: any = { id: '', coverImage: '', canonicalTitle: '', description: '', link: '', subtype: [] };
 
-  @HostBinding('class.hovering') isHovering = false;
+  @HostBinding('class.hovering') isHovering: boolean = false;
 
   isStringUrl(tag: Tag): boolean {
     return typeof tag === 'string';
@@ -36,15 +36,15 @@ export class Card {
 
   index: number = 0;
 
-  onMouseEnter() {
+  onMouseEnter(): void {
     this.isHovering = true;
   }
 
-  onMouseLeave() {
+  onMouseLeave(): void {
     this.isHovering = false;
   }
 
-  favoriteAnime() {
+  favoriteAnime(): void {
     this.apiService.postV1(`favorites-animes/${this.item.id}??include=castings,genres,streamingLinks`, {}).then(response => {
     }).catch(error => {
       console.error('Error favoriting anime:', error);
