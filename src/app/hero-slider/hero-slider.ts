@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy, Input, signal, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faInfoCircle, faFire, faPlayCircle, faStopCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { TooltipDirective } from '../../directives/tooltip.directive';
+import { Router } from '@angular/router';
 
 export interface HeroSlide {
+  id: number;
   badgeText: string;
   title: string;
   rating: number;
@@ -23,8 +25,11 @@ export interface HeroSlide {
 })
 export class HeroSliderComponent implements OnInit, OnDestroy {
 
+  private router = inject(Router);
+
   @Input() slides: HeroSlide[] = [];
   @Input() autoPlayInterval = 6000;
+
 
   currentIndex = signal(0);
 
@@ -43,6 +48,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startAutoPlay();
+    console.log(this.slides)
   }
 
   ngOnDestroy(): void {
@@ -68,5 +74,12 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
       clearInterval(this.timer);
       this.timer = null;
     }
+  }
+
+  openDialog(anime: any): void {
+    console.log(anime)
+    const urlTree = this.router.createUrlTree(['/anime', anime]);
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
   }
 }
