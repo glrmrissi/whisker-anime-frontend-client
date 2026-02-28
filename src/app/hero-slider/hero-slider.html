@@ -27,10 +27,10 @@
         <div class="hero-actions">
           <button class="btn-watch" (click)="openDialog(slide.id)">
             <fa-icon [icon]="faPlay"></fa-icon>
-            Assistir Agora</button>
+            Watch now</button>
           <button class="btn-info" (click)="openDialog(slide.id)">
             <fa-icon [icon]="faInfoCircle"></fa-icon>
-            Detalhes
+            Details
           </button>
           @if(btnStop) {
           <button class="btn-stop" (click)="startAutoPlay()" [appTooltip]="'Play'" position="right">
