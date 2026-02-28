@@ -51,4 +51,16 @@
     </div>
 </div>
 }
+@case(isForgotPasswordSend()) {
+<div class="wrapper" [formGroup]="authForm">
+    <app-auth-inputs icon="user" type="text" placeholder="Code" formControlName="code"></app-auth-inputs>
+    <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
+    <app-auth-inputs icon="lock" type="password" placeholder="New password" formControlName="password"></app-auth-inputs>
+    <button class="auth-button" (click)="sendCode(authForm.get('email')?.value,authForm.get('password')?.value, authForm.get('code')?.value)">Set new password</button>
+    <div class="auth-footer">
+        <span>Remember your password? </span>
+        <a (click)="toggleLogin()">Login</a>
+    </div>
+</div>
+}
 }

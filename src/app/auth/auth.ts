@@ -22,7 +22,9 @@ export class Auth implements OnInit {
     login = signal(true);
     isLogin = this.login.asReadonly();
     forgotPassword = signal(false);
+    forgotPasswordSend = signal(false);
     isForgotPassword = this.forgotPassword.asReadonly();
+    isForgotPasswordSend = this.forgotPasswordSend.asReadonly();
 
     router: Router;
     authForm: FormGroup;
@@ -36,7 +38,8 @@ export class Auth implements OnInit {
         this.authForm = new FormGroup({
             username: new FormControl(''),
             email: new FormControl(''),
-            password: new FormControl('')
+            password: new FormControl(''),
+            code: new FormControl('')
         });
     }
 
@@ -50,6 +53,7 @@ export class Auth implements OnInit {
         this.register.set(!this.register());
         this.login.set(false);
         this.forgotPassword.set(false);
+        this.forgotPasswordSend.set(false);
         console.log('Register state:', this.register());
     }
 
@@ -57,14 +61,24 @@ export class Auth implements OnInit {
         this.login.set(!this.login());
         this.register.set(false);
         this.forgotPassword.set(false);
+        this.forgotPasswordSend.set(false);
         console.log('Login state:', this.login());
     }
 
     toggleForgotPassword() {
         this.forgotPassword.set(!this.forgotPassword());
+        this.forgotPasswordSend.set(false);
         this.register.set(false);
         this.login.set(false);
         console.log('Forgot Password state:', this.forgotPassword());
+    }
+
+     toggleForgotPasswordSend() {
+        this.forgotPasswordSend.set(!this.forgotPasswordSend());
+        this.forgotPassword.set(false);
+        this.register.set(false);
+        this.login.set(false);
+        console.log('Forgot Password Send state:', this.isForgotPasswordSend());
     }
 
     navigateHome() {
@@ -72,10 +86,10 @@ export class Auth implements OnInit {
         this.router.navigate(['/home']);
     }
 
-    loginUser(username: string, password: string) {
+    async loginUser(username: string, password: string) {
         console.log('Login attempt with username:', username, 'and password:', password
         );
-        this._authService.login(username, password)
+        await this._authService.login(username, password)
             .then(() => {
                 console.log('Login successful, navigating to home...');
                 this.navigateHome();
@@ -83,14 +97,38 @@ export class Auth implements OnInit {
             .catch((error) => {
                 console.error('Login failed:', error);
             });
-            
+
     }
 
-    registerUser(username: string, email: string, password: string) {
-        console.log('Register attempt with username:', username, 'email:', email, 'and password:', password);
+    async registerUser(nickName: string, username: string, password: string) {
+        await this._authService.register(nickName, username, password)
+            .then(() => {
+                console.log('Login successful, navigating to home...');
+                this.navigateHome();
+            })
+            .catch((error) => {
+                console.error('Login failed:', error);
+            });
     }
 
-    resetPasswordUser(email: string) {
-        console.log('Reset password attempt for email:', email);
+    async resetPasswordUser(username: string) {
+        console.log('Reset password attempt for email:', username);
+        await this._authService.resetPassword(username)
+            .then(() => {
+                this.toggleForgotPasswordSend()
+            })
+            .catch((error) => {
+                console.error('Reset password failed:', error);
+            });
+    }
+
+    async sendCode(username: string, newPassword: string, code: string) {
+        await this._authService.sendCode(username, newPassword, code)
+            .then(() => {
+                this.toggleLogin()
+            })
+            .catch((error) => {
+                console.error('Failed to save failed:', error);
+            });
     }
 }
