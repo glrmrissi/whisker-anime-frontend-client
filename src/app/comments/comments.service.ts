@@ -15,6 +15,7 @@ export interface Comment {
   avatarUrl?: string;
   nickName?: string;
   likeCount?: number;
+  isLiked?: boolean;
 }
 
 export interface CommentsDto {

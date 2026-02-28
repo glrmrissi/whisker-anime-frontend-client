@@ -24,12 +24,14 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 export class Comments {
     private _animeId!: number;
     protected faHeart = faHeart;
+    
     @Input() set animeId(value: number) {
         this._animeId = value;
         if (isPlatformBrowser(this.platformId)) {
             this.loadComments();
         }
     }
+
     get animeId(): number { return this._animeId; }
 
     comments: Comment[] = [];
@@ -40,6 +42,7 @@ export class Comments {
     expandedReplies: { [key: number]: boolean } = {};
     replyToId: number | null = null;
     charCount = 0;
+    baseUrl = 'http://localhost:3001/'
 
     private platformId = inject(PLATFORM_ID);
     private cdr = inject(ChangeDetectorRef);
@@ -70,7 +73,7 @@ export class Comments {
 
                 const count = resCount?.[0]?.replies_count ? parseInt(resCount[0].replies_count, 10) : 0;
                 const countLike = likeCount?.[0]?.likes_count ? parseInt(likeCount[0].likes_count, 10) : 0;
-                
+
 
                 const res = {
                     ...comment,
@@ -78,7 +81,8 @@ export class Comments {
                     nickName: userData[0].nickName || 'Anonymous',
                     avatarUrl: userData[0].avatarUrl,
                     replies: comment.replies || [],
-                    likeCount: countLike
+                    likeCount: countLike,
+                    userLiked: !!comment.isLiked
                 };
 
                 return res
@@ -231,8 +235,32 @@ export class Comments {
 
     get contentControl() { return this.commentForm.get('content'); }
 
-
     async likeTheComment(commentId: number) {
-        await this.commentsService.likeComment(commentId);
+        try {
+            const res = await this.commentsService.likeComment(commentId) as { action: string };
+
+            this.comments = this.updateLikeInList(this.comments, commentId, res.action);
+            this.cdr.markForCheck();
+
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        }
+    }
+
+    private updateLikeInList(list: Comment[], commentId: number, action: string): Comment[] {
+        return list.map(c => {
+            if (c.id === commentId) {
+                const isLike = action === 'liked';
+                return {
+                    ...c,
+                    likeCount: Math.max(0, (c.likeCount || 0) + (isLike ? 1 : -1)),
+                    userLiked: isLike
+                };
+            }
+            if (c.replies && c.replies.length > 0) {
+                return { ...c, replies: this.updateLikeInList(c.replies, commentId, action) };
+            }
+            return c;
+        });
     }
 }

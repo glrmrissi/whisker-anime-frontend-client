@@ -39,7 +39,7 @@
             <div class="comment-header">
                 <div class="user-avatar-container">
                     @if (comment.avatarUrl) {
-                    <img [src]="'http://localhost:3001/' + comment.avatarUrl" class="user-avatar"
+                    <img [src]="baseUrl + comment.avatarUrl" class="user-avatar"
                         [class.small]="level > 0" alt="avatar">
                     } @else {
                     <div class="user-avatar default" [class.small]="level > 0">
@@ -55,8 +55,8 @@
 
                 <div class="like-btn">
                     <p>{{ comment.likeCount }}</p>
-                    <button (click)="likeTheComment(comment.id)">
-                        <fa-icon [icon]="faHeart" [ngClass]="{ 'liked': comment.likeCount > 0 }"></fa-icon>
+                    <button (click)="likeTheComment(comment.id)" [class.liked]="comment.userLiked">
+                        <fa-icon [icon]="faHeart"></fa-icon>
                     </button>
                 </div>
             </div>
