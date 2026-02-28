@@ -109,8 +109,6 @@ export class Carousel implements AfterViewInit, OnChanges {
 
             const containerWidth = wrapper.clientWidth;
             const trackWidth = track.scrollWidth;
-            console.log(containerWidth)
-            console.log(trackWidth)
 
             const max = Math.max(0, trackWidth - containerWidth);
             this.maxScroll.set(max);

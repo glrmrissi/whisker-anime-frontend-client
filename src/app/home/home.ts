@@ -47,6 +47,7 @@ export class Home implements AfterViewInit {
       const heroSlides = (data?.data || []).map((anime: any) => {
         const year = new Date(anime.attributes.startDate).getFullYear();
         return {
+          id: anime.id,
           badgeText: 'On the rise',
           title: anime.attributes.canonicalTitle || '',
           rating: anime.attributes.averageRating
