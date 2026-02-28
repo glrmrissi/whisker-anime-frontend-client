@@ -16,7 +16,7 @@
 
     --bg-icon-main: #643bfa;;
     --bg-icon-main-hover: #6c4be2;;
-    
+
     --border-color: #1f1f1f;
 
     --padding-sm: 4px;
@@ -50,10 +50,10 @@
     --bg-btn-primary: #0f0f0f;
     --bg-btn-primary-hover: #5f5f5f;
     --bg-btn-card: #2d2d2d;
-    
+
     --bg-icon-main: #fcd93d;
     --bg-icon-main-hover: #e0c54b;
-    
+
     --rain-drop-color: rgba(255, 255, 255, 0.8);
 
     --border-color: #3d3c3c;
@@ -65,15 +65,15 @@ body {
 }
 
 .mat-mdc-dialog-surface {
-  background-color: var(--bg-color) !important; 
+  background-color: var(--bg-color) !important;
 }
 
 .warning {
-    background-color: #fde293 !important; 
+    background-color: #fde293 !important;
     color: #5c3d05;
 
     button {
-        background-color: #facc15 !important; 
+        background-color: #facc15 !important;
         color: #422006 !important;
         font-weight: 600;
 
@@ -84,9 +84,9 @@ body {
 }
 
 .success {
-    background-color: #b7e4c7 !important; 
-    
-    color: #1b4332; 
+    background-color: #b7e4c7 !important;
+
+    color: #1b4332;
 
     button {
         background-color: #95d5b2 !important;
@@ -101,9 +101,9 @@ body {
 }
 
 .error {
-    background-color: #ffcccb !important; 
-    
-    color: #5e0b0b; 
+    background-color: #ffcccb !important;
+
+    color: #5e0b0b;
 
     button {
         background-color: #ff8a8a !important;
