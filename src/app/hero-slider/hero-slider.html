@@ -25,10 +25,10 @@
         <p class="hero-desc">{{ slide.description }}</p>
 
         <div class="hero-actions">
-          <button class="btn-watch">
+          <button class="btn-watch" (click)="openDialog(slide.id)">
             <fa-icon [icon]="faPlay"></fa-icon>
             Assistir Agora</button>
-          <button class="btn-info">
+          <button class="btn-info" (click)="openDialog(slide.id)">
             <fa-icon [icon]="faInfoCircle"></fa-icon>
             Detalhes
           </button>
