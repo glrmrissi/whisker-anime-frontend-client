@@ -1,48 +1,41 @@
-# Whisker Anime - Complete Anime Platform
-A modern and responsive web platform for discovering, tracking, and managing your favorite anime. Developed in Angular with consumption of the RESTful API from Whisker Anime Backend.
+# Whisker Anime Frontend Client
 
-### Authentication and Account
+## Purpose
+The project is a Single Page Application (SPA) designed for the consumption and interaction of media content (animes). The system manages catalog viewing, user authentication, personalized profiles, and a comment system supporting nested replies and like interactions.
 
-- **Login** - Secure authentication with JWT
-- **Register** - Create a new account with validation
-- **Password Recovery** - Reset password via email
-- **User Profile** - View and edit personal information
+---
 
-### Requirements System
+## Core Technologies
+* **Core Framework:** Angular (Version 17+ using Standalone Components).
+* **Language:** TypeScript.
+* **State Management:** Angular Signals (utilization of signals for reactive states and computed/asReadonly for flow control).
+* **Change Detection Strategy:** ChangeDetectionStrategy.OnPush for performance optimization and reduction of rendering cycles.
+* **Communication:** Angular HttpClient for REST API integration.
+* **Forms:** Reactive Forms for validation and data capture in authentication and comment modules.
+* **Icons:** FontAwesome (utilization of @fortawesome/angular-fontawesome).
+* **Styling:** Native CSS with dynamic theme switching (Dark Mode) implemented via document class manipulation and localStorage persistence.
 
-- Node.js - v18.0.0 or higher
-- npm - v9.0.0 or higher
-- Angular CLI - v17.0.0 or higher
+---
 
-## Installation
+## Architecture and Componentization
+The application is structured through independent and modular components, prioritizing logic and interface reuse:
 
-### 1. Clone the Repository
+* **Comment System:** Recursive tree logic for displaying replies, like counters, and user interaction status verification.
+* **Authentication:** Management of Login, Registration, and Password Recovery flows within a single component using Angular control flow directives.
+* **Custom Directives:** Implementation of interface functionalities, such as the TooltipDirective.
+* **Lifecycle Management:** Use of ngOnInit and afterNextRender for asynchronous request control and post-initial rendering state manipulation.
 
-```bash
-git clone https://github.com/glrmrissi/whisker-anime-frontend.git
-cd whisker-anime-frontend
-```
+---
 
-### 2. Install Dependencies
+## Backend Integration
+The interface communicates with an external server through dedicated services. Integrated functionalities include:
 
-```bash
-npm install
-```
+* **Session Persistence:** Cookie-based authentication (credential transmission via withCredentials).
+* **Media Management:** Upload and display of avatars with cache control via timestamp query params.
+* **Dynamic Interactions:** Toggle Like system with persistence in a relational database through the backend.
 
-### 3. Start Development Server
+---
 
-```bash
-ng serve --open
-```
-
-### Layout Overview
-
-<img width="1911" height="935" alt="image" src="https://github.com/user-attachments/assets/79b60b00-c019-4527-b670-f9ae3acc9fac" />
-
-<img width="1911" height="935" alt="image" src="https://github.com/user-attachments/assets/0dc2e2d9-0000-4c66-847c-5a1ecde28c2e" />
-
-## Light and Dark Mode
-
-<img width="1915" height="937" alt="image" src="https://github.com/user-attachments/assets/7507847e-5bf0-4272-9842-c04b1d339ca9" />
-
-<img width="1915" height="940" alt="image" src="https://github.com/user-attachments/assets/6878252e-041a-4dc1-ab37-669acff9f7de" />
+## Rendering and Performance
+* **SSR Awareness:** Platform verification via isPlatformBrowser and PLATFORM_ID to ensure the execution of browser-specific code (such as cookie handling and localStorage).
+* **Reference Refactoring:** Object updates via the spread operator to ensure reactivity in components utilizing the OnPush strategy.
