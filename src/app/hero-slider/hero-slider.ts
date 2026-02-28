@@ -48,7 +48,6 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startAutoPlay();
-    console.log(this.slides)
   }
 
   ngOnDestroy(): void {
@@ -77,7 +76,6 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   }
 
   openDialog(anime: any): void {
-    console.log(anime)
     const urlTree = this.router.createUrlTree(['/anime', anime]);
     const url = this.router.serializeUrl(urlTree);
     window.open(url, '_blank');
