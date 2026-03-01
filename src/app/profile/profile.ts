@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal, ViewChild } from '@angular/core';
 import { ProfileAvatar } from "./profile-avatar/profile-avatar";
 import { A11yModule } from "@angular/cdk/a11y";
 import { faEdit, faMailForward, faUserShield, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ProfileService } from './profile.service';
 import { SnackBarService } from '../../../projects/ui/src/lib/snackbar/snackbar.service';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from "@angular/forms";
-import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Header } from '../header/header';
 
 type ProfileType = {
@@ -24,7 +24,7 @@ type ProfileType = {
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
-export class Profile implements AfterViewInit {
+export class Profile implements OnInit {
   @ViewChild('profileAvatar') protected profileAvatar!: ProfileAvatar;
 
   protected faEdit = faEdit;
@@ -40,6 +40,7 @@ export class Profile implements AfterViewInit {
   public profile = signal<ProfileType | null>(null);
 
   private formBuilder = inject(FormBuilder);
+  private platformId = inject(PLATFORM_ID);
 
   editUserGroup = this.formBuilder.group({
     nickName: [''],
@@ -55,8 +56,11 @@ export class Profile implements AfterViewInit {
     this.hiddenEditButton = false;
   }
 
-  async ngAfterViewInit(): Promise<ProfileType | void> {
-    await this.getProfile();
+
+  async ngOnInit() { 
+    if (isPlatformBrowser(this.platformId)) {
+      await this.getProfile();
+    }
   }
 
   async getProfile(): Promise<ProfileType | void> {

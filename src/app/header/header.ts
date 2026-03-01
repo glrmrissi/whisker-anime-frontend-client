@@ -21,7 +21,7 @@ export class Header {
 
   baseUrl = 'http://localhost:3001/'
 
-  avatarItem = { src: `${this.baseUrl}user.png`, alt: 'User Avatar' };
+  avatarItem = { src: ``, alt: 'U' };
   logoItem = '/logo.png'
   themeSwitch = false
   dropDownActive = true;
