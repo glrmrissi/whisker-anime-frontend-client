@@ -1,4 +1,10 @@
-<div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+<ng-container *appSkeleton="isLoading(); else content">
+   <div class="skeleton-loader" style="height: 313px; width: 100%;">
+     <div style=" background: #eee; width: 100%;"></div>
+   </div> 
+</ng-container>
+<ng-template #content>
+    <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <div class="card-container-img">
         <img class="card-img" [src]="item.coverImage" alt="Cover" (click)="openDialog()">
     </div>
@@ -21,3 +27,4 @@
         </div>
     }
 </div>
+</ng-template>

@@ -1,57 +1,65 @@
-<section class="hero">
+<ng-container *appSkeleton="isLoading(); else content">
+   <div class="skeleton-loader" style="height: 520px; width: 100%;">
+     <div style=" background: #eee; width: 100%;"></div>
+   </div> 
+</ng-container>
 
-  <div class="hero-slides" [style.transform]="sliderTransform()">
-    @for (slide of slides; track slide.title; let i = $index) {
-    <div class="hero-slide" [class.active]="i === currentIndex()">
+<ng-template #content>
+  <section class="hero">
 
-      <div class="hero-bg" [style.background-image]="'url(' + slide.backgroundUrl + ')'"></div>
-      <div class="hero-gradient"></div>
+    <div class="hero-slides" [style.transform]="sliderTransform()">
+      @for (slide of slides; track slide.title; let i = $index) {
+      <div class="hero-slide" [class.active]="i === currentIndex()">
 
-      <div class="hero-content">
-        <div class="hero-badge">
-          <fa-icon [icon]="faFire"></fa-icon> {{ slide.badgeText }}
+        <div class="hero-bg" [style.background-image]="'url(' + slide.backgroundUrl + ')'"></div>
+        <div class="hero-gradient"></div>
+
+        <div class="hero-content">
+          <div class="hero-badge">
+            <fa-icon [icon]="faFire"></fa-icon> {{ slide.badgeText }}
+          </div>
+
+          <h1 class="hero-title">{{ slide.title }}</h1>
+
+          <div class="hero-meta">
+            <span class="hero-rating">★ {{ slide.rating }}</span>
+            <span class="dot"></span>
+            <span>{{ slide.subtype }}</span>
+            <span class="dot"></span>
+            <span>{{ slide.year }}</span>
+          </div>
+
+          <p class="hero-desc">{{ slide.description }}</p>
+
+          <div class="hero-actions">
+            <button class="btn-watch" (click)="openDialog(slide.id)">
+              <fa-icon [icon]="faPlay"></fa-icon>
+              Watch now</button>
+            <button class="btn-info" (click)="openDialog(slide.id)">
+              <fa-icon [icon]="faInfoCircle"></fa-icon>
+              Details
+            </button>
+            @if(btnStop) {
+            <button class="btn-stop" (click)="startAutoPlay()" [appTooltip]="'Play'" position="right">
+              <fa-icon [icon]="faStopCircle"></fa-icon>
+            </button>
+            } @else {
+            <button class="btn-stop" (click)="stopAutoPlay()" [appTooltip]="'Stop'" position="right">
+              <fa-icon [icon]="faPlayCircle"></fa-icon>
+            </button>
+            }
+          </div>
         </div>
 
-        <h1 class="hero-title">{{ slide.title }}</h1>
-
-        <div class="hero-meta">
-          <span class="hero-rating">★ {{ slide.rating }}</span>
-          <span class="dot"></span>
-          <span>{{ slide.subtype }}</span>
-          <span class="dot"></span>
-          <span>{{ slide.year }}</span>
-        </div>
-
-        <p class="hero-desc">{{ slide.description }}</p>
-
-        <div class="hero-actions">
-          <button class="btn-watch" (click)="openDialog(slide.id)">
-            <fa-icon [icon]="faPlay"></fa-icon>
-            Watch now</button>
-          <button class="btn-info" (click)="openDialog(slide.id)">
-            <fa-icon [icon]="faInfoCircle"></fa-icon>
-            Details
-          </button>
-          @if(btnStop) {
-          <button class="btn-stop" (click)="startAutoPlay()" [appTooltip]="'Play'" position="right">
-            <fa-icon [icon]="faStopCircle"></fa-icon>
-          </button>
-          } @else {
-          <button class="btn-stop" (click)="stopAutoPlay()" [appTooltip]="'Stop'" position="right">
-            <fa-icon [icon]="faPlayCircle"></fa-icon>
-          </button>
-          }
-        </div>
       </div>
-
+      }
     </div>
-    }
-  </div>
 
-  <div class="hero-dots">
-    @for (slide of slides; track slide.title; let i = $index) {
-    <div class="hero-dot" [class.active]="i === currentIndex()" (click)="goToSlide(i)"></div>
-    }
-  </div>
+    <div class="hero-dots">
+      @for (slide of slides; track slide.title; let i = $index) {
+      <div class="hero-dot" [class.active]="i === currentIndex()" (click)="goToSlide(i)"></div>
+      }
+    </div>
 
-</section>
+  </section>
+</ng-template>

@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, signal, computed, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, signal, computed, inject, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faInfoCircle, faFire, faPlayCircle, faStopCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { TooltipDirective } from '../../directives/tooltip.directive';
 import { Router } from '@angular/router';
+import { SkeletonDirective } from '../../directives/skeleton.directive';
 
 export interface HeroSlide {
   id: number;
@@ -19,7 +20,7 @@ export interface HeroSlide {
 @Component({
   selector: 'app-hero-slider',
   standalone: true,
-  imports: [CommonModule, FaIconComponent, TooltipDirective],
+  imports: [CommonModule, FaIconComponent, TooltipDirective, SkeletonDirective],
   templateUrl: './hero-slider.html',
   styleUrl: './hero-slider.css'
 })
@@ -30,6 +31,7 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   @Input() slides: HeroSlide[] = [];
   @Input() autoPlayInterval = 6000;
 
+  isLoading: any = signal(true);
 
   currentIndex = signal(0);
 
@@ -46,7 +48,11 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   protected faStopCircle = faStopCircle
   protected faPlay = faPlay
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 1500);
     this.startAutoPlay();
   }
 
