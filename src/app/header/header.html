@@ -24,7 +24,7 @@
     </aside>
     <aside class="header-rows"> 
         <fa-icon class="iconTheme" [icon]="themeSwitch ? faMoon : faSun" (click)="switchTheme()" [appTooltip]="'Change theme'" position="bottom"></fa-icon>
-        <input type="search" placeholder="Search">
+        <app-search></app-search>
         <lib-avatar [item]="avatarItem" (click)="redirectToProfile()"></lib-avatar>
     </aside>
 </header>

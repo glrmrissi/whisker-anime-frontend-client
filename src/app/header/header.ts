@@ -1,5 +1,5 @@
 import { afterNextRender, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { Avatar } from '../../../projects/ui/src/public-api';
+import { Avatar, Search } from '../../../projects/ui/src/public-api';
 import { faSun, faMoon, faHouse, faInfoCircle, faEnvelope, faCompass } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { TooltipDirective } from '../../directives/tooltip.directive';
@@ -8,7 +8,7 @@ import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
-  imports: [Avatar, FaIconComponent, TooltipDirective],
+  imports: [Avatar, Search, FaIconComponent, TooltipDirective],
   templateUrl: './header.html',
   styleUrl: './header.css',
   changeDetection: ChangeDetectionStrategy.OnPush
