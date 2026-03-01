@@ -5,19 +5,26 @@
         <fa-icon [icon]="faWater"></fa-icon>
         <h2>Best Rating</h2>
     </div>
-    <app-carousel [items]="averageRating"></app-carousel>
+    <app-carousel [items]="averageRating()"></app-carousel>
+</section>
+<section class="carousel-wrapper" style="width: 100%;">
+    <div class="title-wrapper">
+        <fa-icon [icon]="faBolt"></fa-icon>
+        <h2>More viewers</h2>
+    </div>
+    <app-carousel [items]="moreViewers()"></app-carousel>
 </section>
 <section class="carousel-wrapper" style="width: 100%;">
     <div class="title-wrapper">
         <fa-icon [icon]="faBolt"></fa-icon>
         <h2>Latest release</h2>
     </div>
-    <app-carousel [items]="latestRelease"></app-carousel>
+    <app-carousel [items]="latestRelease()"></app-carousel>
 </section>
 <section class="carousel-wrapper" style="width: 100%;">
     <div class="title-wrapper">
         <fa-icon [icon]="faBolt"></fa-icon>
         <h2>OVAS</h2>
     </div>
-    <app-carousel [items]="ovasRelease"></app-carousel>
+    <app-carousel [items]="ovasRelease()"></app-carousel>
 </section>
