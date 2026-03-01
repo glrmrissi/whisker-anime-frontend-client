@@ -4,9 +4,9 @@
    </div> 
 </ng-container>
 <ng-template #content>
-    <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+    <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"> 
     <div class="card-container-img">
-        <img class="card-img" [src]="item.coverImage" alt="Cover" (click)="openDialog()">
+        <img class="card-img" [src]="item.coverImage" alt="Cover">
     </div>
 
     @if(isHovering) {

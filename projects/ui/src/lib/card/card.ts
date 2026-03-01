@@ -62,6 +62,6 @@ export class Card implements OnInit {
   openDialog(): void {
     const urlTree = this.router.createUrlTree(['/anime', this.item.id]);
     const url = this.router.serializeUrl(urlTree);
-    window.open(url, '_blank');
+    window.open(url, '_self');
   }
 }

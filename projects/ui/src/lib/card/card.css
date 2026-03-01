@@ -7,15 +7,14 @@
         aspect-ratio: 3 / 4;
         border-radius: 4px;
         overflow: hidden;
-        cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         background: #0a0e27;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .card-wrapper:hover {
         transform: scale(1.01);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
     }
 
     .card-container-img {

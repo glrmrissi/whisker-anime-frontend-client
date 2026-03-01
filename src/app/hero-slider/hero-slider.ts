@@ -84,6 +84,6 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   openDialog(anime: any): void {
     const urlTree = this.router.createUrlTree(['/anime', anime]);
     const url = this.router.serializeUrl(urlTree);
-    window.open(url, '_blank');
+    window.open(url, '_self');
   }
 }
