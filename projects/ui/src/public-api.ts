@@ -10,6 +10,7 @@ export { Accordion } from './lib/accordion/accordion';
 export { Avatar } from './lib/avatar/avatar';
 export { Card } from './lib/card/card';
 export { SnackBar } from './lib/snackbar/snackbar'
+export { Search } from './lib/search/search'
 
 
 // Services

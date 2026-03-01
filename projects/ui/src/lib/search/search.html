@@ -1,0 +1,32 @@
+<div class="search-wrapper">
+    <div class="input-group">
+        <fa-icon [icon]="faSearch" class="search-icon"></fa-icon>
+        <input type="search" placeholder="Search anime..." (input)="onTyping($event)"
+            (focus)="showSuggestions.set(true)" (blur)="hideSuggestionsWithDelay()">
+    </div>
+
+    @if (showSuggestions() && (isSearching() || results().length > 0)) {
+    <div class="suggestions-dropdown">
+        @if (isSearching()) {
+        <div class="search-loader">
+            <div class="spinner"></div>
+            <span>Searching...</span>
+        </div>
+        }
+
+        @for (anime of results(); track anime.id) {
+        <div class="suggestion-item" (mousedown)="selectAnime(anime)">
+            <img [src]="anime.attributes.posterImage?.tiny" alt="Poster" class="tiny-poster">
+            <div class="anime-info">
+                <span class="title">{{ anime.attributes.canonicalTitle }}</span>
+                <span class="meta">{{ anime.attributes.subtype }} • {{ anime.attributes.startDate }}</span>
+            </div>
+        </div>
+        } @empty {
+        @if (!isSearching()) {
+        <div class="no-results">No animes found.</div>
+        }
+        }
+    </div>
+    }
+</div>
