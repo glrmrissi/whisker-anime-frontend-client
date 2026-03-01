@@ -15,7 +15,10 @@
     --bg-btn-card: #ffffff;
 
     --bg-icon-main: #643bfa;;
-    --bg-icon-main-hover: #6c4be2;;
+    --bg-icon-main-hover: #6c4be2;
+
+    --base-skeleton-color: #f0f0f0;
+    --linear-skeleton-background: linear-gradient(45deg, #ddd 25%, #eee 50%, #ddd 75%);
 
     --border-color: #1f1f1f;
 
@@ -53,6 +56,9 @@
 
     --bg-icon-main: #fcd93d;
     --bg-icon-main-hover: #e0c54b;
+
+    --base-skeleton-color: #404040;
+    --linear-skeleton-background: linear-gradient(45deg, #3b3b3b 25%, #535353 50%, #6f6f6f 75%);
 
     --rain-drop-color: rgba(255, 255, 255, 0.8);
 
@@ -117,4 +123,27 @@ body {
             background-color: #ff5c5c !important;
         }
     }
+}
+
+
+.skeleton-loader {
+  height: 24px;
+  width: 80%;
+  background: var(--linear-skeleton-background);
+  background-size: 200% 200%;
+  
+  animation: shimmer 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px; 
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0;
+  }
 }
