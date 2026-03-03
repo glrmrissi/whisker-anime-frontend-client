@@ -1,41 +1,83 @@
-# Whisker Anime Frontend Client
+# Whisker Anime — Frontend
 
-## Purpose
-The project is a Single Page Application (SPA) designed for the consumption and interaction of media content (animes). The system manages catalog viewing, user authentication, personalized profiles, and a comment system supporting nested replies and like interactions.
+Modern Single Page Application (SPA) for the Whisker Anime platform — a complete anime catalog and tracking system with advanced authentication, favorites, nested comments, and a custom UI component library.
 
----
-
-## Core Technologies
-* **Core Framework:** Angular (Version 17+ using Standalone Components).
-* **Language:** TypeScript.
-* **State Management:** Angular Signals (utilization of signals for reactive states and computed/asReadonly for flow control).
-* **Change Detection Strategy:** ChangeDetectionStrategy.OnPush for performance optimization and reduction of rendering cycles.
-* **Communication:** Angular HttpClient for REST API integration.
-* **Forms:** Reactive Forms for validation and data capture in authentication and comment modules.
-* **Icons:** FontAwesome (utilization of @fortawesome/angular-fontawesome).
-* **Styling:** Native CSS with dynamic theme switching (Dark Mode) implemented via document class manipulation and localStorage persistence.
+**Main Technologies**  
+![Angular](https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white) 
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white) 
+![Signals](https://img.shields.io/badge/Angular_Signals-0F0F0F?logo=angular&logoColor=white)
 
 ---
 
-## Architecture and Componentization
-The application is structured through independent and modular components, prioritizing logic and interface reuse:
+## Features
 
-* **Comment System:** Recursive tree logic for displaying replies, like counters, and user interaction status verification.
-* **Authentication:** Management of Login, Registration, and Password Recovery flows within a single component using Angular control flow directives.
-* **Custom Directives:** Implementation of interface functionalities, such as the TooltipDirective.
-* **Lifecycle Management:** Use of ngOnInit and afterNextRender for asynchronous request control and post-initial rendering state manipulation.
+### Authentication & Security
+- Complete auth flow (Login, Register, Password Recovery) in a single component using Angular control flow
+- Cookie-based session persistence with `withCredentials`
+- Avatar upload and display with cache busting (timestamp query params)
+
+### User Interactions
+- Anime catalog browsing and search
+- Favorites management
+- Nested comment system with replies, like counters, and user interaction status
+- Dynamic Dark Mode (persisted via `localStorage` and `document.classList`)
+
+### Technical Highlights
+- **Angular 21** with Standalone Components
+- **Angular Signals** for reactive state management (computed and asReadonly)
+- **OnPush** change detection strategy for maximum performance
+- Custom UI Component Library (`projects/ui`)
+- Recursive comment tree component
+- Reactive Forms with validation
+- Custom directives (e.g., `TooltipDirective`)
+- FontAwesome integration
+- SSR-safe code (`isPlatformBrowser` + `PLATFORM_ID`)
 
 ---
 
-## Backend Integration
-The interface communicates with an external server through dedicated services. Integrated functionalities include:
+## How to Run
 
-* **Session Persistence:** Cookie-based authentication (credential transmission via withCredentials).
-* **Media Management:** Upload and display of avatars with cache control via timestamp query params.
-* **Dynamic Interactions:** Toggle Like system with persistence in a relational database through the backend.
+### Prerequisites
+- Node.js (v18 or higher)
 
----
+### Installation
 
-## Rendering and Performance
-* **SSR Awareness:** Platform verification via isPlatformBrowser and PLATFORM_ID to ensure the execution of browser-specific code (such as cookie handling and localStorage).
-* **Reference Refactoring:** Object updates via the spread operator to ensure reactivity in components utilizing the OnPush strategy.
+```bash
+# Clone the repository
+git clone https://github.com/glrmrissi/whisker-anime-frontend-client.git
+cd whisker-anime-frontend-client
+
+# Install dependencies
+npm install
+
+```
+### Running the application
+```bash
+Development mode (with hot-reload)
+npm run start:dev
+
+# Build for production
+npm run build
+The application will be available at http://localhost:4200.
+```
+
+
+### Environment Configuration
+Configure the backend URL in src/environments/environment.ts:
+```ts 
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/'   // Change to your backend URL
+};
+```
+
+### Related Repositories
+
+Backend (NestJS): whisker-anime-backend-client
+Notifier Service (Go): whisker-anime-notifier-go
+
+
+### About the Project
+Anime catalog frontend built with Angular 21 and TypeScript, featuring a custom UI component library, authentication flow, favorites and comments integrated with the Whisker backend.
+Developed by: Guilherme Rissi
+Status: Production-ready / Available for demo
