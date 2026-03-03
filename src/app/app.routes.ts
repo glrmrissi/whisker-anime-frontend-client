@@ -3,6 +3,7 @@ import { Auth } from './auth/auth';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
 import { AnimeDetails } from './anime-details/anime-details';
+import { About } from './about/about';
 
 export const routes: Routes = [
     {
@@ -17,6 +18,10 @@ export const routes: Routes = [
     {
         path: 'home',
         component: Home
+    },
+    {
+        path: 'about',
+        component: About
     },
     {
         path: 'profile',

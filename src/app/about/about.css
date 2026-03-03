@@ -1,0 +1,24 @@
+:host {
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+
+        p {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            background-color: #1a1b26;
+            color: #9ece6a;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #414868;
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+
+        p::before {
+            content: "> ";
+            color: #7aa2f7;
+        }
+    }
+}

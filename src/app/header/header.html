@@ -3,21 +3,17 @@
         <h1 class="header-title">Whiskers</h1>
         <nav class="header-nav-list">
             <ul>
-                <li><a href="home">
+                <li><a href="home" [appTooltip]="'Home'" position="bottom">
                     <fa-icon [icon]="faHouse"></fa-icon>
-                    Home
                 </a></li>
-                <li><a href="discovery">
+                <li><a href="discovery" [appTooltip]="'Discovery'" position="bottom">
                     <fa-icon [icon]="faCompass"></fa-icon>
-                    Discovery
                 </a></li>
-                <li><a href="about">
+                <li><a href="about" [appTooltip]="'About'" position="bottom">
                     <fa-icon [icon]="faInfo"></fa-icon>
-                    About
                 </a></li>
-                <li><a href="contact">
+                <li><a href="https://github.com/glrmrissi" [appTooltip]="'Contact'" position="bottom">
                     <fa-icon [icon]="faEnvelope"></fa-icon>
-                    Contact
                 </a></li>
             </ul>
         </nav>
