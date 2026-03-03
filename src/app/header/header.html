@@ -1,25 +1,26 @@
 <header class="header-container">
     <aside class="header-rows">
-        <h1 class="header-title">Whiskers</h1>
+        <img src="logo.svg" alt="Logo" style="user-select: none;">
         <nav class="header-nav-list">
             <ul>
                 <li><a href="home" [appTooltip]="'Home'" position="bottom">
-                    <fa-icon [icon]="faHouse"></fa-icon>
-                </a></li>
+                        <fa-icon [icon]="faHouse"></fa-icon>
+                    </a></li>
                 <li><a href="discovery" [appTooltip]="'Discovery'" position="bottom">
-                    <fa-icon [icon]="faCompass"></fa-icon>
-                </a></li>
+                        <fa-icon [icon]="faCompass"></fa-icon>
+                    </a></li>
                 <li><a href="about" [appTooltip]="'About'" position="bottom">
-                    <fa-icon [icon]="faInfo"></fa-icon>
-                </a></li>
+                        <fa-icon [icon]="faInfo"></fa-icon>
+                    </a></li>
                 <li><a href="https://github.com/glrmrissi" [appTooltip]="'Contact'" position="bottom">
-                    <fa-icon [icon]="faEnvelope"></fa-icon>
-                </a></li>
+                        <fa-icon [icon]="faEnvelope"></fa-icon>
+                    </a></li>
             </ul>
         </nav>
     </aside>
-    <aside class="header-rows"> 
-        <fa-icon class="iconTheme" [icon]="themeSwitch ? faMoon : faSun" (click)="switchTheme()" [appTooltip]="'Change theme'" position="bottom"></fa-icon>
+    <aside class="header-rows">
+        <fa-icon class="iconTheme" [icon]="themeSwitch ? faMoon : faSun" (click)="switchTheme()"
+            [appTooltip]="'Change theme'" position="bottom"></fa-icon>
         <app-search></app-search>
         <lib-avatar [item]="avatarItem" (click)="redirectToProfile()"></lib-avatar>
     </aside>
