@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, signal, computed, inject, WritableSignal } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faInfoCircle, faFire, faPlayCircle, faStopCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
