@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'lib-avatar',
@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './avatar.css',
 })
 export class Avatar {
-  @Input() item: { src: string; alt: string } = { src: '', alt: '' };
+  item = input<{src: string, alt: string}>({src: '', alt: ''});
 }
