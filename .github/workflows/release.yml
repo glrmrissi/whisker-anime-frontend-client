@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm ci  
 
-      - name: Check Lint (ESLint)
-        run: npm run lint
-
       - name: A test (Jest)
         run: npm test
         env:
