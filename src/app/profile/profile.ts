@@ -1,11 +1,10 @@
 import { Component, inject, OnInit, PLATFORM_ID, signal, ViewChild } from '@angular/core';
 import { ProfileAvatar } from "./profile-avatar/profile-avatar";
-import { A11yModule } from "@angular/cdk/a11y";
 import { faEdit, faMailForward, faUserShield, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ProfileService } from './profile.service';
 import { SnackBarService } from '../../../projects/ui/src/lib/snackbar/snackbar.service';
-import { FormBuilder, ReactiveFormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Header } from '../header/header';
 
@@ -20,7 +19,7 @@ type ProfileType = {
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, ProfileAvatar, A11yModule, FaIconComponent, ɵInternalFormsSharedModule, ReactiveFormsModule, Header],
+  imports: [CommonModule, ProfileAvatar, FaIconComponent, ReactiveFormsModule, Header],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
