@@ -1,9 +1,4 @@
 import { Routes } from '@angular/router';
-import { Auth } from './auth/auth';
-import { Home } from './home/home';
-import { Profile } from './profile/profile';
-import { AnimeDetails } from './anime-details/anime-details';
-import { About } from './about/about';
 
 export const routes: Routes = [
     {
@@ -13,26 +8,26 @@ export const routes: Routes = [
     },
     {
         path: 'auth',
-        component: Auth
+        loadComponent: () => import('./auth/auth').then(m => m.Auth)
     },
     {
         path: 'home',
-        component: Home
+        loadComponent: () => import('./home/home').then(m => m.Home)
     },
     {
         path: 'about',
-        component: About
+        loadComponent: () => import('./about/about').then(m => m.About)
     },
     {
         path: 'profile',
-        component: Profile
+        loadComponent: () => import('./profile/profile').then(m => m.Profile)
     },
     {
         path: 'anime/:id',
-        component: AnimeDetails,
+        loadComponent: () => import('./anime-details/anime-details').then(m => m.AnimeDetails)
     },
     {
         path: '**',
-        redirectTo: 'auth',
+        redirectTo: 'auth'
     }
 ];
