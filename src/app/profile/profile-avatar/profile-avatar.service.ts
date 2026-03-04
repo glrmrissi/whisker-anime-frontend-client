@@ -7,17 +7,18 @@ import { ApiService } from "../../../api/api.service";
 export class ProfileAvatarService {
     constructor(private _apiService: ApiService) { }
 
-    sendAvatarToServer(file: File) {
+    async sendAvatarToServer(file: File) {
         const formData = new FormData();
 
         formData.append('file', file);
 
-        this._apiService.postV1('users/upload-avatar', formData)
+        await this._apiService.postV1('users/upload-avatar', formData)
             .then(response => {
-                console.log('Avatar uploaded successfully');
+                return response.avatarUrl;
             })
             .catch(error => {
                 console.error('Error uploading avatar:', error);
+                return;
             });
     }
 }

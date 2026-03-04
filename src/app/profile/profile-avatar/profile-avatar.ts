@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, inject, input, Output, ViewChild } from '@angular/core';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ProfileAvatarService } from './profile-avatar.service';
+import { SnackBarService } from '../../../../projects/ui/src/public-api';
 @Component({
   selector: 'app-profile-avatar',
   imports: [FaIconComponent],
@@ -17,6 +18,8 @@ export class ProfileAvatar {
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Output() avatarUpdated = new EventEmitter<void>();
+
+  private snackBar = inject(SnackBarService);
 
   constructor(
     private profileAvatarService: ProfileAvatarService,
@@ -34,6 +37,10 @@ export class ProfileAvatar {
       const file = input.files[0];
       await this.profileAvatarService.sendAvatarToServer(file);
       this.avatarUpdated.emit();
+      this.snackBar.open("Avatar updated!", "OK", 3000, "success");
+    } else {
+      this.snackBar.open("The avatar hasn't been updated", "OK", 3000, "error");
+      
     }
   }
 }
