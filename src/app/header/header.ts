@@ -1,73 +1,77 @@
-import { afterNextRender, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { Avatar, Search } from '../../../projects/ui/src/public-api';
-import { faSun, faMoon, faHouse, faInfoCircle, faEnvelope, faCompass } from '@fortawesome/free-solid-svg-icons';
+import { afterNextRender, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, PLATFORM_ID, signal } from '@angular/core';
+import {
+  faSun, faMoon, faHouse, faInfoCircle, faEnvelope, faCompass,
+  faBars, faTimes
+} from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { TooltipDirective } from '../../directives/tooltip.directive';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderService } from './header.service';
+import { Avatar, Search } from '../../../projects/ui/src/public-api';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [Avatar, Search, FaIconComponent, TooltipDirective],
+  imports: [
+    Avatar, Search, FaIconComponent, TooltipDirective, RouterLink
+  ],
   templateUrl: './header.html',
   styleUrl: './header.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true
 })
-
 export class Header {
-  private router = inject(Router)
-  private headerService = inject(HeaderService)
-  private cdr = inject(ChangeDetectorRef)
+  private router = inject(Router);
+  private headerService = inject(HeaderService);
+  private cdr = inject(ChangeDetectorRef);
+  private platformId: Object = inject(PLATFORM_ID);
+  protected avatarItem = signal({ src: '', alt: 'U' });
+  protected themeSwitch = signal(false);
+  protected sidebarOpen = signal(false);
 
-  baseUrl = 'http://localhost:3001/'
+  protected faSun = faSun;
+  protected faMoon = faMoon;
+  protected faHouse = faHouse;
+  protected faInfo = faInfoCircle;
+  protected faEnvelope = faEnvelope;
+  protected faCompass = faCompass;
+  protected faBars = faBars;
+  protected faTimes = faTimes;
 
-  avatarItem = { src: ``, alt: 'U' };
-  logoItem = '/logo.png'
-  themeSwitch = false
-  dropDownActive = true;
-  protected faSun = faSun
-  protected faMoon = faMoon
-  protected faHouse = faHouse
-  protected faInfo = faInfoCircle
-  protected faEnvelope = faEnvelope
-  protected faCompass = faCompass
-  
   constructor() {
-    afterNextRender(() => {
-        this.getProfile();
-    });
-}
+    afterNextRender(() => this.getProfile());
 
-  redirectToProfile() {
-    this.router.navigate(['/profile'])
+    if (isPlatformBrowser(this.platformId)) {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'false') {
+        document.documentElement.classList.add('dark-mode');
+        this.themeSwitch.set(true);
+      }
+    }
   }
 
   async getProfile(): Promise<void> {
-    let res = await this.headerService.getUserProfile();
-    
-    if (!res) return;
-    
-    const timestamp = new Date().getTime();
-    
-    const fullAvatarUrl = `${this.baseUrl}${res[0].avatarUrl}?t=${timestamp}`;
+    const res = await this.headerService.getUserProfile();
+    if (!res?.[0]) return;
 
-    this.avatarItem = {
-        ...this.avatarItem,
-        src: fullAvatarUrl  
-    };
+    const timestamp = Date.now();
+    const fullUrl = `http://localhost:3001/${res[0].avatarUrl}?t=${timestamp}`;
 
-    this.cdr.markForCheck(); 
-}
+    this.avatarItem.update(v => ({ ...v, src: fullUrl }));
+    this.cdr.markForCheck();
+  }
 
   switchTheme() {
-    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    const isDark = document.documentElement.classList.toggle('dark-mode');
+    this.themeSwitch.set(isDark);
+    localStorage.setItem('theme', String(!isDark));
+  }
 
-    if (isDarkMode) {
-      document.documentElement.classList.remove('dark-mode');
-      localStorage.setItem('theme', 'true');
-    } else {
-      document.documentElement.classList.add('dark-mode');
-      localStorage.setItem('theme', 'false');
-    }
+  toggleSidebar() {
+    this.sidebarOpen.update(v => !v);
+  }
+
+  redirectToProfile() {
+    this.router.navigate(['/profile']);
   }
 }

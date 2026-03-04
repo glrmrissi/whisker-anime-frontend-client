@@ -1,27 +1,88 @@
 <header class="header-container">
-    <aside class="header-rows">
-        <img src="logo.svg" alt="Logo" style="user-select: none;">
-        <nav class="header-nav-list">
-            <ul>
-                <li><a href="home" [appTooltip]="'Home'" position="bottom">
-                        <fa-icon [icon]="faHouse"></fa-icon>
-                    </a></li>
-                <li><a href="discovery" [appTooltip]="'Discovery'" position="bottom">
-                        <fa-icon [icon]="faCompass"></fa-icon>
-                    </a></li>
-                <li><a href="about" [appTooltip]="'About'" position="bottom">
-                        <fa-icon [icon]="faInfo"></fa-icon>
-                    </a></li>
-                <li><a href="https://github.com/glrmrissi" [appTooltip]="'Contact'" position="bottom">
-                        <fa-icon [icon]="faEnvelope"></fa-icon>
-                    </a></li>
-            </ul>
-        </nav>
-    </aside>
-    <aside class="header-rows">
-        <fa-icon class="iconTheme" [icon]="themeSwitch ? faMoon : faSun" (click)="switchTheme()"
-            [appTooltip]="'Change theme'" position="bottom"></fa-icon>
-        <app-search></app-search>
-        <lib-avatar [item]="avatarItem" (click)="redirectToProfile()"></lib-avatar>
-    </aside>
+  <div class="header-left">
+    <img src="logo.svg" alt="Logo" class="logo-default" style="user-select: none;">
+
+    <button 
+      class="hamburger" 
+      (click)="toggleSidebar()"
+      aria-label="Toggle menu"
+      [attr.aria-expanded]="sidebarOpen()"
+    >
+      <fa-icon [icon]="sidebarOpen() ? faTimes : faBars"></fa-icon>
+    </button>
+
+    <nav class="header-nav-list desktop-nav">
+      <ul>
+        <li>
+          <a href="home" [appTooltip]="'Home'" position="bottom">
+            <fa-icon [icon]="faHouse"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a href="discovery" [appTooltip]="'Discovery'" position="bottom">
+            <fa-icon [icon]="faCompass"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a href="about" [appTooltip]="'About'" position="bottom">
+            <fa-icon [icon]="faInfo"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/glrmrissi" [appTooltip]="'Contact'" position="bottom">
+            <fa-icon [icon]="faEnvelope"></fa-icon>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="header-right">
+    <fa-icon 
+      class="iconTheme" 
+      (click)="switchTheme()"
+      [icon]="themeSwitch() ? faMoon : faSun" 
+      [appTooltip]="'Change theme'" 
+      position="bottom"
+      ></fa-icon>
+
+    <app-search class="search-desktop"></app-search>
+
+    <lib-avatar 
+      [item]="avatarItem()" 
+      (click)="redirectToProfile()"
+      [appTooltip]="'Profile'" 
+      position="bottom"
+    ></lib-avatar>
+  </div>
 </header>
+
+<aside class="mobile-sidebar" 
+       [class.open]="sidebarOpen()"
+       (click)="sidebarOpen.set(false)">
+  <div class="sidebar-content" (click)="$event.stopPropagation()">
+    <div class="sidebar-header">
+      <img src="logo.svg" alt="Logo" class="logo">
+      <button class="close-btn" (click)="sidebarOpen.set(false)">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a routerLink="/home"     (click)="sidebarOpen.set(false)">Home</a></li>
+        <li><a routerLink="/discovery" (click)="sidebarOpen.set(false)">Discovery</a></li>
+        <li><a routerLink="/about"     (click)="sidebarOpen.set(false)">About</a></li>
+        <li><a href="https://github.com/glrmrissi" target="_blank" (click)="sidebarOpen.set(false)">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <app-search></app-search>
+    </div>
+  </div>
+</aside>
+
+<div class="overlay" 
+     [class.visible]="sidebarOpen()" 
+     (click)="sidebarOpen.set(false)"></div>
