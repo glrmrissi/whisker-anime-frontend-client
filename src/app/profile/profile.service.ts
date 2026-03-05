@@ -5,15 +5,9 @@ import { ApiService } from "../../api/api.service";
     providedIn: 'root'
 })
 export class ProfileService {
-    constructor(
-        private _apiService: ApiService
-    ) { }   
+    constructor(private _apiService: ApiService) { }
 
-    async getUserProfile() {
-        return await this._apiService.getV1('users/', {})
-    }
-
-    async editUser() {
-        
-    }
+   async getUserProfile() {
+    return await this._apiService.getV1('users/me', {});
+}
 }
