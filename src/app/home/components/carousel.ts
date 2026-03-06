@@ -126,15 +126,22 @@ export class Carousel implements AfterViewInit, OnChanges {
     }
 
     scrollLeft() {
-        const itemWidth = this.carouselWrapper.nativeElement.clientWidth / this.itemsPerView;
-        const newPosition = Math.max(0, this.scrollPosition() - itemWidth);
+        const newPosition = Math.max(0, this.scrollPosition() - this.getItemWidth());
         this.scrollPosition.set(newPosition);
     }
 
     scrollRight() {
-        const itemWidth = this.carouselWrapper.nativeElement.clientWidth / this.itemsPerView;
-        const newPosition = Math.min(this.maxScroll(), this.scrollPosition() + itemWidth);
+        const newPosition = Math.min(this.maxScroll(), this.scrollPosition() + this.getItemWidth());
         this.scrollPosition.set(newPosition);
+    }
+
+    private getItemWidth(): number {
+        const track = this.carouselTrack.nativeElement as HTMLElement;
+        const firstItem = track.firstElementChild as HTMLElement | null;
+        if (firstItem) {
+            return firstItem.offsetWidth + this.gap;
+        }
+        return this.carouselWrapper.nativeElement.clientWidth / this.itemsPerView;
     }
 
     isAtEnd(): boolean {
