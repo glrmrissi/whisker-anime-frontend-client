@@ -1,0 +1,15 @@
+<div class="favorites-grid">
+  @for (item of items; track item.id) {
+    <a class="grid-card" [routerLink]="['/anime', item.id]">
+      <div class="grid-poster">
+        <img [src]="item.coverImage" [alt]="item.canonicalTitle" class="grid-img">
+        <div class="grid-overlay">
+          @if (item.subtype[0]) {
+            <span class="grid-badge">{{ item.subtype[0] }}</span>
+          }
+        </div>
+      </div>
+      <p class="grid-title">{{ item.canonicalTitle }}</p>
+    </a>
+  }
+</div>
