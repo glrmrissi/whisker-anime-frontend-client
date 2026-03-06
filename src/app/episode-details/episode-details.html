@@ -1,0 +1,148 @@
+<app-header></app-header>
+
+@if(isLoading()) {
+<div class="loading-screen">
+  <div class="loading-spinner"></div>
+  <p>Loading episode...</p>
+</div>
+}
+
+@if(!isLoading() && episode()) {
+<div class="page">
+
+  <div class="breadcrumb-bar">
+    <a class="back-link" [routerLink]="['/anime', animeId]">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      <span>{{ anime()?.data?.attributes?.canonicalTitle || 'Back to anime' }}</span>
+    </a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">
+      Ep {{ episode().data.attributes.number }}
+    </span>
+  </div>
+
+  <div class="layout">
+
+    <div class="main-col">
+
+      <div class="thumbnail-wrap">
+        <img class="thumbnail"
+          [src]="episode()?.data?.attributes?.thumbnail?.original ?? 'assets/no_image.png'"
+          [alt]="episode()?.data?.attributes?.canonicalTitle"
+          (error)="$any($event.target).src = 'assets/no_image.png'" />
+      </div>
+
+      <div class="episode-header">
+        <span class="ep-number-label">Episode {{ episode().data.attributes.number }}</span>
+        <h1 class="ep-title">
+          {{ episode().data.attributes.canonicalTitle || ('Episode ' + episode().data.attributes.number) }}
+        </h1>
+        <div class="ep-meta">
+          @if(episode().data.attributes.airdate) {
+          <span class="meta-chip">
+            <fa-icon [icon]="faCalendar"></fa-icon>
+            {{ episode().data.attributes.airdate }}
+          </span>
+          }
+          @if(episode().data.attributes.length) {
+          <span class="meta-chip">
+            <fa-icon [icon]="faClock"></fa-icon>
+            {{ episode().data.attributes.length }} min
+          </span>
+          }
+        </div>
+      </div>
+
+      @if(episode().data.attributes.synopsis) {
+      <div class="section">
+        <h3 class="section-title">Synopsis</h3>
+        <p class="synopsis-text">{{ episode().data.attributes.synopsis }}</p>
+      </div>
+      }
+
+      <div class="nav-mobile">
+        @if(prevEpisode()) {
+        <a class="nav-btn prev" [routerLink]="['/anime', animeId, 'episode', prevEpisode().id]">
+          <fa-icon [icon]="faChevronLeft"></fa-icon>
+          <span>
+            <small>Previous</small>
+            <strong>Ep {{ prevEpisode().attributes.number }}</strong>
+          </span>
+        </a>
+        } @else {
+        <div></div>
+        }
+        @if(nextEpisode()) {
+        <a class="nav-btn next" [routerLink]="['/anime', animeId, 'episode', nextEpisode().id]">
+          <span>
+            <small>Next</small>
+            <strong>Ep {{ nextEpisode().attributes.number }}</strong>
+          </span>
+          <fa-icon [icon]="faChevronRight"></fa-icon>
+        </a>
+        }
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+
+      @if(trailerUrl()) {
+      <div class="sidebar-block">
+        <h4 class="sidebar-heading">Trailer</h4>
+        <div class="trailer-wrap">
+          <iframe [src]="trailerUrl()" class="trailer-iframe"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy" title="Anime trailer">
+          </iframe>
+        </div>
+      </div>
+      }
+
+      @if(anime()) {
+      <div class="sidebar-block">
+        <h4 class="sidebar-heading">Anime</h4>
+        <a class="anime-card" [routerLink]="['/anime', animeId]">
+          <img class="anime-poster" [src]="anime().data.attributes.posterImage?.small"
+            [alt]="anime().data.attributes.canonicalTitle" />
+          <div class="anime-info">
+            <p class="anime-title">{{ anime().data.attributes.canonicalTitle }}</p>
+            <span class="anime-type">{{ anime().data.attributes.subtype }}</span>
+          </div>
+        </a>
+      </div>
+      }
+
+      <div class="sidebar-block nav-desktop">
+        <h4 class="sidebar-heading">Navigation</h4>
+        <div class="nav-list">
+          @if(prevEpisode()) {
+          <a class="nav-btn prev" [routerLink]="['/anime', animeId, 'episode', prevEpisode().id]">
+            <fa-icon [icon]="faChevronLeft"></fa-icon>
+            <span>
+              <small>Previous</small>
+              <strong>{{ prevEpisode().attributes.canonicalTitle || ('Episode ' + prevEpisode().attributes.number)
+                }}</strong>
+            </span>
+          </a>
+          }
+          @if(nextEpisode()) {
+          <a class="nav-btn next" [routerLink]="['/anime', animeId, 'episode', nextEpisode().id]">
+            <span>
+              <small>Next</small>
+              <strong>{{ nextEpisode().attributes.canonicalTitle || ('Episode ' + nextEpisode().attributes.number)
+                }}</strong>
+            </span>
+            <fa-icon [icon]="faChevronRight"></fa-icon>
+          </a>
+          }
+          @if(!prevEpisode() && !nextEpisode()) {
+          <p class="no-nav">No adjacent episodes found.</p>
+          }
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+}

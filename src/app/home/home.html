@@ -1,5 +1,14 @@
 <app-header></app-header>
 <app-hero-slider [slides]="heroSlides()" [autoPlayInterval]="6000" style="padding-bottom: 10px;"/>
+@if (recommendations().length > 0) {
+<section class="carousel-wrapper" style="width: 100%;">
+    <div class="title-wrapper">
+        <fa-icon [icon]="faStar"></fa-icon>
+        <h2>Recommended for you</h2>
+    </div>
+    <app-carousel [items]="recommendations()"></app-carousel>
+</section>
+}
 <section class="carousel-wrapper" style="width: 100%;">
     <div class="title-wrapper">
         <fa-icon [icon]="faWater"></fa-icon>
