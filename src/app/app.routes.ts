@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./anime-details/anime-details').then(m => m.AnimeDetails)
     },
     {
+        path: 'anime/:animeId/episode/:episodeId',
+        loadComponent: () => import('./episode-details/episode-details').then(m => m.EpisodeDetails)
+    },
+    {
         path: 'favorites',
         loadComponent: () => import('./favorites/favorites').then(m => m.Favorites)
     },
