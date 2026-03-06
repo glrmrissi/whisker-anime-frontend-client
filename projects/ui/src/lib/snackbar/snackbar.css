@@ -1,54 +1,66 @@
 :host {
     position: fixed;
-    bottom: 25px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    
-    width: fit-content; 
-    width: 25rem;
-    
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: clamp(280px, 50vw, 400px);
+
     display: flex;
     align-items: center;
-    background-color: #363636;
-    padding: 0.3rem ;
-    border-radius: 4px;
-    animation: entry normal 0.3s;
+    gap: 12px;
+
+    background: rgba(15, 15, 20, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 4px solid rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+
+    padding: 13px 16px;
+
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.15),
+        0 10px 32px rgba(0, 0, 0, 0.45);
+
     z-index: 99999;
+    animation: snack-in 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
 
     .snackbar-message {
-        width: 100%;
+        flex: 1;
+        color: #e2e2e2;
+        font-size: 0.875rem;
+        line-height: 1.45;
     }
 
     .snackbar-btn {
-        width: auto;
-        padding: 0.1rem 0.2rem;
-        text-align: center;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        background-color: #ffffff;
-        color: #000;
+        flex-shrink: 0;
+        padding: 5px 13px;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.18);
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background 0.18s ease;
+        white-space: nowrap;
 
         &:hover {
-            background-color: #c5c5c5;
+            background: rgba(255, 255, 255, 0.22);
         }
     }
 }
 
-
-@keyframes entry {
-    0% {
-        scale: 0.8;
+@keyframes snack-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(14px) scale(0.95);
     }
-
-    50% {
-        scale: 1.1
-    }
-
-    100% {
-        scale: 1;
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
     }
 }

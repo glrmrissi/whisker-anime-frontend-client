@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./anime-details/anime-details').then(m => m.AnimeDetails)
     },
     {
+        path: 'favorites',
+        loadComponent: () => import('./favorites/favorites').then(m => m.Favorites)
+    },
+    {
         path: '**',
         redirectTo: 'auth'
     }

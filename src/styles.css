@@ -13,6 +13,7 @@
     --bg-btn-primary-hover: #0a0a0a;
     --bg-card-hover: #efefef;
     --bg-btn-card: #ffffff;
+    --bg-header: #ffffff;
 
     --bg-icon-main: #643bfa;;
     --bg-icon-main-hover: #6c4be2;
@@ -53,6 +54,7 @@
     --bg-btn-primary: #0f0f0f;
     --bg-btn-primary-hover: #5f5f5f;
     --bg-btn-card: #2d2d2d;
+    --bg-header: #0a0a0a;
 
     --bg-icon-main: #fcd93d;
     --bg-icon-main-hover: #e0c54b;
@@ -65,6 +67,344 @@
     --border-color: #3d3c3c;
 }
 
+/* ── Tokyo Night ─────────────────────────────────────────────── */
+:root.theme-tokyo-night {
+    --bg-color: #1a1b26;
+    --bg-secondary: #24283b;
+    --bg-color-hover: #292e42;
+    --bg-card-hover: #16161e;
+    --bg-btn-card: #24283b;
+    --bg-header: #16161e;
+
+    --text-color: #c0caf5;
+    --text-color-hover: #a9b1d6;
+    --text-color-invert: #1a1b26;
+
+    --bg-btn-primary: #16161e;
+    --bg-btn-primary-hover: #414868;
+
+    --bg-icon-main: #7aa2f7;
+    --bg-icon-main-hover: #bb9af7;
+
+    --base-skeleton-color: #24283b;
+    --linear-skeleton-background: linear-gradient(45deg, #24283b 25%, #2f3549 50%, #3b4261 75%);
+
+    --rain-drop-color: rgba(100, 133, 230, 0.5);
+    --border-color: #292e42;
+}
+
+/* ── Catppuccin Latte (light) ─────────────────────────────────── */
+:root.theme-catppuccin-latte {
+    --bg-color: #eff1f5;
+    --bg-secondary: #e6e9ef;
+    --bg-color-hover: #ccd0da;
+    --bg-card-hover: #dce0e8;
+    --bg-btn-card: #ffffff;
+    --bg-header: #e6e9ef;
+
+    --text-color: #4c4f69;
+    --text-color-hover: #5c5f77;
+    --text-color-invert: #eff1f5;
+
+    --bg-btn-primary: #4c4f69;
+    --bg-btn-primary-hover: #6c6f85;
+
+    --bg-icon-main: #8839ef;
+    --bg-icon-main-hover: #7287fd;
+
+    --base-skeleton-color: #ccd0da;
+    --linear-skeleton-background: linear-gradient(45deg, #bcc0cc 25%, #ccd0da 50%, #dce0e8 75%);
+
+    --rain-drop-color: rgba(76, 79, 105, 0.5);
+    --border-color: #9ca0b0;
+}
+
+/* ── Catppuccin Frappé ─────────────────────────────────────────── */
+:root.theme-catppuccin-frappe {
+    --bg-color: #303446;
+    --bg-secondary: #292c3c;
+    --bg-color-hover: #414559;
+    --bg-card-hover: #232634;
+    --bg-btn-card: #414559;
+    --bg-header: #232634;
+
+    --text-color: #c6d0f5;
+    --text-color-hover: #b5bfe2;
+    --text-color-invert: #303446;
+
+    --bg-btn-primary: #232634;
+    --bg-btn-primary-hover: #626880;
+
+    --bg-icon-main: #ca9ee6;
+    --bg-icon-main-hover: #babbf1;
+
+    --base-skeleton-color: #414559;
+    --linear-skeleton-background: linear-gradient(45deg, #414559 25%, #51576d 50%, #626880 75%);
+
+    --rain-drop-color: rgba(202, 158, 230, 0.4);
+    --border-color: #626880;
+}
+
+/* ── Catppuccin Macchiato ──────────────────────────────────────── */
+:root.theme-catppuccin-macchiato {
+    --bg-color: #24273a;
+    --bg-secondary: #1e2030;
+    --bg-color-hover: #363a4f;
+    --bg-card-hover: #181926;
+    --bg-btn-card: #363a4f;
+    --bg-header: #1e2030;
+
+    --text-color: #cad3f5;
+    --text-color-hover: #b8c0e0;
+    --text-color-invert: #24273a;
+
+    --bg-btn-primary: #181926;
+    --bg-btn-primary-hover: #5b6078;
+
+    --bg-icon-main: #c6a0f6;
+    --bg-icon-main-hover: #b7bdf8;
+
+    --base-skeleton-color: #363a4f;
+    --linear-skeleton-background: linear-gradient(45deg, #363a4f 25%, #494d64 50%, #5b6078 75%);
+
+    --rain-drop-color: rgba(198, 160, 246, 0.4);
+    --border-color: #5b6078;
+}
+
+/* ── Catppuccin Mocha ─────────────────────────────────────────── */
+:root.theme-catppuccin-mocha {
+    --bg-color: #1e1e2e;
+    --bg-secondary: #181825;
+    --bg-color-hover: #313244;
+    --bg-card-hover: #11111b;
+    --bg-btn-card: #313244;
+    --bg-header: #181825;
+
+    --text-color: #cdd6f4;
+    --text-color-hover: #bac2de;
+    --text-color-invert: #1e1e2e;
+
+    --bg-btn-primary: #11111b;
+    --bg-btn-primary-hover: #585b70;
+
+    --bg-icon-main: #cba6f7;
+    --bg-icon-main-hover: #b4befe;
+
+    --base-skeleton-color: #313244;
+    --linear-skeleton-background: linear-gradient(45deg, #313244 25%, #45475a 50%, #585b70 75%);
+
+    --rain-drop-color: rgba(203, 166, 247, 0.4);
+    --border-color: #585b70;
+}
+
+/* ── Gruvbox Material ─────────────────────────────────────────── */
+:root.theme-gruvbox {
+    --bg-color: #282828;
+    --bg-secondary: #32302f;
+    --bg-color-hover: #3c3836;
+    --bg-card-hover: #1d2021;
+    --bg-btn-card: #3c3836;
+    --bg-header: #1d2021;
+
+    --text-color: #ebdbb2;
+    --text-color-hover: #d5c4a1;
+    --text-color-invert: #282828;
+
+    --bg-btn-primary: #1d2021;
+    --bg-btn-primary-hover: #665c54;
+
+    --bg-icon-main: #d8a657;
+    --bg-icon-main-hover: #e78a4e;
+
+    --base-skeleton-color: #3c3836;
+    --linear-skeleton-background: linear-gradient(45deg, #3c3836 25%, #504945 50%, #665c54 75%);
+
+    --rain-drop-color: rgba(216, 166, 87, 0.4);
+    --border-color: #504945;
+}
+
+/* ── GitHub Dark ──────────────────────────────────────────────── */
+:root.theme-github-dark {
+    --bg-color: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-color-hover: #1c2128;
+    --bg-card-hover: #010409;
+    --bg-btn-card: #1c2128;
+    --bg-header: #161b22;
+
+    --text-color: #e6edf3;
+    --text-color-hover: #c9d1d9;
+    --text-color-invert: #0d1117;
+
+    --bg-btn-primary: #21262d;
+    --bg-btn-primary-hover: #30363d;
+
+    --bg-icon-main: #58a6ff;
+    --bg-icon-main-hover: #388bfd;
+
+    --base-skeleton-color: #21262d;
+    --linear-skeleton-background: linear-gradient(45deg, #21262d 25%, #30363d 50%, #3d444d 75%);
+
+    --rain-drop-color: rgba(88, 166, 255, 0.4);
+    --border-color: #30363d;
+}
+
+/* ── Rose Pine ────────────────────────────────────────────────── */
+:root.theme-rose-pine {
+    --bg-color: #191724;
+    --bg-secondary: #1f1d2e;
+    --bg-color-hover: #26233a;
+    --bg-card-hover: #0f0d1b;
+    --bg-btn-card: #26233a;
+    --bg-header: #1f1d2e;
+
+    --text-color: #e0def4;
+    --text-color-hover: #c9c7db;
+    --text-color-invert: #191724;
+
+    --bg-btn-primary: #0f0d1b;
+    --bg-btn-primary-hover: #6e6a86;
+
+    --bg-icon-main: #c4a7e7;
+    --bg-icon-main-hover: #eb6f92;
+
+    --base-skeleton-color: #26233a;
+    --linear-skeleton-background: linear-gradient(45deg, #26233a 25%, #3a3750 50%, #514e67 75%);
+
+    --rain-drop-color: rgba(196, 167, 231, 0.4);
+    --border-color: #6e6a86;
+}
+
+/* ── One Dark Pro ─────────────────────────────────────────────── */
+:root.theme-one-dark {
+    --bg-color: #282c34;
+    --bg-secondary: #21252b;
+    --bg-color-hover: #2c313a;
+    --bg-card-hover: #1a1d24;
+    --bg-btn-card: #2c313a;
+    --bg-header: #21252b;
+
+    --text-color: #abb2bf;
+    --text-color-hover: #c8cdd5;
+    --text-color-invert: #282c34;
+
+    --bg-btn-primary: #1a1d24;
+    --bg-btn-primary-hover: #4b5263;
+
+    --bg-icon-main: #61afef;
+    --bg-icon-main-hover: #c678dd;
+
+    --base-skeleton-color: #2c313a;
+    --linear-skeleton-background: linear-gradient(45deg, #2c313a 25%, #3e4451 50%, #4b5263 75%);
+
+    --rain-drop-color: rgba(97, 175, 239, 0.4);
+    --border-color: #3e4451;
+}
+
+/* ── Dracula Official ─────────────────────────────────────────── */
+:root.theme-dracula {
+    --bg-color: #282a36;
+    --bg-secondary: #1e1f29;
+    --bg-color-hover: #44475a;
+    --bg-card-hover: #191a24;
+    --bg-btn-card: #44475a;
+    --bg-header: #1e1f29;
+
+    --text-color: #f8f8f2;
+    --text-color-hover: #e0e0d0;
+    --text-color-invert: #282a36;
+
+    --bg-btn-primary: #191a24;
+    --bg-btn-primary-hover: #6272a4;
+
+    --bg-icon-main: #bd93f9;
+    --bg-icon-main-hover: #ff79c6;
+
+    --base-skeleton-color: #44475a;
+    --linear-skeleton-background: linear-gradient(45deg, #44475a 25%, #525568 50%, #6272a4 75%);
+
+    --rain-drop-color: rgba(189, 147, 249, 0.4);
+    --border-color: #6272a4;
+}
+
+/* ── Nord ─────────────────────────────────────────────────────── */
+:root.theme-nord {
+    --bg-color: #2e3440;
+    --bg-secondary: #3b4252;
+    --bg-color-hover: #434c5e;
+    --bg-card-hover: #242832;
+    --bg-btn-card: #434c5e;
+    --bg-header: #242832;
+
+    --text-color: #eceff4;
+    --text-color-hover: #e5e9f0;
+    --text-color-invert: #2e3440;
+
+    --bg-btn-primary: #242832;
+    --bg-btn-primary-hover: #4c566a;
+
+    --bg-icon-main: #88c0d0;
+    --bg-icon-main-hover: #81a1c1;
+
+    --base-skeleton-color: #434c5e;
+    --linear-skeleton-background: linear-gradient(45deg, #434c5e 25%, #4c566a 50%, #5d6d80 75%);
+
+    --rain-drop-color: rgba(136, 192, 208, 0.4);
+    --border-color: #4c566a;
+}
+
+/* ── Kanagawa ─────────────────────────────────────────────────── */
+:root.theme-kanagawa {
+    --bg-color: #1f1f28;
+    --bg-secondary: #16161d;
+    --bg-color-hover: #2a2a37;
+    --bg-card-hover: #0d0c0c;
+    --bg-btn-card: #2a2a37;
+    --bg-header: #16161d;
+
+    --text-color: #dcd7ba;
+    --text-color-hover: #c8c093;
+    --text-color-invert: #1f1f28;
+
+    --bg-btn-primary: #0d0c0c;
+    --bg-btn-primary-hover: #54546d;
+
+    --bg-icon-main: #7aa89f;
+    --bg-icon-main-hover: #7e9cd8;
+
+    --base-skeleton-color: #2a2a37;
+    --linear-skeleton-background: linear-gradient(45deg, #2a2a37 25%, #363646 50%, #54546d 75%);
+
+    --rain-drop-color: rgba(122, 168, 159, 0.4);
+    --border-color: #54546d;
+}
+
+/* ── Night Owl ────────────────────────────────────────────────── */
+:root.theme-night-owl {
+    --bg-color: #011627;
+    --bg-secondary: #01111d;
+    --bg-color-hover: #0b2942;
+    --bg-card-hover: #010c16;
+    --bg-btn-card: #0b2942;
+    --bg-header: #01111d;
+
+    --text-color: #d6deeb;
+    --text-color-hover: #b2c9d4;
+    --text-color-invert: #011627;
+
+    --bg-btn-primary: #010c16;
+    --bg-btn-primary-hover: #1d3b53;
+
+    --bg-icon-main: #82aaff;
+    --bg-icon-main-hover: #7fdbca;
+
+    --base-skeleton-color: #0b2942;
+    --linear-skeleton-background: linear-gradient(45deg, #0b2942 25%, #163859 50%, #1d3b53 75%);
+
+    --rain-drop-color: rgba(130, 170, 255, 0.4);
+    --border-color: #1d3b53;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -74,53 +414,56 @@ body {
   background-color: var(--bg-color) !important;
 }
 
-.warning {
-    background-color: #fde293 !important;
-    color: #5c3d05;
-
-    button {
-        background-color: #facc15 !important;
-        color: #422006 !important;
-        font-weight: 600;
-
-        &:hover {
-            background-color: #eab308 !important;
-        }
-    }
-}
-
 .success {
-    background-color: #b7e4c7 !important;
+    border-left: 4px solid #22c55e !important;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.15),
+        0 10px 32px rgba(0, 0, 0, 0.45),
+        0 0 18px rgba(34, 197, 94, 0.18) !important;
 
-    color: #1b4332;
-
-    button {
-        background-color: #95d5b2 !important;
-        color: #1b4332 !important;
-        border: none;
-        font-weight: 600;
+    .snackbar-btn {
+        background: rgba(34, 197, 94, 0.18) !important;
+        color: #86efac !important;
+        border-color: rgba(34, 197, 94, 0.35) !important;
 
         &:hover {
-            background-color: #74c69d !important;
+            background: rgba(34, 197, 94, 0.32) !important;
         }
     }
 }
 
 .error {
-    background-color: #ffcccb !important;
+    border-left: 4px solid #ef4444 !important;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.15),
+        0 10px 32px rgba(0, 0, 0, 0.45),
+        0 0 18px rgba(239, 68, 68, 0.18) !important;
 
-    color: #5e0b0b;
-
-    button {
-        background-color: #ff8a8a !important;
-        color: #5e0b0b !important;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
+    .snackbar-btn {
+        background: rgba(239, 68, 68, 0.18) !important;
+        color: #fca5a5 !important;
+        border-color: rgba(239, 68, 68, 0.35) !important;
 
         &:hover {
-            background-color: #ff5c5c !important;
+            background: rgba(239, 68, 68, 0.32) !important;
+        }
+    }
+}
+
+.warning {
+    border-left: 4px solid #f59e0b !important;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.15),
+        0 10px 32px rgba(0, 0, 0, 0.45),
+        0 0 18px rgba(245, 158, 11, 0.18) !important;
+
+    .snackbar-btn {
+        background: rgba(245, 158, 11, 0.18) !important;
+        color: #fcd34d !important;
+        border-color: rgba(245, 158, 11, 0.35) !important;
+
+        &:hover {
+            background: rgba(245, 158, 11, 0.32) !important;
         }
     }
 }
@@ -131,12 +474,12 @@ body {
   width: 80%;
   background: var(--linear-skeleton-background);
   background-size: 200% 200%;
-  
+
   animation: shimmer 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  
+
   overflow: hidden;
   position: relative;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
 @keyframes shimmer {

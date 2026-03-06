@@ -1,5 +1,7 @@
 # Whisker Anime — Frontend
 
+[![CI/CD Pipeline](https://github.com/glrmrissi/whisker-anime-frontend-client/actions/workflows/release.yml/badge.svg)](https://github.com/glrmrissi/whisker-anime-frontend-client/actions/workflows/release.yml)
+
 Modern Single Page Application (SPA) for the Whisker Anime platform — a complete anime catalog and tracking system with advanced authentication, favorites, nested comments, and a custom UI component library.
 
 **Main Technologies**  
