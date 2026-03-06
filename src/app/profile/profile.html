@@ -19,12 +19,6 @@
             </div>
             <hr>
             <p>{{profile()?.bio}}</p>
-            <div class="favorites-animes">
-                <h1>Favorite Animes:</h1>
-                @for(animes of profile()?.favoriteAnimes ; track animes) {
-                <span class="anime-badge">{{ animes }}</span>
-                }
-            </div>
 
             <div class="btn-edit-wrapper" [hidden]="!hiddenEditButton">
                 <button class="edit-profile-btn" (click)="saveEdits()">
@@ -48,9 +42,11 @@
                 </textarea>
                 <div class="favorites-animes">
                     <h1>Favorite Animes:</h1>
-                    @for(animes of profile()?.favoriteAnimes ; track animes) {
-                    <span class="anime-badge">{{ animes }}</span>
-                    }
+                    <div class="badges-row">
+                        @for(animes of profile()?.favoriteAnimes ; track animes) {
+                        <span class="anime-badge">{{ animes }}</span>
+                        }
+                    </div>
                 </div>
 
                 <div class="btn-edit-wrapper" [hidden]="!hiddenEditButton">
