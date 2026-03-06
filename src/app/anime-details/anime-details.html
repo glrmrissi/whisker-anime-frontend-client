@@ -15,6 +15,16 @@
 
       <h1 class="anime-title">{{ anime().data.attributes.canonicalTitle }}</h1>
 
+      <button
+        class="favorite-btn"
+        [class.favorited]="isFavorited()"
+        (click)="toggleFavorite()"
+        [attr.aria-label]="isFavorited() ? 'Remove from favorites' : 'Add to favorites'"
+      >
+        <fa-icon [icon]="faHeart"></fa-icon>
+        {{ isFavorited() ? 'In Favorites' : 'Add to Favorites' }}
+      </button>
+
       <div class="streaming-section">
         <h3 class="streaming-title">WHERE TO WATCH</h3>
         <aside class="streamingLinks">
