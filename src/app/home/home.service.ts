@@ -18,8 +18,10 @@ export class HomeService {
     }
 
     async getFavoriteAnimes() {
-        const res = this.apiService.getV1('favorites-animes', {});
-        console.log('Favorite animes response:', res);
-        return res;
+        return this.apiService.getV1('favorites-animes', {});
+    }
+
+    async getRecommendations() {
+        return this.apiService.getV1('recommendations', {});
     }
 }

@@ -5,7 +5,7 @@ import { HeroSlide, HeroSliderComponent } from '../hero-slider/hero-slider';
 import { Carousel } from './components/carousel';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HomeService } from './home.service';
-import { faBolt, faWater } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faWater, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -22,17 +22,20 @@ export class Home implements OnInit {
   moreViewers = signal<any[]>([]);
   ovasRelease = signal<any[]>([]);
   averageRating = signal<any[]>([]);
+  recommendations = signal<any[]>([]);
   isLoading = signal<boolean>(true);
 
   protected faBolt = faBolt;
   protected faWater = faWater;
+  protected faStar = faStar;
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.fetchAllData();
+      this.loadRecommendations();
     }
   }
-
+  
   private async fetchAllData() {
     this.isLoading.set(true);
     
@@ -95,5 +98,19 @@ export class Home implements OnInit {
   private async loadTopRated() {
     const data = await this.homeService.getAnimePagination('1', '20', '-averageRating', 'TV,OVA,ONA,MOVIE,SPECIAL');
     this.averageRating.set(this.mapAnimeData(data));
+  }
+
+  private async loadRecommendations() {
+    const data = await this.homeService.getRecommendations();
+    const items = Array.isArray(data) ? data : (data ? [data] : []);
+    const mapped = items.map((anime: any) => ({
+      id: anime.id,
+      coverImage: anime.attributes.posterImage?.medium || anime.attributes.posterImage?.small || '',
+      canonicalTitle: anime.attributes.canonicalTitle || '',
+      description: anime.attributes.synopsis || '',
+      link: anime.id,
+      subtype: [anime.attributes.subtype || '']
+    }));
+    this.recommendations.set(mapped);
   }
 }
