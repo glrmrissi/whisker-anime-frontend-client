@@ -140,6 +140,19 @@
         transform: scale(0.95);
     }
 
+    .card-handling-buttons button.is-favorited {
+        background: transparent;
+        border: solid 1px var(--bg-icon-main);
+        color: var(--bg-icon-main);
+        cursor: default;
+        opacity: 0.75;
+    }
+
+    .card-handling-buttons button:disabled {
+        cursor: default;
+        pointer-events: none;
+    }
+
     @media (max-width: 1024px) {
         .card-wrapper {
             aspect-ratio: 3 / 4;

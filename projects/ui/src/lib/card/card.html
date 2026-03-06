@@ -1,30 +1,37 @@
 <ng-container *appSkeleton="isLoading(); else content">
    <div class="skeleton-loader" style="height: 19.5rem; width: 100%;">
-     <div style=" background: #eee; width: 100%;"></div>
-   </div> 
+     <div style="background: #eee; width: 100%;"></div>
+   </div>
 </ng-container>
-<ng-template #content>
-    <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"> 
-        <div class="card-container-img">
-        <img class="card-img" [src]="item.coverImage" alt="Cover">
-    </div>
 
-    @if(isHovering) {
-        <div class="card-content-view">
-            <div class="header-title">
-                <h3 class="card-title" (click)="openDialog()">{{ item.canonicalTitle }}</h3>
-                <div class="tags-container">
-                    @for(tag of item.subtype; track $index) {
-                        <small>{{ tag }}</small>
-                    }
+<ng-template #content>
+    <div class="card-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+        <div class="card-container-img">
+            <img class="card-img" [src]="item.coverImage" alt="Cover">
+        </div>
+
+        @if (isHovering) {
+            <div class="card-content-view">
+                <div class="header-title">
+                    <h3 class="card-title" (click)="openDialog()">{{ item.canonicalTitle }}</h3>
+                    <div class="tags-container">
+                        @for (tag of item.subtype; track $index) {
+                            <small>{{ tag }}</small>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-handling-buttons">
+                    <button
+                        (click)="favoriteAnime()"
+                        [disabled]="isFavorited()"
+                        [class.is-favorited]="isFavorited()"
+                        [appTooltip]="isFavorited() ? 'Already in favorites' : 'Add to Favorites'"
+                    >
+                        <fa-icon [icon]="isFavorited() ? faCheck : faPlus"></fa-icon>
+                    </button>
                 </div>
             </div>
-
-            <div class="card-handling-buttons">
-                <button (click)="favoriteAnime()" [appTooltip]="'Add To Favorite'"><fa-icon [icon]="faPlus"></fa-icon></button>
-                <button (click)="openDialog()" [appTooltip]="'See More'"><fa-icon [icon]="faAngleUp"></fa-icon></button>
-            </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 </ng-template>
