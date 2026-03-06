@@ -2,8 +2,8 @@
   <div class="header-left">
     <img src="logo.svg" alt="Logo" class="logo-default" style="user-select: none;">
 
-    <button 
-      class="hamburger" 
+    <button
+      class="hamburger"
       (click)="toggleSidebar()"
       aria-label="Toggle menu"
       [attr.aria-expanded]="sidebarOpen()"
@@ -29,6 +29,11 @@
           </a>
         </li>
         <li>
+          <a routerLink="/favorites" [appTooltip]="'Favorites'" position="bottom">
+            <fa-icon [icon]="faHeart"></fa-icon>
+          </a>
+        </li>
+        <li>
           <a href="https://github.com/glrmrissi" [appTooltip]="'Contact'" position="bottom">
             <fa-icon [icon]="faEnvelope"></fa-icon>
           </a>
@@ -38,26 +43,50 @@
   </div>
 
   <div class="header-right">
-    <fa-icon 
-      class="iconTheme" 
-      (click)="switchTheme()"
-      [icon]="themeSwitch() ? faMoon : faSun" 
-      [appTooltip]="'Change theme'" 
-      position="bottom"
+    <div class="theme-picker">
+      <fa-icon
+        class="iconTheme"
+        (click)="toggleThemePanel($event)"
+        [icon]="faPalette"
+        [appTooltip]="'Choose theme'"
+        position="left"
       ></fa-icon>
+
+      @if (themePanelOpen()) {
+        <div class="theme-panel" (click)="$event.stopPropagation()">
+          <p class="theme-panel-title">Choose theme</p>
+
+          <div class="theme-divider"></div>
+
+          @for (theme of themes; track theme.id) {
+            <button
+              class="theme-option"
+              [class.active]="currentThemeId() === theme.id"
+              (click)="applyTheme(theme.id)"
+            >
+              <span class="theme-dot" [style.background]="theme.accent"></span>
+              <span class="theme-name">{{ theme.name }}</span>
+              @if (currentThemeId() === theme.id) {
+                <fa-icon [icon]="faCheck" class="theme-check"></fa-icon>
+              }
+            </button>
+          }
+        </div>
+      }
+    </div>
 
     <app-search class="search-desktop"></app-search>
 
-    <lib-avatar 
-      [item]="avatarItem()" 
+    <lib-avatar
+      [item]="avatarItem()"
       (click)="redirectToProfile()"
-      [appTooltip]="'Profile'" 
+      [appTooltip]="'Profile'"
       position="bottom"
     ></lib-avatar>
   </div>
 </header>
 
-<aside class="mobile-sidebar" 
+<aside class="mobile-sidebar"
        [class.open]="sidebarOpen()"
        (click)="sidebarOpen.set(false)">
   <div class="sidebar-content" (click)="$event.stopPropagation()">
@@ -70,9 +99,10 @@
 
     <nav class="sidebar-nav">
       <ul>
-        <li><a routerLink="/home"     (click)="sidebarOpen.set(false)">Home</a></li>
+        <li><a routerLink="/home"      (click)="sidebarOpen.set(false)">Home</a></li>
         <li><a routerLink="/discovery" (click)="sidebarOpen.set(false)">Discovery</a></li>
         <li><a routerLink="/about"     (click)="sidebarOpen.set(false)">About</a></li>
+        <li><a routerLink="/favorites" (click)="sidebarOpen.set(false)">Favorites</a></li>
         <li><a href="https://github.com/glrmrissi" target="_blank" (click)="sidebarOpen.set(false)">Contact</a></li>
       </ul>
     </nav>
@@ -83,6 +113,6 @@
   </div>
 </aside>
 
-<div class="overlay" 
-     [class.visible]="sidebarOpen()" 
+<div class="overlay"
+     [class.visible]="sidebarOpen()"
      (click)="sidebarOpen.set(false)"></div>

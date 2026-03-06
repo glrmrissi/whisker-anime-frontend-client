@@ -1,11 +1,23 @@
 <!doctype html>
-<html class="dark-mode" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Whiskers</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="logo.svg">
+  <script>
+    (function () {
+      var theme = localStorage.getItem('selected-theme');
+      if (!theme) {
+        var legacy = localStorage.getItem('theme');
+        theme = legacy === 'false' ? 'dark-mode' : 'light';
+      }
+      if (theme && theme !== 'light') {
+        document.documentElement.classList.add(theme);
+      }
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>
