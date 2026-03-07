@@ -6,6 +6,7 @@ import { Carousel } from './components/carousel';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { HomeService } from './home.service';
 import { faBolt, faWater, faStar } from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { faBolt, faWater, faStar } from '@fortawesome/free-solid-svg-icons';
 export class Home implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly homeService = inject(HomeService);
+  private readonly titleService = inject(Title)
 
   heroSlides = signal<HeroSlide[]>([]);
   latestRelease = signal<any[]>([]);
@@ -32,15 +34,16 @@ export class Home implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.fetchAllData();
-      this.loadRecommendations();
+      this.titleService.setTitle(`Whiskers`);
     }
   }
-  
+
   private async fetchAllData() {
     this.isLoading.set(true);
-    
+
     try {
       await Promise.all([
+        this.loadRecommendations(),
         this.loadHero(),
         this.loadLatest(),
         this.loadMoreViewers(),
@@ -69,8 +72,8 @@ export class Home implements OnInit {
       id: anime.id,
       badgeText: 'On the rise',
       title: anime.attributes.canonicalTitle || '',
-      rating: anime.attributes.averageRating 
-        ? parseFloat((parseFloat(anime.attributes.averageRating) / 10).toFixed(1)) 
+      rating: anime.attributes.averageRating
+        ? parseFloat((parseFloat(anime.attributes.averageRating) / 10).toFixed(1))
         : 0,
       subtype: anime.attributes.subtype || '',
       year: new Date(anime.attributes.startDate).getFullYear(),
