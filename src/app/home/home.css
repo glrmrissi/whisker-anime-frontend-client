@@ -15,4 +15,15 @@
             }
         }
     }
+
+    .carousel-sentinel {
+        width: 100%;
+        min-height: 1px;
+    }
+
+    .infinite-loading {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
+    }
 }

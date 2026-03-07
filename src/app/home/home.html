@@ -6,8 +6,10 @@
     <p>Loading home...</p>
 </div>
 }
+
 @if(!isLoading()) {
     <app-hero-slider [slides]="heroSlides()" [autoPlayInterval]="6000" style="padding-bottom: 10px;" />
+
     @if (recommendations().length > 0) {
     <section class="carousel-wrapper" style="width: 100%;">
         <div class="title-wrapper">
@@ -17,6 +19,9 @@
         <app-carousel [items]="recommendations()"></app-carousel>
     </section>
     }
+
+    <div #sentinelRating class="carousel-sentinel"></div>
+    @if (averageRating().length > 0) {
     <section class="carousel-wrapper" style="width: 100%;">
         <div class="title-wrapper">
             <fa-icon [icon]="faWater"></fa-icon>
@@ -24,6 +29,10 @@
         </div>
         <app-carousel [items]="averageRating()"></app-carousel>
     </section>
+    }
+
+    <div #sentinelViewers class="carousel-sentinel"></div>
+    @if (moreViewers().length > 0) {
     <section class="carousel-wrapper" style="width: 100%;">
         <div class="title-wrapper">
             <fa-icon [icon]="faBolt"></fa-icon>
@@ -31,6 +40,10 @@
         </div>
         <app-carousel [items]="moreViewers()"></app-carousel>
     </section>
+    }
+
+    <div #sentinelLatest class="carousel-sentinel"></div>
+    @if (latestRelease().length > 0) {
     <section class="carousel-wrapper" style="width: 100%;">
         <div class="title-wrapper">
             <fa-icon [icon]="faBolt"></fa-icon>
@@ -38,6 +51,10 @@
         </div>
         <app-carousel [items]="latestRelease()"></app-carousel>
     </section>
+    }
+
+    <div #sentinelOvas class="carousel-sentinel"></div>
+    @if (ovasRelease().length > 0) {
     <section class="carousel-wrapper" style="width: 100%;">
         <div class="title-wrapper">
             <fa-icon [icon]="faBolt"></fa-icon>
@@ -45,4 +62,23 @@
         </div>
         <app-carousel [items]="ovasRelease()"></app-carousel>
     </section>
+    }
+
+    @for (carousel of infiniteCarousels(); track carousel.id) {
+    <section class="carousel-wrapper" style="width: 100%;">
+        <div class="title-wrapper">
+            <fa-icon [icon]="carousel.icon"></fa-icon>
+            <h2>{{ carousel.title }}</h2>
+        </div>
+        <app-carousel [items]="carousel.items"></app-carousel>
+    </section>
+    }
+
+    <div #sentinelBottom class="carousel-sentinel">
+        @if (isLoadingMore()) {
+        <div class="infinite-loading">
+            <div class="loading-spinner"></div>
+        </div>
+        }
+    </div>
 }
