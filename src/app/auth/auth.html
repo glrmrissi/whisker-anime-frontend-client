@@ -17,6 +17,7 @@
 @switch(true) {
 @case(isLogin()) {
 <div class="wrapper" [formGroup]="authForm">
+    <h1>Login your account!</h1>
     <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
     <app-auth-inputs icon="lock" type="password" placeholder="Password" formControlName="password"></app-auth-inputs>
     <span class="forget-password">
@@ -31,6 +32,7 @@
 }
 @case(isRegister()) {
 <div class="wrapper" [formGroup]="authForm">
+    <h1>Register your account!</h1>
     <app-auth-inputs icon="tag" type="text" placeholder="Username" formControlName="username"></app-auth-inputs>
     <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
     <app-auth-inputs icon="lock" type="password" placeholder="Password" formControlName="password"></app-auth-inputs>
@@ -43,6 +45,7 @@
 }
 @case(isForgotPassword()) {
 <div class="wrapper" [formGroup]="authForm">
+    <h1>Put your email</h1>
     <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
     <button class="auth-button" (click)="resetPasswordUser(authForm.get('email')?.value)">Reset Password</button>
     <div class="auth-footer">
@@ -53,6 +56,7 @@
 }
 @case(isForgotPasswordSend()) {
 <div class="wrapper" [formGroup]="authForm">
+    <h1>Put your code</h1>
     <app-auth-inputs icon="user" type="text" placeholder="Code" formControlName="code"></app-auth-inputs>
     <app-auth-inputs icon="user" type="email" placeholder="Email" formControlName="email"></app-auth-inputs>
     <app-auth-inputs icon="lock" type="password" placeholder="New password" formControlName="password"></app-auth-inputs>

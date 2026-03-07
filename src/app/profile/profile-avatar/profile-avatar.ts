@@ -37,10 +37,10 @@ export class ProfileAvatar {
       const file = input.files[0];
       await this.profileAvatarService.sendAvatarToServer(file);
       this.avatarUpdated.emit();
-      this.snackBar.open("Avatar updated!", "OK", 3000, "success");
+      this.snackBar.open("Avatar updated!", 3000, "success");
     } else {
-      this.snackBar.open("The avatar hasn't been updated", "OK", 3000, "error");
-      
+      this.snackBar.open("The avatar hasn't been updated", 3000, "error");
+
     }
   }
 }

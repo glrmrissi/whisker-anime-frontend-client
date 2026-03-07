@@ -192,11 +192,11 @@ export class AnimeDetails implements OnInit, OnDestroy {
 
   async toggleFavorite(): Promise<void> {
     if (this.isFavorited()) {
-      this.snackBar.open('Already in your favorites!', 'OK', 3000, 'warning');
+      this.snackBar.open('Already in your favorites!', 3000, 'warning');
       return;
     }
 
     await this.favoritesService.add(this.animeId());
-    this.snackBar.open('Added to favorites!', 'OK', 3000, 'success');
+    this.snackBar.open('Added to favorites!', 3000, 'success');
   }
 }

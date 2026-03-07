@@ -157,7 +157,6 @@ export class Comments {
 
             this.snackBar.open(
                 'Comment added successfully',
-                'OK',
                 3000,
                 'success'
             )

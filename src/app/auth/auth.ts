@@ -1,9 +1,10 @@
-import { Component, OnInit, signal } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AuthInputs } from "./components/inputs-auth/inputs.auth";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./auth.service";
+import { SnackBarService } from "../../../projects/ui/src/public-api";
 
 @Component({
     selector: 'app-auth',
@@ -25,6 +26,8 @@ export class Auth implements OnInit {
     forgotPasswordSend = signal(false);
     isForgotPassword = this.forgotPassword.asReadonly();
     isForgotPasswordSend = this.forgotPasswordSend.asReadonly();
+
+    snackBar = inject(SnackBarService);
 
     router: Router;
     authForm: FormGroup;
@@ -54,7 +57,6 @@ export class Auth implements OnInit {
         this.login.set(false);
         this.forgotPassword.set(false);
         this.forgotPasswordSend.set(false);
-        console.log('Register state:', this.register());
     }
 
     toggleLogin() {
@@ -62,7 +64,6 @@ export class Auth implements OnInit {
         this.register.set(false);
         this.forgotPassword.set(false);
         this.forgotPasswordSend.set(false);
-        console.log('Login state:', this.login());
     }
 
     toggleForgotPassword() {
@@ -70,7 +71,6 @@ export class Auth implements OnInit {
         this.forgotPasswordSend.set(false);
         this.register.set(false);
         this.login.set(false);
-        console.log('Forgot Password state:', this.forgotPassword());
     }
 
      toggleForgotPasswordSend() {
@@ -78,24 +78,24 @@ export class Auth implements OnInit {
         this.forgotPassword.set(false);
         this.register.set(false);
         this.login.set(false);
-        console.log('Forgot Password Send state:', this.isForgotPasswordSend());
     }
 
     navigateHome() {
-        console.log('Navigating to home...');
         this.router.navigate(['/home']);
     }
 
     async loginUser(username: string, password: string) {
-        console.log('Login attempt with username:', username, 'and password:', password
-        );
         await this._authService.login(username, password)
             .then(() => {
-                console.log('Login successful, navigating to home...');
                 this.navigateHome();
+                this.snackBar.open(
+                    'Login successful',
+                    3000,
+                    'success'
+                )
             })
-            .catch((error) => {
-                console.error('Login failed:', error);
+            .catch(() => {
+                this.snackBar.open("Ops! Maybe this not your password or email!", 3000, 'error');
             });
 
     }
@@ -103,11 +103,10 @@ export class Auth implements OnInit {
     async registerUser(nickName: string, username: string, password: string) {
         await this._authService.register(nickName, username, password)
             .then(() => {
-                console.log('Login successful, navigating to home...');
                 this.navigateHome();
             })
-            .catch((error) => {
-                console.error('Login failed:', error);
+            .catch(() => {
+                this.snackBar.open("Maybe this email or username already in use", 3000, 'warning')
             });
     }
 
@@ -117,8 +116,9 @@ export class Auth implements OnInit {
             .then(() => {
                 this.toggleForgotPasswordSend()
             })
-            .catch((error) => {
-                console.error('Reset password failed:', error);
+            .catch(() => {
+                this.snackBar.open("An error occurred", 3000, 'error')
+
             });
     }
 
@@ -127,8 +127,8 @@ export class Auth implements OnInit {
             .then(() => {
                 this.toggleLogin()
             })
-            .catch((error) => {
-                console.error('Failed to save failed:', error);
+            .catch(() => {
+                this.snackBar.open("An error occurred", 3000, 'error')
             });
     }
 }
