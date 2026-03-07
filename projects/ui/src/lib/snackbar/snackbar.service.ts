@@ -20,7 +20,7 @@ export class SnackBarService {
     private snackRef?: ComponentRef<SnackBar>
 
 
-    open(message: string, actionText: string = 'OK', duration: number = 3000, classMod?: SnackType,) {
+    open(message: string, duration: number = 3000, classMod?: SnackType, actionText: string = 'OK') {
 
         if (typeof document === 'undefined') {
             return;
