@@ -1,0 +1,66 @@
+<app-header></app-header>
+
+<main class="discovery-wrapper">
+  <div class="discovery-header">
+    <div class="title-row">
+      <fa-icon [icon]="faCompass"></fa-icon>
+      <h1>Discovery</h1>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        @for (sub of subtypes; track sub) {
+          <button
+            class="filter-chip"
+            [class.active]="activeSubtype() === sub"
+            (click)="setSubtype(sub)"
+          >{{ sub }}</button>
+        }
+      </div>
+
+      <div class="filter-group">
+        @for (sort of sorts; track sort) {
+          <button
+            class="filter-chip"
+            [class.active]="activeSort() === sort"
+            (click)="setSort(sort)"
+          >
+            @if (sort === '-averageRating') { <fa-icon [icon]="faStar"></fa-icon> }
+            @if (sort === '-userCount') { <fa-icon [icon]="faFire"></fa-icon> }
+            @if (sort === '-createdAt') { <fa-icon [icon]="faCalendar"></fa-icon> }
+            {{ sortLabels[sort] }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-screen">
+      <div class="loading-spinner"></div>
+      <p>Loading...</p>
+    </div>
+  } @else {
+    <div class="discovery-grid">
+      @for (item of items(); track item.id) {
+        <a class="grid-card" [routerLink]="['/anime', item.id]">
+          <div class="grid-poster">
+            <img [src]="item.coverImage" [alt]="item.canonicalTitle" class="grid-img" loading="lazy" />
+            <div class="grid-overlay">
+              @if (item.subtype) {
+                <span class="grid-badge">{{ item.subtype }}</span>
+              }
+            </div>
+          </div>
+          <p class="grid-title">{{ item.canonicalTitle }}</p>
+        </a>
+      }
+    </div>
+
+    <div #sentinel class="sentinel">
+      @if (isLoadingMore()) {
+        <div class="loading-spinner"></div>
+      }
+    </div>
+  }
+</main>
