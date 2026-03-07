@@ -6,6 +6,16 @@
             (avatarUpdated)="refreshData()"></app-profile-avatar>
     </section>
     <section class="right-section">
+        <div class="tabs">
+            <button class="tab-btn" [class.active]="activeTab() === 'profile'" (click)="setTab('profile')">
+                <fa-icon [icon]="faUserShield"></fa-icon> Profile
+            </button>
+            <button class="tab-btn" [class.active]="activeTab() === 'history'" (click)="setTab('history')">
+                <fa-icon [icon]="faClockRotateLeft"></fa-icon> History
+            </button>
+        </div>
+
+        @if (activeTab() === 'profile') {
         <div class="profile-info">
             @if(disabledInput) {
             <div class="btn-edit-wrapper">
@@ -57,5 +67,10 @@
             </form>
             }
         </div>
+        }
+
+        @if (activeTab() === 'history') {
+        <app-history></app-history>
+        }
     </section>
 </main>

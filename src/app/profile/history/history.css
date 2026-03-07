@@ -1,0 +1,138 @@
+:host {
+  display: block;
+
+  .history-loading,
+  .history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 3rem 0;
+    color: var(--text-color-hover);
+
+    fa-icon {
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+  }
+
+  .spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--bg-icon-main);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .history-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .history-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      background: var(--bg-color-hover);
+      border-color: var(--bg-icon-main);
+    }
+  }
+
+  .history-cover {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 64px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-color-hover);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .history-cover-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color-hover);
+
+    fa-icon {
+      font-size: 1.2rem;
+    }
+  }
+
+  .history-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .history-action {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--bg-icon-main);
+  }
+
+  .history-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .history-date {
+    font-size: 0.78rem;
+    color: var(--text-color-hover);
+  }
+
+  .history-type-icon {
+    flex: 0 0 auto;
+    color: var(--text-color-hover);
+    opacity: 0.5;
+    font-size: 1rem;
+  }
+
+  .sentinel {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 8px;
+    min-height: 40px;
+  }
+}

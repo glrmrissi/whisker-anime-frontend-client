@@ -1,6 +1,7 @@
 :host {
     display: flex;
     flex-direction: column;
+
     .carousel-wrapper {
         padding: 0px 24px;
 
@@ -8,9 +9,21 @@
             display: flex;
             align-items: center;
             gap: 4px;
+
             h2 {
                 font-size: 1.4rem;
             }
         }
+    }
+
+    .carousel-sentinel {
+        width: 100%;
+        min-height: 1px;
+    }
+
+    .infinite-loading {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
     }
 }

@@ -6,20 +6,22 @@
     <h2>My Favorites</h2>
   </div>
 
-  @if (isLoading()) {
-    <div class="state-box">
-      <p>Loading your favorites...</p>
-    </div>
+  @if(isLoading()) {
+  <div class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p>Loading favorites...</p>
+    <fa-icon [icon]="faHeart"></fa-icon>
+  </div>
   } @else if (items().length === 0) {
-    <div class="state-box empty">
-      <fa-icon [icon]="faHeart" class="empty-icon"></fa-icon>
-      <p>You haven't added any favorites yet.</p>
-      <a routerLink="/home" class="discover-btn">
-        <fa-icon [icon]="faCompass"></fa-icon>
-        Discover Animes
-      </a>
-    </div>
+  <div class="state-box empty">
+    <fa-icon [icon]="faHeart" class="empty-icon"></fa-icon>
+    <p>You haven't added any favorites yet.</p>
+    <a routerLink="/home" class="discover-btn">
+      <fa-icon [icon]="faCompass"></fa-icon>
+      Discover Animes
+    </a>
+  </div>
   } @else {
-    <app-favorites-grid [items]="items()"></app-favorites-grid>
+  <app-favorites-grid [items]="items()"></app-favorites-grid>
   }
 </section>

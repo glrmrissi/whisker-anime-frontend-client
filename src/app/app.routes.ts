@@ -35,6 +35,10 @@ export const routes: Routes = [
         loadComponent: () => import('./favorites/favorites').then(m => m.Favorites)
     },
     {
+        path: 'discovery',
+        loadComponent: () => import('./discovery/discovery').then(m => m.Discovery)
+    },
+    {
         path: '**',
         redirectTo: 'auth'
     }

@@ -1,0 +1,41 @@
+@if (isLoading()) {
+  <div class="history-loading">
+    <span class="spinner"></span>
+    <p>Loading history...</p>
+  </div>
+} @else if (items().length === 0) {
+  <div class="history-empty">
+    <fa-icon [icon]="faClockRotateLeft"></fa-icon>
+    <p>No activity yet.</p>
+  </div>
+} @else {
+  <ul class="history-list">
+    @for (item of items(); track item.id) {
+      <li class="history-item" [routerLink]="item.routerLink">
+        <div class="history-cover">
+          @if (item.coverImage) {
+            <img [src]="item.coverImage" [alt]="item.title" />
+          } @else {
+            <div class="history-cover-placeholder">
+              <fa-icon [icon]="isEpisodeAction(item) ? faTv : faFilm"></fa-icon>
+            </div>
+          }
+        </div>
+        <div class="history-info">
+          <span class="history-action">{{ formatAction(item.action) }}</span>
+          <p class="history-title">{{ item.title }}</p>
+          <span class="history-date">{{ formatDate(item.createdAt) }}</span>
+        </div>
+        <div class="history-type-icon">
+          <fa-icon [icon]="isEpisodeAction(item) ? faTv : faFilm"></fa-icon>
+        </div>
+      </li>
+    }
+  </ul>
+
+  <div #sentinel class="sentinel">
+    @if (isLoadingMore()) {
+      <span class="spinner"></span>
+    }
+  </div>
+}

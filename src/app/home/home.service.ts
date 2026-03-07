@@ -24,4 +24,14 @@ export class HomeService {
     async getRecommendations() {
         return this.apiService.getV1('recommendations', {});
     }
+
+    getAnimeDiscovery(offset: number, limit: number, sort?: string, subtype?: string): Promise<any> {
+        const params: Record<string, string | number> = {
+            'page[limit]': limit,
+            'page[offset]': offset,
+        };
+        if (sort) params['sort'] = sort;
+        if (subtype) params['filter[subtype]'] = subtype.toLowerCase();
+        return this.apiService.getV1('kitsu-api/anime', params);
+    }
 }
