@@ -1,8 +1,8 @@
-import { Component, inject, OnInit, PLATFORM_ID, signal, ViewChild } from '@angular/core';
+import { Component, effect, inject, OnInit, PLATFORM_ID, signal, ViewChild } from '@angular/core';
 import { ProfileAvatar } from "./profile-avatar/profile-avatar";
 import { faEdit, faMailForward, faUserShield, faSave, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ProfileService } from './profile.service';
+import { ProfileService, ProfileUpdateType } from './profile.service';
 import { SnackBarService } from '../../../projects/ui/src/lib/snackbar/snackbar.service';
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -47,10 +47,8 @@ export class Profile implements OnInit {
   private platformId = inject(PLATFORM_ID);
 
   editUserGroup = this.formBuilder.group({
-    nickName: [''],
-    bio: ['']
-  })
-
+    bio: [this.profile()?.bio ?? '']
+  });
 
   constructor(
     private readonly profileService: ProfileService,
@@ -84,6 +82,7 @@ export class Profile implements OnInit {
   }
 
   enableInputs() {
+    this.editUserGroup.patchValue({ bio: this.profile()?.bio ?? '' });
     this.disabledInput = false
     this.hiddenEditButton = true
     this.snackBar.open(
@@ -102,7 +101,7 @@ export class Profile implements OnInit {
   }
 
   onSubmit() {
-    const res = this.editUserGroup.value
+    this.profileService.updateUserProfile(this.editUserGroup.value);
   }
 
   setTab(tab: Tab) {

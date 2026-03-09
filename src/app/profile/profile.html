@@ -42,22 +42,12 @@
                 <div class="btn-edit-wrapper">
                     <span class="content-wrapper">
                         <fa-icon [icon]="faUserShield"></fa-icon>
-                        <input type="text" placeholder="Nickname" formControlName="nickName"
-                            >
+                        <h2>{{profile()?.nickName}}</h2>
                     </span>
                 </div>
                 <hr>
                 <textarea name="Bio" formControlName="bio" maxlength="300" placeholder="Bio:">
-                    Enter your comments here (max 300 characters)...
                 </textarea>
-                <div class="favorites-animes">
-                    <h1>Favorite Animes:</h1>
-                    <div class="badges-row">
-                        @for(animes of profile()?.favoriteAnimes ; track animes) {
-                        <span class="anime-badge">{{ animes }}</span>
-                        }
-                    </div>
-                </div>
 
                 <div class="btn-edit-wrapper" [hidden]="!hiddenEditButton">
                     <button class="edit-profile-btn" type="submit">
