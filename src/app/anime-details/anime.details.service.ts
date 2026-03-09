@@ -8,7 +8,7 @@ export class AnimeDetailsService {
     private readonly apiService = inject(ApiService)
     getAnimeById(id: string | null): Promise<any> {
         if (!id) {
-            throw new Error('id não fornecido');
+            throw new Error('id not found');
         }
 
         return this.apiService.getV1(`kitsu-api/anime/${id}?include=streamingLinks,genres`, {})
