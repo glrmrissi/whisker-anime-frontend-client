@@ -12,6 +12,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         catchError(error => {
             if (error.status === 401 || error.status === 403) {
                 router.navigate(['/login']);
+                snackBar.open(
+                    "Login expired!",
+                    3000,
+                    "warning"
+                )
             }
             return throwError(() => error);
         })

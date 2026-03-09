@@ -96,12 +96,15 @@ export class Profile implements OnInit {
     this.hiddenEditButton = false
     this.snackBar.open(
       'Success saved',
-      3000
+      3000,
+      "success"
     )
   }
 
   onSubmit() {
     this.profileService.updateUserProfile(this.editUserGroup.value);
+    this.disabledInput = true
+    this.hiddenEditButton = false
   }
 
   setTab(tab: Tab) {
