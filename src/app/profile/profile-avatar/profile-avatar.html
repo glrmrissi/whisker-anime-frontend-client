@@ -1,14 +1,52 @@
-<div class="img-wrapper" (click)="fileInput.click()">
-    <img [src]="imageUrlInput()" alt="Sua foto">
-    
-    <span class="camera-wrapper">
-        <fa-icon [icon]="faCamera"></fa-icon>
-    </span>
+<div class="avatar-wrapper" (click)="fileInput.click()">
+  <div class="avatar-inner">
+    <img [src]="imageUrlInput()" alt="Profile photo">
+    <div class="avatar-overlay">
+      <fa-icon [icon]="faCamera"></fa-icon>
+      <span>Change photo</span>
+    </div>
+  </div>
 </div>
-<input 
-  #fileInput
-  type="file" 
-  style="display: none;"  
-  accept="image/*" 
-  (change)="onFileSelected($event)"
-  >
+
+<input #fileInput type="file" style="display: none;" accept="image/*" (change)="onFileSelected($event)">
+
+@if (showEditor()) {
+<div class="editor-backdrop" (click)="cancelEditor()">
+  <div class="editor-modal" (click)="$event.stopPropagation()">
+
+    <div class="editor-header">
+      <h3>Adjust your photo</h3>
+      <p>Drag to reposition · Scroll to zoom</p>
+    </div>
+
+    <div class="editor-crop-area" (mousedown)="onEditorMouseDown($event)" (touchstart)="onEditorTouchStart($event)"
+      (wheel)="onWheel($event)">
+      <img [src]="previewUrl()" [style.transform]="editorImageTransform()" draggable="false" alt="Preview">
+      <div class="crop-ring"></div>
+    </div>
+
+    <div class="zoom-bar">
+      <button class="zoom-btn" (click)="adjustZoom(-0.15)" type="button">
+        <fa-icon [icon]="faMagnifyingGlassMinus"></fa-icon>
+      </button>
+      <input class="zoom-slider" type="range" min="0.5" max="4" step="0.05" [value]="zoom()"
+        (input)="zoom.set(+$any($event.target).value)">
+      <button class="zoom-btn" (click)="adjustZoom(0.15)" type="button">
+        <fa-icon [icon]="faMagnifyingGlassPlus"></fa-icon>
+      </button>
+    </div>
+
+    <div class="editor-actions">
+      <button class="btn-cancel" type="button" (click)="cancelEditor()">
+        <fa-icon [icon]="faXmark"></fa-icon>
+        Cancel
+      </button>
+      <button class="btn-confirm" type="button" (click)="confirmEditor()" [disabled]="isUploading()">
+        <fa-icon [icon]="faCheck"></fa-icon>
+        {{ isUploading() ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+
+  </div>
+</div>
+}
