@@ -62,7 +62,7 @@ export class Header {
     if (!res?.[0]) return;
 
     const timestamp = Date.now();
-    const fullUrl = `${environment}/${res[0].avatarUrl}?t=${timestamp}`;
+    const fullUrl = `${environment.apiUrl}/${res[0].avatarUrl}?t=${timestamp}`;
 
     this.avatarItem.update(v => ({ ...v, src: fullUrl }));
     this.cdr.markForCheck();

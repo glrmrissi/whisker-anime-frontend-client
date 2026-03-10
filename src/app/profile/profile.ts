@@ -39,7 +39,7 @@ export class Profile implements OnInit {
   protected disabledInput = true;
   protected hiddenEditButton = false;
 
-  protected baseUrl = environment;
+  protected baseUrl = environment.apiUrl;
 
   public profile = signal<ProfileType | null>(null);
   protected activeTab = signal<Tab>('profile');

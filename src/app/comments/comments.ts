@@ -43,7 +43,7 @@ export class Comments {
     expandedReplies: { [key: number]: boolean } = {};
     replyToId: number | null = null;
     charCount = 0;
-    baseUrl = environment;
+    baseUrl = environment.apiUrl;
 
     private platformId = inject(PLATFORM_ID);
     private cdr = inject(ChangeDetectorRef);
