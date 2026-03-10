@@ -73,7 +73,7 @@ export class Profile implements OnInit {
       return;
     }
     const timestamp = new Date().getTime();
-    res.avatarUrl = `${this.baseUrl}${res.avatarUrl}?t=${timestamp}`;
+    res.avatarUrl = `${this.baseUrl}/${res.avatarUrl}?t=${timestamp}`;
     this.profile.set(res);
     return res;
   }
