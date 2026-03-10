@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: whisker-anime-frontend
+    ports:
+      - "4000:4000"
+    restart: unless-stopped

@@ -39,7 +39,7 @@
             <div class="comment-header">
                 <div class="user-avatar-container">
                     @if (comment.avatarUrl) {
-                    <img [src]="baseUrl + comment.avatarUrl" class="user-avatar"
+                    <img [src]="baseUrl + '/' + comment.avatarUrl" class="user-avatar"
                         [class.small]="level > 0" alt="avatar">
                     } @else {
                     <div class="user-avatar default" [class.small]="level > 0">
