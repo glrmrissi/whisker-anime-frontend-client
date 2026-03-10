@@ -12,6 +12,7 @@ import { Router, RouterLink } from '@angular/router';
 import { HeaderService } from './header.service';
 import { Avatar, Search } from '../../../projects/ui/src/public-api';
 import { ThemeService } from '../../shared/services/theme.service';
+import environment from '../../shared/environments/environment.local'
 
 @Component({
   selector: 'app-header',
@@ -61,7 +62,7 @@ export class Header {
     if (!res?.[0]) return;
 
     const timestamp = Date.now();
-    const fullUrl = `http://localhost:3001/${res[0].avatarUrl}?t=${timestamp}`;
+    const fullUrl = `${environment}/${res[0].avatarUrl}?t=${timestamp}`;
 
     this.avatarItem.update(v => ({ ...v, src: fullUrl }));
     this.cdr.markForCheck();

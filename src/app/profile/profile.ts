@@ -8,6 +8,7 @@ import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Header } from '../header/header';
 import { History } from './history/history';
+import environment from '../../shared/environments/environment.local';
 
 type ProfileType = {
   username: string;
@@ -38,7 +39,7 @@ export class Profile implements OnInit {
   protected disabledInput = true;
   protected hiddenEditButton = false;
 
-  protected baseUrl = 'http://localhost:3001/';
+  protected baseUrl = environment;
 
   public profile = signal<ProfileType | null>(null);
   protected activeTab = signal<Tab>('profile');
