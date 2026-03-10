@@ -12,6 +12,7 @@ import { CommentsService, Comment } from './comments.service';
 import { SnackBarService } from '../../../projects/ui/src/public-api';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import environment from '../../shared/environments/environment.local'
 
 @Component({
     selector: 'app-comments',
@@ -42,6 +43,7 @@ export class Comments {
     expandedReplies: { [key: number]: boolean } = {};
     replyToId: number | null = null;
     charCount = 0;
+    baseUrl = environment.apiUrl;
 
     private platformId = inject(PLATFORM_ID);
     private cdr = inject(ChangeDetectorRef);
